@@ -28,7 +28,7 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
         {
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
-
+            
             return View();
         }
         public IActionResult Privacy()
