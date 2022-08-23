@@ -1,4 +1,20 @@
+body {
+    background-color: rgb(34, 33, 33);
+    color:white;
+}
+
 .chartSpace {
+    
     width:500px;
     height:500px;
+}
+
+
+.uploadDataBtn {
+    color:rgb(245, 245, 81);
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+  
+   
 }
