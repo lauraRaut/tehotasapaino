@@ -11,13 +11,14 @@
     <title>Tehotasapaino</title>
 </head>
 <body>
+
     <h1 class="text-center">Team Tehotasapaino</h1>
-    <p class=""> Hello {userName}</p>
+    <p> Hello {userName}</p>
     
     <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link h3" style="color:rgb(228, 228, 122);" href="#">Home <span class="sr-only"></span></a>
+              <a class="nav-link h3 text-white" href="#">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link  h3" style="color:rgb(228, 228, 122);" href="#">Price alerts</a>
@@ -27,15 +28,48 @@
         </div>
       </nav>
 
-
+      <!-- Button for data upload -->
       <div class="text-center mt-0"> 
         <button type="button" class="uploadDataBtn mt-0">Upload Data</button>
-    </div>
+     </div>
 
-            <div class="chartSpace mt-3">
-                <canvas id="myChart" class="bg-white text-center"></canvas>
+     <!-- Chart -->
+     <div class="chartSpace mt-3">
+        <canvas id="myChart" class="bg-white text-center"></canvas>
+     </div>
+      
+      <!-- Space for details and price       -->
+     <div class="container mt-3 text-center">
+
+        <div class="row">
+            <div class="col-3 d-flex justify-content-end" >
+                <img src="assets/trending.png">
             </div>
+            <div class="col-3 d-flex justify-content-start">
+                <p>
+                    10%
+                </p>
+            </div>
+            <div class="col-3 d-flex justify-content-end">
+                <img src="assets/line-chart.png">
+            </div>
+            <div class="col-3 d-flex justify-content-start">
+                <p>
+                    1000%
+                </p>
+            </div>
+        </div>       
+        
+        <div class="row mt-4">
+                <div class="col-3 d-flex justify-content-end">
+                    <img src="assets/cost.png">
+                </div>
 
+                <div class="col-9 d-flex justify-content-start">
+                    <p>100 c/kWh</p>
+                </div>
+        </div>
+    </div>    
 
         
     
