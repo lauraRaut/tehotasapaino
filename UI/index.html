@@ -27,7 +27,6 @@
         </div>
       </nav>
 
-
       <div class="text-center"> 
         <button type="button" class="uploadDataBtn">Upload Data</button>
     </div>
@@ -36,8 +35,18 @@
                 <canvas id="myChart" class="bg-white text-center"></canvas>
             </div>
 
-
-        
+            <!--Button for consumption tips-->
+            <div class="text-center"> 
+                <button type="button" class="consumption" id="flip">Tips for electricity consumption </button>
+                
+            <!--Panel for washing machine-->
+            <div id="panel"><input id=demoInput type=number min=0 max=100>
+                <button onclick="increment()" id="plus">+</button>
+                <button onclick="decrement()" id="minus">-</button>
+                <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="50" height="50" flip="horizontal"></iconify-icon></div>
+            </div>
+        </div>
+         
     
 
     <script>
@@ -75,10 +84,57 @@
                 beginAtZero: true
             }
         }
+        
     }
 });
+
+
     </script>
+
+<!--jQuery Library for slideToggle-->    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
+<script>
+//Lauran scriptit
+
+    //SlideToggle to drop "tips for electricity consumption"
+    $(document).ready(function(){
+    $("#flip").click(function(){
+    $("#panel").slideToggle("slow");
+
+    });
+});
+
+    </script>
+
+<script>
+    var acc = document.getElementsByClassName("consumption");
+    var i;
     
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+      });
+    }
+    </script>
+  
+  <script>
+    function increment() {
+       document.getElementById('demoInput').stepUp();
+    }
+    function decrement() {
+       document.getElementById('demoInput').stepDown();
+    }
+ </script>
+ 
   
 </body>
 </html>
