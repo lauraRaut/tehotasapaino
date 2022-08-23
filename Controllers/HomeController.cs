@@ -13,14 +13,16 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserService _userService;
 
         private readonly GraphServiceClient _graphServiceClient;
 
         public HomeController(ILogger<HomeController> logger,
-                          GraphServiceClient graphServiceClient)
+                          GraphServiceClient graphServiceClient, UserService userService)
         {
              _logger = logger;
             _graphServiceClient = graphServiceClient;
+            _userService = userService;
        }
 
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
@@ -28,8 +30,10 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
         {
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
+
+            IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
             
-            return View();
+            return View(indexViewModel);
         }
         public IActionResult Privacy()
         {
