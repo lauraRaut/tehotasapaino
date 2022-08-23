@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 {
+    //olemassaoleva käyttäjä
     public class UserInformation
     {
         public int UserInformationId { get; set; }
