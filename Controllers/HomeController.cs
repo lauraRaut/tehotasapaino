@@ -14,7 +14,6 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserService _userService;
-
         private readonly GraphServiceClient _graphServiceClient;
 
         public HomeController(ILogger<HomeController> logger,
