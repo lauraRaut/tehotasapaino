@@ -9,18 +9,94 @@ body {
     
 }
 
-
 .uploadDataBtn {
    
     color:rgb(228, 228, 122);
     background-color:rgb(34, 33, 33);
-    border:2px solid rgb(228, 228, 122);
-    border-radius:4px;
-    padding: 0 1em 0 1em;
-  
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
    
 }
 
+.consumption {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+}
+.consumption:after {
+    color: rgb(255, 255, 30);
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 20px;
+    font: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    
+  }
+
+  #panel {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+
+  }
+
+  #plus {
+    display:inline-flexbox;
+    padding: 10px 24px;
+    font-size: 24px;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+
+    color: rgb(34, 33, 33);
+    background-color:rgb(245, 245, 81);
+
+  }
+
+#plus:active {
+    background-color: rgb(169, 169, 55);
+    box-shadow: 0 5px #666;
+  }
+
+  #minus {
+    display:inline-flexbox;
+    padding: 10px 24px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(34, 33, 33);
+    background-color:rgb(245, 245, 81);
+
+  }
+
+#minus:active {
+    background-color: rgb(169, 169, 55);
+    box-shadow: 0 5px #666;
+  }
+
+#washingMachine {
+    color: white;
+    }
+    
+.uploadDataBtn{
+    border:2px solid rgb(228, 228, 122);
+    border-radius:4px;
+    padding: 0 1em 0 1em;
+}
 
 .navbar-nav .nav-item .nav-link {
     margin: 2rem;
@@ -30,7 +106,6 @@ body {
    border-bottom: 5px solid rgb(228, 228, 122);
    border-bottom-right-radius: 2px;
    border-bottom-left-radius: 2px;
-  
-    
+     
 }
 
