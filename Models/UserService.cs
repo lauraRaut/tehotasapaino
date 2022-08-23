@@ -18,9 +18,14 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 
         public async Task<bool> CheckUser(string email)
         {
-            UserService dbUser = await _DbContext.UserData.FindAsync.Where(x => x.Email == email).FirstOrDefaultAsync();
-            dbUser.
-            await Task.Delay(1000);
+            UserInformation dbUser = await _DbContext.UserData.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if(dbUser == null)
+            {
+
+            }
+
+          
 
         }
     }
