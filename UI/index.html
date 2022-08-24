@@ -68,6 +68,8 @@
                     <p>100 c/kWh</p>
                 </div>
 
+                
+
             <!--Button for consumption tips-->
             <div class="text-center"> 
                 <button type="button" class="consumption" id="flip">Tips for electricity consumption </button>
@@ -137,10 +139,14 @@
 
     //SlideToggle to drop "tips for electricity consumption"
     $(document).ready(function(){
+    let panel = document.getElementById("panel");
+    panel.style.display = "none";
     $("#flip").click(function(){
     $("#panel").slideToggle("slow");
 
-    });
+   });
+
+  
 });
 
 </script>
