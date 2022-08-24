@@ -11,7 +11,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Serialization;
 using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
-
+using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
+using System.Collections;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 {
@@ -41,16 +45,15 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
             {
                 using (HttpResponseMessage response = client.GetAsync(url).Result)
                 {
+                   //Getting the api response, which is in xml format
+
                     using (HttpContent content = response.Content)
                     {
                         var xml = content.ReadAsStringAsync().Result;
-                         //Serialization to XML, necessary or not?
-                         //var serializer = new System.Xml.Serialization.XmlSerializer(typeof(DayAheadPrice));
-                         //DayAheadPrice prices  = (DayAheadPrice)serializer.Deserialize(xml);
-                         return xml;
+                        return xml;
                     }
-                  
-                    }
+
+                }
                 }
             }
 
