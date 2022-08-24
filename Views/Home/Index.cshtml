@@ -8,13 +8,33 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@{ 
+@{
     if (!Model.loggedInPerson.isRegisteredToService)
     {
         <h2>Please Register</h2>
     }
 }
+<!-- enctype ="multipart/form-data" = Encoding type that MUST be specified in HTML to enable file upload.    -->
+<form action="BufferedSingleFileUploadPhysical/?handler=Upload"
+      enctype="multipart/form-data" onsubmit="uploadFile(this);return false;" method="post">
+    <dl>
+        <dt>
+            <label for="FileUpload_FormFile">File</label>
+        </dt>
+        <dd>
+            <input id="FileUpload_FormFile" type="file" name="FileUpload.FormFile" />
+        </dd>
+    </dl>
 
+    <input class="btn" type="submit" value="Upload" />
+
+    <div style="margin-top:15px">
+        <output name="result"></output>
+    </div>
+</form>
+
+
+ 
 
 
 <div>Api result</div>

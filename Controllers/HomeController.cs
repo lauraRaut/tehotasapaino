@@ -46,5 +46,6 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
