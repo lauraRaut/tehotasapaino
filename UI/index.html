@@ -140,6 +140,8 @@
 
     //SlideToggle to drop "tips for electricity consumption"
     $(document).ready(function(){
+     let panel = document.getElementById("panel");
+     panel.style.display = 'none';   
     $("#flip").click(function(){
     $("#panel").slideToggle("slow");
 
