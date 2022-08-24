@@ -38,6 +38,7 @@ body {
   
   .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
+    color:yellow;
     
   }
 
@@ -109,3 +110,14 @@ body {
      
 }
 
+input {
+  border-radius: 10px;
+  outline:none;
+  border:none;
+  padding: 15px 0;
+  font-size:1.5em;
+  text-align:center;
+  background:transparent;
+  color:white;
+
+}
