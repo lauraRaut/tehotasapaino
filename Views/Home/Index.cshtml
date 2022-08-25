@@ -1,4 +1,5 @@
-﻿@model IndexViewModel
+﻿@using Newtonsoft.Json;
+@model IndexViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,6 +7,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome @(Model.loggedInPerson.FirstName)</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p> Maria testaa</p>
 </div>
 
 @{
@@ -36,6 +38,12 @@
 
  
 
+
+<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+<script type="text/javascript">
+    const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
+    console.log(topicData);
+</script>
 
 <div>Api result</div>
 

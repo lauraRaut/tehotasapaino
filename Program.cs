@@ -1,13 +1,19 @@
+using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
+using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
+using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.TestModel;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+           
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -16,5 +22,8 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+
+
     }
 }

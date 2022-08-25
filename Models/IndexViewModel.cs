@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.DayAheadPrice;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 {
     public class IndexViewModel
     {
         public LoggedInPerson loggedInPerson { get; set; }
-        public IndexViewModel(User userFromAzureAD, bool isRegistered) 
+        public DayAHeadPriceData dayAHeadPriceData { get; set; }
+        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList) 
         {
             loggedInPerson = new LoggedInPerson(userFromAzureAD, isRegistered);
+            dayAHeadPriceData = new DayAHeadPriceData(priceList);
         }
+
+        
        
         public class LoggedInPerson
         {
@@ -29,6 +34,19 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
                 this.isRegisteredToService = isRegistered;
             }
 
+
+        }
+
+        public class DayAHeadPriceData 
+        {
+
+            public List<Point> DayAheadPrices { get; set; } = new List<Point>();
+
+
+            public DayAHeadPriceData(List<Point> dayAheadPrice) 
+            {
+                this.DayAheadPrices = dayAheadPrice;
+            }
 
         }
     }
