@@ -28,8 +28,8 @@ body {
     border-radius:3px;
 }
 .consumption:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
     color: rgb(255, 255, 30);
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 20px;
     font: bold;
     float: right;
@@ -39,6 +39,7 @@ body {
   .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
     color:yellow;
+
     
   }
 
@@ -110,7 +111,7 @@ body {
      
 }
 
-input {
+#demoInput {
   border-radius: 10px;
   outline:none;
   border:none;
@@ -121,3 +122,19 @@ input {
   color:white;
 
 }
+
+.icons {
+  height:24px;
+  width:24px;
+}
+
+.accordion-body {
+  background-color: black;
+  border: 1px solid rgb(228, 228, 122);
+}
+
+.accordion-button {
+  background-color: black;
+  color:rgb(228, 228, 122);
+}
+
