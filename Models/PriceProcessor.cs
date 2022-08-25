@@ -24,17 +24,17 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 
         public static void GetPricesPerSearch()
         {
-           var today = DateTime.Today;
-           var todayFormatted = today.ToString("yyyy-MM-dd");
-           var tomorrow = today.AddDays(1);
-           var tomorrowFormatted = tomorrow.ToString("yyyy-MM-dd");
+            var today = DateTime.Today;
+            var todayFormatted = today.ToString("yyyy-MM-dd");
+            var tomorrow = today.AddDays(1);
+            var tomorrowFormatted = tomorrow.ToString("yyyy-MM-dd");
 
             // Adding the key-value pairs I want to look up in my httpcall.
             IDictionary<string, string> searchterms = new Dictionary<string, string>();
             searchterms.Add("DocumentType", "A44");
             searchterms.Add("in_Domain", "10YFI-1--------U");
             searchterms.Add("out_Domain", "10YFI-1--------U");
-            searchterms.Add("TimeInterval", todayFormatted +"T00:00Z/"+ tomorrowFormatted +"T03:00Z");
+            searchterms.Add("TimeInterval", todayFormatted + "T00:00Z/" + todayFormatted + "T03:00Z");
 
             var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", "0ea14323-e50b-4de2-8810-05ee1c84dd06", searchterms);
             if (res.IsCompletedSuccessfully)
@@ -46,9 +46,9 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 
 
 
-        public static void HourandPriceKeyValuePairs(string xmlFromApi)
+        public static List<Point> HourandPriceKeyValuePairs(string xmlFromApi)
         {
-            
+            List<Point> prices = new List<Point>();
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xmlFromApi);
             XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc.NameTable);
@@ -67,38 +67,26 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
                         {
                             int hour = int.Parse(pointNode["position"].InnerText);
                             decimal price = decimal.Parse(pointNode["price.amount"].InnerText, CultureInfo.InvariantCulture);
-                            Console.WriteLine($"{startDate.AddHours(hour - 1)} {price/1000} e/kWh");
+                            DateTime daterange = startDate.AddHours(hour - 1);
+                            Point nextDayPrices = new Point();
+
+                            nextDayPrices.position = hour;
+                            nextDayPrices.priceamount = price;
+                            nextDayPrices.dateRange = daterange;
+                            prices.Add(nextDayPrices);
+                           
                         }
                     }
                 }
-
-                /*List<JObject> list = jsonFromApi
-                .Descendants() // From the JObject we created earlier, we get all of its descendant JTokens
-                .Where(jt => jt.Type == JTokenType.Property && ((JProperty)jt).Value.HasValues) // Filter that list to only JProperties whose values have children
-                .Cast<JProperty>() // Cast the JTokens to JProperties to make them easier to work with in the next step
-                .Select(prop => //Now, for each JProperty we selected, transform it as follows:
-                {
-                    var obj = new JObject(new JProperty("Point", prop.Name)); //Create a new JObject and add the JProperty Pointproperty of the new object
-                    if (prop.Value.Type == JTokenType.Array)
-                    {
-                        var items = prop.Value.Children<JObject>()
-                                              .SelectMany(jo => jo.Properties())
-                                              .Where(jp => jp.Value.Type == JTokenType.String);
-                        obj.Add(items);
-                    }
-
-                    var parentName = prop.Ancestors()
-                                        .Where(jt => jt.Type == JTokenType.Property)
-                                      .Select(jt => ((JProperty)jt).Name)
-                                      .FirstOrDefault();
-                    //obj.Add("Parent", parentName ?? "");
-                    return obj;
-                })
-                .ToList();
-
-                Console.WriteLine(list);*/
             }
+            return prices;
+        }
 
+
+        public static void PriceObject(int hour, decimal price)
+        {
+            
+            
 
         }
 
