@@ -9,7 +9,8 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
     public class IndexViewModel
     {
         public LoggedInPerson loggedInPerson { get; set; }
-        public IndexViewModel(User userFromAzureAD, bool isRegistered) 
+        public DayAHeadPriceData dayAHeadPriceData { get; set; }
+        public IndexViewModel(User userFromAzureAD, bool isRegistered ) 
         {
             loggedInPerson = new LoggedInPerson(userFromAzureAD, isRegistered);
         }
@@ -30,6 +31,17 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
             }
 
 
+        }
+
+        public class DayAHeadPriceData 
+        {
+
+            public List<T> DayAheadPrices { get; set; } = new List<T>();
+
+            public DayAHeadPriceData() 
+            { 
+            
+            }
         }
     }
 }
