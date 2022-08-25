@@ -6,6 +6,7 @@ using RestSharp.Authenticators;
 using System;
 using System.Threading.Tasks;
 using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
+using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.TestModel;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2
 {
