@@ -39,7 +39,7 @@
  
 
 
-<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData)"></div>
+<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 <script type="text/javascript">
     const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
     console.log(topicData);

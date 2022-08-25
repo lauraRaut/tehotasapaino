@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
-
+using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.DayAheadPrice;
 
 namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 {
@@ -51,8 +51,9 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
         public async Task<IndexViewModel> CreateIndexViewModel(User userFromAzureAD) 
         {
             bool userExcists = await CheckUserExistDbAsync(userFromAzureAD.Mail);
+            List<Point> nextDayPrices = new List<Point>();
            // metodikutsu dayahead pricelle
-            IndexViewModel newIndexViewModel = new IndexViewModel(userFromAzureAD, userExcists);
+            IndexViewModel newIndexViewModel = new IndexViewModel(userFromAzureAD, userExcists, nextDayPrices);
 
 
             return newIndexViewModel;
