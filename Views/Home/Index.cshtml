@@ -15,9 +15,30 @@
         <h2>Please Register</h2>
     }
 }
+<!-- enctype ="multipart/form-data" = Encoding type that MUST be specified in HTML to enable file upload.    -->
+<form action="BufferedSingleFileUploadPhysical/?handler=Upload"
+      enctype="multipart/form-data" onsubmit="uploadFile(this);return false;" method="post">
+    <dl>
+        <dt>
+            <label for="FileUpload_FormFile">File</label>
+        </dt>
+        <dd>
+            <input id="FileUpload_FormFile" type="file" name="FileUpload.FormFile" />
+        </dd>
+    </dl>
+
+    <input class="btn" type="submit" value="Upload" />
+
+    <div style="margin-top:15px">
+        <output name="result"></output>
+    </div>
+</form>
+
+
+ 
+
 
 <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData)"></div>
-
 <script type="text/javascript">
     const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
     console.log(topicData);
