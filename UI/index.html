@@ -17,13 +17,12 @@
     
     <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item "> <!--active oli nav-item active-->
               <a class="nav-link h3 text-white" href="#">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link  h3" style="color:rgb(228, 228, 122);" href="#">Price alerts</a>
             </li>
-          
           </ul>
         </div>
       </nav>
@@ -68,21 +67,27 @@
                     <p>100 c/kWh</p>
                 </div>
 
-                
+
 
             <!--Button for consumption tips-->
             <div class="text-center"> 
                 <button type="button" class="consumption" id="flip">Tips for electricity consumption </button>
                 
             <!--Panel for washing machine-->
-            <div id="panel"><input id=demoInput type=number min=0 max=100>
+        
+              
+                <div id="panel">
+                <div class="d-flex justify-content-left mt-2 mb-2">
                 <button onclick="increment()" id="plus">+</button>
                 <button onclick="decrement()" id="minus">-</button>
-                <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="50" height="50" flip="horizontal"></iconify-icon></div>
+                <iconify-icon icon="mdi:washing-machine" id="washingMachine" width="55" height="55" flip="horizontal"></iconify-icon>
+                <input id=demoInput type=number min=0 max=100>
+                </div>
             </div>
         </div>
         </div>
     </div>    
+        </div>
 
     
 
@@ -143,7 +148,9 @@
     panel.style.display = "none";
     $("#flip").click(function(){
     $("#panel").slideToggle("slow");
+  
 
+    
    });
 
   
@@ -157,7 +164,7 @@
     
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
+        this.classList.Toggle("active");
         var panel = this.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
@@ -168,6 +175,8 @@
     }
     </script>
   
+
+ <!--increment & decrement functions - how them look when panel is open or closed-->
   <script>
     function increment() {
        document.getElementById('demoInput').stepUp();

@@ -54,7 +54,7 @@ body {
 
   #plus {
     display:inline-flexbox;
-    padding: 10px 24px;
+    padding: 6px 16px;
     font-size: 24px;
 
     cursor: pointer;
@@ -73,7 +73,7 @@ body {
 
   #minus {
     display:inline-flexbox;
-    padding: 10px 24px;
+    padding: 6px 16px;
     font-size: 24px;
     cursor: pointer;
     text-align: center;
@@ -90,6 +90,8 @@ body {
 
 #washingMachine {
     color: white;
+
+
     }
     
 .uploadDataBtn{
@@ -109,3 +111,24 @@ body {
      
 }
 
+#demoInput {
+
+    border-radius: 10px;
+  
+    outline:none;
+  
+    border:none;
+  
+    padding: 15px 0;
+  
+    font-size:1.5em;
+  
+    text-align:center;
+  
+    background:transparent;
+  
+    color:white;
+  
+  
+  
+  }
