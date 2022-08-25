@@ -3,6 +3,10 @@ body {
     color:white;
 }
 
+.chart-container {
+  display:flex;
+  justify-content: center;
+}
 .chartSpace {
     
     max-width:500px;
@@ -36,12 +40,12 @@ body {
     margin-left: 5px;
   }
   
-  .active:after {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
-    color:yellow;
+  /* .active:after {
+    content: "\2796"; Unicode character for "minus" sign (-) */
+    /* color:yellow;
 
     
-  }
+  } */
 
   #panel {
     color:rgb(245, 245, 81);
@@ -138,3 +142,12 @@ body {
   color:rgb(228, 228, 122);
 }
 
+
+.line{
+  border-top: 2px solid white;
+  width: 75vw;
+  margin-left:8%;
+  
+  
+  
+}

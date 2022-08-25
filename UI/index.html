@@ -14,7 +14,7 @@
 <body>
 
     <div class="container">
-    <h1 class="text-center">Team Tehotasapaino</h1>
+    <h1 class="text-center">Tehotasapaino App</h1>
     <p> Hello {userName}</p>
     
     <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
@@ -36,7 +36,7 @@
      </div>
 
      <!-- Chart -->
-     <div class="chartSpace mt-3">
+     <div class="chart-container chartSpace mt-3 text-center">
         <canvas id="myChart" class="bg-white text-center"></canvas>
      </div>
       
@@ -96,8 +96,8 @@
         </div>   
 
             <!--Button for consumption tips-->
-            <div class="text-center"> 
-                <button type="button" class="consumption" id="flip">Tips for electricity consumption </button>
+            <!-- <div class="text-center"> 
+                <button type="button" class="consumption" id="flip">Tips for electricity consumption </button> -->
                 
             <!--Panel for washing machine-->
                 <!-- <div id="panel">
@@ -106,32 +106,43 @@
                     <button onclick="decrement()" id="minus">-</button>
                     <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="50" height="50" flip="horizontal"></iconify-icon>
                 </div>
-
+                
             </div> -->
             <!-- Space for your eletricity details -->
-        
-                <hr class="line">
-                <div class="container">
+            
+            <hr class="line text-center">
+            <div class="container">
                 
                     <div class="row">
-                        <div class="col-3 d-flex justify-content-start">
+                        <div class="col-1 d-flex justify-content-start align-items-center">
                             <img src="assets/lightning.svg" class="icons">
 
                         </div>
-                        <div class="col-3 d-flex justify-content-start">
-                            <p>Koko sähkönkulutus:</p>
-                            <p> 100 kWh</p>
+                        <div class="col-5 d-flex justify-content-start align-items-start">
+                            <p>Sähkönkulutus:</p>
+                         
                         </div>
 
-                        <div class="col-3 d-flex justify-content-end">
+                        <div class="col-1 d-flex justify-content-start align-items-center">
                             <img src="assets/euro.svg" class="icons">
 
                         </div>
-                        <div class="col-3 d-flex justify-content-start">
+                        <div class="col-5 d-flex justify-content-start">
                             <p>Sähkönhinta:</p>
-                            <p>100 €</p>
+                            
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center ">
+                            <p>100 kWh</p>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <p>100 kWh</p>
+                        </div>
+                    </div>
+
+                
                 </div>
                 
     </div> 
