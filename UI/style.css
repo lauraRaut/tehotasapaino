@@ -3,6 +3,10 @@ body {
     color:white;
 }
 
+.chart-container {
+  display:flex;
+  justify-content: center;
+}
 .chartSpace {
     
     max-width:500px;
@@ -18,8 +22,34 @@ body {
    
 }
 
-
   /* #panel {
+=======
+.consumption {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+}
+.consumption:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+    /* color: rgb(255, 255, 30);
+    font-size: 20px;
+    font: bold;
+    float: right;
+    margin-left: 5px;
+  } */
+  
+  /* .active:after {
+    content: "\2796"; Unicode character for "minus" sign (-) */
+    /* color:yellow;
+
+    
+  } */
+/* 
+  #panel {
     color:rgb(245, 245, 81);
     font-size: 20px;
     width: 100%;
@@ -28,7 +58,7 @@ body {
     border:1px solid rgb(245, 245, 81);
     border-radius:3px;
 
-  } */
+  }  */
 
 #washingMachine {
     color: white;
@@ -156,7 +186,7 @@ button.accordion-button.collapsed::after{
     padding: 6px 16px;
     font-size: 24px;
     font:bold;
-    margin-left:4px
+    margin-left:4px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -199,3 +229,11 @@ button.accordion-button.collapsed::after{
 
     
   /* } */ 
+.line{
+  border-top: 2px solid white;
+  width: 75vw;
+  margin-left:8%;
+  
+  
+  
+}
