@@ -11,6 +11,8 @@
   /*
     This section describes the Azure AD Applications to configure, and their dependencies
   */
+
+
   "AADApps": [
     {
       "Id": "webApp",

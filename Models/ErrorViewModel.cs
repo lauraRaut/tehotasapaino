@@ -1,6 +1,6 @@
 using System;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     public class ErrorViewModel
     {
@@ -8,4 +8,6 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
+
 }

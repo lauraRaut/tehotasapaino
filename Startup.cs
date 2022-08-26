@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tehotasapaino.Models;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2
+namespace Tehotasapaino
 {
     public class Startup
     {
@@ -24,6 +25,9 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TehotasapainoContext>();
+            services.AddScoped<UserService>();
+
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)

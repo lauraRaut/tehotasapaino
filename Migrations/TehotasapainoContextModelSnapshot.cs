@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
+using Tehotasapaino.Models;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Migrations
+namespace Tehotasapaino.Migrations
 {
     [DbContext(typeof(TehotasapainoContext))]
     partial class TehotasapainoContextModelSnapshot : ModelSnapshot
@@ -18,7 +18,7 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("active_directory_aspnetcore_webapp_openidconnect_v2.Models.UserInformation", b =>
+            modelBuilder.Entity("Tehotasapaino.Models.UserInformation", b =>
                 {
                     b.Property<int>("UserInformationId")
                         .ValueGeneratedOnAdd()
