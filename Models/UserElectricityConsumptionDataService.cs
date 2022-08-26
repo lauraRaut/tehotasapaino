@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 using CsvHelper;
 using Microsoft.Extensions.Logging;
 using System.Linq;
@@ -42,14 +43,14 @@ namespace Tehotasapaino.Models
             return averagedUserConsumption;
         }
 
-        private Dictionary<DateData, List<decimal>> BuildDataAnalysisModelFromCSV()
+        private Dictionary<DateData, List<decimal>> BuildDataAnalysisModelFromCSV(IFormFile fileFromUser)
         {
-            string filepath = @"C:\Users\Sampsa\source\repos\LinqTestailua\LinqTestailua\files\electricity.csv";
+            //string filepath = @"C:\Users\Sampsa\source\repos\LinqTestailua\LinqTestailua\files\electricity.csv";
 
             _logger.LogInformation($"Started parsing CSV stream");
             Dictionary<DateData, List<decimal>> dataPoints = new Dictionary<DateData, List<decimal>>();
 
-            using (StreamReader reader = new StreamReader(filepath))
+            using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream()))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
 

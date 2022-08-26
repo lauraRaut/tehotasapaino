@@ -24,14 +24,10 @@ namespace Tehotasapaino.Models
         [Required(ErrorMessage = "Please enter file name")]
        public string FileName { get; set; }
 
-        [Required(ErrorMessage = "please select file")]
-        public IFormFile File { get; set; }
 
     }
 
-    public interface IFormFile
-    {
-    }
+
 
 
 
