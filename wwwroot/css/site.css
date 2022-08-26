@@ -1,71 +1,141 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿body {
+    background-color: rgb(34, 33, 33);
+    color: white;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.chart-container {
+    display: flex;
+    justify-content: center;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.chartSpace {
+    max-width: 500px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.uploadDataBtn {
+    color: rgb(228, 228, 122);
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(245, 245, 81);
+    border-radius: 3px;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.consumption {
+    color: rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(245, 245, 81);
+    border-radius: 3px;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    .consumption:after {
+        content: '\02795'; /* Unicode character for "plus" sign (+) */
+        color: rgb(255, 255, 30);
+        font-size: 20px;
+        font: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+/* .active:after {
+    content: "\2796"; Unicode character for "minus" sign (-) */
+/* color:yellow;
+
+    
+  } */
+
+#panel {
+    color: rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(245, 245, 81);
+    border-radius: 3px;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+#plus {
+    display: inline-flexbox;
+    padding: 10px 24px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(34, 33, 33);
+    background-color: rgb(245, 245, 81);
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+    #plus:active {
+        background-color: rgb(169, 169, 55);
+        box-shadow: 0 5px #666;
+    }
+
+#minus {
+    display: inline-flexbox;
+    padding: 10px 24px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(34, 33, 33);
+    background-color: rgb(245, 245, 81);
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    #minus:active {
+        background-color: rgb(169, 169, 55);
+        box-shadow: 0 5px #666;
+    }
+
+#washingMachine {
+    color: white;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+.uploadDataBtn {
+    border: 2px solid rgb(228, 228, 122);
+    border-radius: 4px;
+    padding: 0 1em 0 1em;
+}
+
+.navbar-nav .nav-item .nav-link {
+    margin: 2rem;
+}
+
+.navbar-nav .nav-item .nav-link {
+    border-bottom: 5px solid rgb(228, 228, 122);
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+#demoInput {
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: 15px 0;
+    font-size: 1.5em;
+    text-align: center;
+    background: transparent;
+    color: white;
+}
+
+.icons {
+    height: 24px;
+    width: 24px;
+}
+
+.accordion-body {
+    background-color: black;
+    border: 1px solid rgb(228, 228, 122);
+}
+
+.accordion-button {
+    background-color: black;
+    color: rgb(228, 228, 122);
+}
+
+
+.line {
+    border-top: 2px solid white;
+    width: 75vw;
+    margin-left: 8%;
 }

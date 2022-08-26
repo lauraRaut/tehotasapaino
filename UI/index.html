@@ -162,13 +162,15 @@
 
     <script>
         const ctx = document.getElementById("myChart");
+        // Mychartista voi tehdä funktion, joka ottaa sisään x ja y koordinaatit sisään
+
         const myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['01', '02', '03', '04', '05', '06', '07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','00'],
+                labels: [hourArray],
                 datasets: [{
                     label: 'Sähkönhinta',
-                    data: [ 2.0, 1.9, 1.6, 0.3, 0.2, 1.3, 0.1, 0.7, 0.9, 1.5],
+                    data: [ priceArray],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
