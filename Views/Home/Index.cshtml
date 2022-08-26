@@ -50,7 +50,29 @@
 
     const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
     console.log(topicData);
-     
+    console.log(topicData[0].position);
+    
+
+    const priceList = topicData.map(sortPricesFromData);
+
+    function sortPricesFromData(topicData) {
+        return topicData.priceamount;
+    }
+
+    console.log(priceList);
+
+    const hourPositionList = topicData.map(sortPositionsFromData);
+
+    function sortPositionsFromData(topicData) {
+        return topicData.position;
+    }
+
+    console.log(hourPositionList);
+
+    
+
+  
+    
     
 
     const ctx = document.getElementById("myChart");
@@ -59,10 +81,10 @@
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["a", "b", "c", "D", "e"],
+            labels: hourPositionList,
             datasets: [{
                 label: 'Sähkönhinta',
-                data: [1,2,3,4,5,6],
+                data: priceList,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
