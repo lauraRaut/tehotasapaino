@@ -17,7 +17,6 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 
                 public DateTime dateRange { get; set; }
 
-                private readonly IConfiguration Configuration;
                 public override string ToString()
                 {
 
