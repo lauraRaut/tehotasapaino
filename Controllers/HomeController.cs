@@ -5,12 +5,12 @@ using Microsoft.Identity.Web;
 using Microsoft.Graph;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
+using Tehotasapaino.Models;
 
 namespace Tehotasapaino.Controllers
 {
