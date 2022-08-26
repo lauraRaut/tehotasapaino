@@ -24,13 +24,13 @@ namespace Tehotasapaino.Models
             _logger = logger;
         }
 
-        public List<UserElectricityConsumptionData> GetUserElectricityWeekDayHourAverages()
+        public List<UserElectricityConsumptionData> GetUserElectricityWeekDayHourAverages(IFormFile fileFromUser)
         {
             List<UserElectricityConsumptionData> averagedUserConsumption = new List<UserElectricityConsumptionData>();
 
             _logger.LogInformation($"Creating consumption list");
 
-            averagedUserConsumption = BuildDataAnalysisModelFromCSV()
+            averagedUserConsumption = BuildDataAnalysisModelFromCSV(fileFromUser)
                            .Select(record =>
                                    new UserElectricityConsumptionData
                                    {

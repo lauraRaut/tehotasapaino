@@ -5,7 +5,9 @@ using Microsoft.Identity.Web;
 using Microsoft.Graph;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 using Tehotasapaino.Models;
+using System.IO;
 
 namespace Tehotasapaino.Controllers
 {
@@ -30,7 +32,8 @@ namespace Tehotasapaino.Controllers
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
 
-            await _userService.AddUserAndUserConsumptionDataToDb(user.Mail);
+            //Metodikutsu tiedostonkäsittelijälle
+           // await _userService.AddUserAndUserConsumptionDataToDb(user.Mail, fileFromUser);
 
             IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
             

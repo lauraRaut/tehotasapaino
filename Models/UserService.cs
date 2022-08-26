@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
+using Microsoft.AspNetCore.Http;
 using static Tehotasapaino.Models.DayAheadPrice;
 
 namespace Tehotasapaino.Models
@@ -29,7 +30,7 @@ namespace Tehotasapaino.Models
             return true;
         }
 
-        public async Task AddUserAndUserConsumptionDataToDb(string email) 
+        public async Task AddUserAndUserConsumptionDataToDb(string email, IFormFile fileFromUser) 
         {
             bool userExcists = await CheckUserExistDbAsync(email);
             if (!userExcists)
@@ -38,7 +39,7 @@ namespace Tehotasapaino.Models
                 {
                     Email = email,
                     HasUploadedData = true,
-                    UserElectricityConsumptionDatas = _ConsumptionData.GetUserElectricityWeekDayHourAverages()
+                    UserElectricityConsumptionDatas = _ConsumptionData.GetUserElectricityWeekDayHourAverages(fileFromUser)
                 };
 
                 _DbContext.UserData.Add(newUser);
