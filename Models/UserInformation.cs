@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     //olemassaoleva käyttäjä
     public class UserInformation

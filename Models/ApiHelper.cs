@@ -10,14 +10,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Serialization;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
+using static Tehotasapaino.Models.ApiHelper;
 using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
 
 

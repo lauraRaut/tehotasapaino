@@ -5,9 +5,9 @@ using Microsoft.Identity.Web;
 using Microsoft.Graph;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
+using Tehotasapaino.Models;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Controllers
+namespace Tehotasapaino.Controllers
 {
     [Authorize]
     public class HomeController : Controller
