@@ -7,7 +7,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome @(Model.loggedInPerson.FirstName)</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p> Maria testaa</p>
+    
 </div>
 
 @{
@@ -17,24 +17,11 @@
     }
 }
 <!-- enctype ="multipart/form-data" = Encoding type that MUST be specified in HTML to enable file upload.    -->
-<form action="BufferedSingleFileUploadPhysical/?handler=Upload"
-      enctype="multipart/form-data" onsubmit="uploadFile(this);return false;" method="post">
-    <dl>
-        <dt>
-            <label for="FileUpload_FormFile">File</label>
-        </dt>
-        <dd>
-            <input id="FileUpload_FormFile" type="file" name="FileUpload.FormFile" />
-        </dd>
-    </dl>
-
-    <input class="btn" type="submit" value="Upload" />
-
-    <div style="margin-top:15px">
-        <output name="result"></output>
-    </div>
+<form asp-controller="Home" asp-action="FileUpload" enctype="multipart/form-data" method="post">
+    <input type="file" name="file" />
+    <button type="submit">Submit</button>
+    <span>@TempData["msg"]</span>
 </form>
-
 
  
 

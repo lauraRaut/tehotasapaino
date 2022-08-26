@@ -5,7 +5,12 @@ using Microsoft.Identity.Web;
 using Microsoft.Graph;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Tehotasapaino.Models;
+using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Tehotasapaino.Controllers
 {
@@ -16,13 +21,14 @@ namespace Tehotasapaino.Controllers
         private readonly UserService _userService;
         private readonly GraphServiceClient _graphServiceClient;
 
+
         public HomeController(ILogger<HomeController> logger,
                           GraphServiceClient graphServiceClient, UserService userService)
         {
-             _logger = logger;
+            _logger = logger;
             _graphServiceClient = graphServiceClient;
             _userService = userService;
-       }
+        }
 
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         public async Task<IActionResult> Index()
@@ -31,7 +37,7 @@ namespace Tehotasapaino.Controllers
             ViewData["ApiResult"] = user.DisplayName;
 
             IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
-            
+
             return View(indexViewModel);
         }
         public IActionResult Privacy()
@@ -46,5 +52,53 @@ namespace Tehotasapaino.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        
+
+        //Uploading file on server
+        public async Task<bool> UploadFile(Microsoft.AspNetCore.Http.IFormFile file)
+        {
+            string path = "";
+            //Returning a boolean as a sort of OK that the file saving worked, so that FileUpload() method can take over
+            bool isCopied = false;
+            try
+            {
+                //Telling our program that the filename should stay as the name that is uploaded
+                string fileName = file.FileName;
+                //Created a folder named Upload in the project, and finding it as the path
+                path = Path.GetFullPath(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Upload"));
+                using (var fileStream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                isCopied = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return isCopied;
+
+        }
+
+        //Adding a message that upload succeeded and staying in the Index-view
+        [HttpPost]
+        public async Task<ActionResult> FileUpload(Microsoft.AspNetCore.Http.IFormFile file)
+        {
+            await UploadFile(file);
+            TempData["msg"] = "File uploaded successfully.";
+            
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
+
+
+            
+            
+
+
+
+     
