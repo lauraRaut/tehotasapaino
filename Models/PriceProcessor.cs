@@ -21,28 +21,25 @@ using Microsoft.Extensions.Configuration;
 namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
 {
 
-    public class TestModel
-    {
-        private readonly IConfiguration Configuration;
-        public TestModel(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+
         public class PriceProcessor
         {
             private readonly IConfiguration Configuration;
+
 
             public PriceProcessor(IConfiguration configuration)
             {
                 Configuration = configuration;
             }
+            public PriceProcessor() { }
+       
 
-            public static void GetPricesPerSearch()
+            public List<Point> GetPricesPerSearch()
             {
+                //string apikey = this.Configuration["ApiKey:DayAhedPrice"];
+                string apikey = "0ea14323-e50b-4de2-8810-05ee1c84dd06";
                 var today = DateTime.Today;
                 var todayFormatted = today.ToString("yyyy-MM-dd");
-                var tomorrow = today.AddDays(1);
-                var tomorrowFormatted = tomorrow.ToString("yyyy-MM-dd");
 
                 // Adding the key-value pairs I want to look up in my httpcall.
                 IDictionary<string, string> searchterms = new Dictionary<string, string>();
@@ -52,15 +49,15 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
                 searchterms.Add("TimeInterval", todayFormatted + "T00:00Z/" + todayFormatted + "T03:00Z");
 
 
-                var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", "apikey", searchterms);
+                var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", apikey, searchterms);
                 if (res.IsCompletedSuccessfully)
                 {
-                    HourandPriceKeyValuePairs(res.Result.ToString());
+                   return HourandPriceKeyValuePairs(res.Result.ToString());
+
                 }
+                return new List<Point>();
 
             }
-
-
 
             public static List<Point> HourandPriceKeyValuePairs(string xmlFromApi)
             {
@@ -98,9 +95,6 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
                 return prices;
             }
 
-
-
-
         }
-    }
+    
 }
