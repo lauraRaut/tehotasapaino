@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="text-center">
     <h1 class="display-4">Welcome @(Model.loggedInPerson.FirstName)</h1>
@@ -35,14 +36,64 @@
     </div>
 </form>
 
+<div class="chart-container chartSpace mt-3 text-center">
+    <canvas id="myChart" class="bg-white text-center"></canvas>
+</div>
 
- 
+
+
+
 
 
 <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 <script type="text/javascript">
+
     const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
     console.log(topicData);
+     
+    
+
+    const ctx = document.getElementById("myChart");
+    // Mychartista voi tehdä funktion, joka ottaa sisään x ja y koordinaatit sisään
+
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["a", "b", "c", "D", "e"],
+            datasets: [{
+                label: 'Sähkönhinta',
+                data: [1,2,3,4,5,6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+
+                    beginAtZero: true
+                }
+            }
+        }
+
+    });
+
+
 </script>
 
 <div>Api result</div>
