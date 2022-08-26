@@ -132,6 +132,24 @@ body {
   width:24px;
 }
 
+.arrowLeft {
+  height:36px;
+  width:36px;
+  transform: rotate(-90deg);
+}
+
+.arrowRight {
+  height:36px;
+  width:36px;
+  transform: rotate(90deg)
+}
+
+.exclamation {
+  width:36px;
+  height:36px;
+}
+
+
 .accordion-body {
   background-color: black;
   border: 1px solid rgb(228, 228, 122);
