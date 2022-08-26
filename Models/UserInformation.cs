@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     //olemassaoleva käyttäjä
     public class UserInformation
@@ -15,6 +15,9 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
         public string Email { get; set; }
 
         public bool HasUploadedData { get; set; }
+
+        public ICollection<UserElectricityConsumptionData> UserElectricityConsumptionDatas { get; set; }
+        public ICollection<UserExternalAPIToken> UserExternalAPITokens { get; set; }
 
 
     }

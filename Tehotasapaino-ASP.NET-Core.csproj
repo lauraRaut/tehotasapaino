@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-active_directory_aspnetcore_webapp_openidconnect_v2-EBA77524-2042-46B7-839E-366CB0F19D8C</UserSecretsId>
-    <RootNamespace>active_directory_aspnetcore_webapp_openidconnect_v2</RootNamespace>
+    <UserSecretsId>Tehotasapaino-EBA77524-2042-46B7-839E-366CB0F19D8C</UserSecretsId>
+    <RootNamespace>Tehotasapaino</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Chart.js" Version="3.7.1" />
+    <PackageReference Include="CsvHelper" Version="28.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.17" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />

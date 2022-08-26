@@ -11,14 +11,14 @@ using static System.Net.Http.HttpClient;
 using System.Text;
 using System.Text.Json;
 using System.Xml.Serialization;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.DayAheadPrice;
+using static Tehotasapaino.Models.ApiHelper;
+using static Tehotasapaino.Models.DayAheadPrice;
 using Newtonsoft.Json.Linq;
 using System.Xml;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
 
 

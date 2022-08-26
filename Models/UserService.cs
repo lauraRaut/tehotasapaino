@@ -4,17 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.DayAheadPrice;
+using Microsoft.AspNetCore.Http;
+using static Tehotasapaino.Models.DayAheadPrice;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     public class UserService
     {
         private readonly TehotasapainoContext _DbContext;
-
-        public UserService(TehotasapainoContext context)
+        private readonly UserElectricityConsumptionDataService _ConsumptionData;
+        public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService )
         {
             _DbContext = context;
+            _ConsumptionData = dataService;
         }
 
         public async Task<bool> CheckUserExistDbAsync(string email)
@@ -28,7 +30,7 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
             return true;
         }
 
-        public async Task AddUserToDb(string email) 
+        public async Task AddUserAndUserConsumptionDataToDb(string email, IFormFile fileFromUser) 
         {
             bool userExcists = await CheckUserExistDbAsync(email);
             if (!userExcists)
@@ -36,7 +38,8 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
                 UserInformation newUser = new UserInformation()
                 {
                     Email = email,
-                    HasUploadedData = false
+                    HasUploadedData = true,
+                    UserElectricityConsumptionDatas = _ConsumptionData.GetUserElectricityWeekDayHourAverages(fileFromUser)
                 };
 
                 _DbContext.UserData.Add(newUser);

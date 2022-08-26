@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Migrations
+namespace Tehotasapaino.Migrations
 {
     public partial class UserEmailRequiredDB : Migration
     {

@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     public class TehotasapainoContext : DbContext
     {
         public DbSet<UserInformation> UserData { get; set; }
+        public DbSet<UserElectricityConsumptionData> UserConsumptionData {get;set;}
+        public DbSet<UserExternalAPIToken> UserExternalAPITokens {get;set;}
+
+
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

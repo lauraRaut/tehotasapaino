@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
+using Tehotasapaino.Models;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2
+namespace Tehotasapaino
 {
     public class Startup
     {
@@ -27,6 +27,7 @@ namespace active_directory_aspnetcore_webapp_openidconnect_v2
         {
             services.AddDbContext<TehotasapainoContext>();
             services.AddScoped<UserService>();
+            services.AddScoped<UserElectricityConsumptionDataService>();
 
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
