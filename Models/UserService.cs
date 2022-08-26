@@ -11,10 +11,11 @@ namespace Tehotasapaino.Models
     public class UserService
     {
         private readonly TehotasapainoContext _DbContext;
-
-        public UserService(TehotasapainoContext context)
+        private readonly UserElectricityConsumptionDataService _ConsumptionData;
+        public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService )
         {
             _DbContext = context;
+            _ConsumptionData = dataService;
         }
 
         public async Task<bool> CheckUserExistDbAsync(string email)
@@ -28,7 +29,7 @@ namespace Tehotasapaino.Models
             return true;
         }
 
-        public async Task AddUserToDb(string email) 
+        public async Task AddUserAndUserConsumptionDataToDb(string email) 
         {
             bool userExcists = await CheckUserExistDbAsync(email);
             if (!userExcists)
@@ -36,7 +37,8 @@ namespace Tehotasapaino.Models
                 UserInformation newUser = new UserInformation()
                 {
                     Email = email,
-                    HasUploadedData = false
+                    HasUploadedData = true,
+                    UserElectricityConsumptionDatas = _ConsumptionData.GetUserElectricityWeekDayHourAverages()
                 };
 
                 _DbContext.UserData.Add(newUser);

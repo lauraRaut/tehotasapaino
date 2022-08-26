@@ -30,6 +30,8 @@ namespace Tehotasapaino.Controllers
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
 
+            await _userService.AddUserAndUserConsumptionDataToDb(user.Mail);
+
             IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
             
             return View(indexViewModel);
