@@ -16,8 +16,3 @@ async function uploadFile (event) {
 }
 
 //axios.
-
-
-
-
-

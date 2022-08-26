@@ -1,0 +1,265 @@
+﻿body {
+    background-color: rgb(34, 33, 33);
+    color: white;
+}
+
+
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chartSpace {
+    max-width: 500px;
+}
+
+
+.custom-file-upload {
+    color: rgb(228, 228, 122);
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(245, 245, 81);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+/* #panel {
+=======
+.consumption {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+}
+.consumption:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+/* color: rgb(255, 255, 30);
+    font-size: 20px;
+    font: bold;
+    float: right;
+    margin-left: 5px;
+  } */
+
+/* .active:after {
+    content: "\2796"; Unicode character for "minus" sign (-) */
+/* color:yellow;
+    
+  } */
+/*
+  #panel {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+  }  */
+
+
+
+#washingMachine {
+    color: white;
+    margin-left: 4px;
+}
+
+.uploadDataBtn {
+    border: 2px solid rgb(228, 228, 122);
+    border-radius: 4px;
+    padding: 0 1em 0 1em;
+}
+
+
+
+.navbar-nav .nav-item .nav-link {
+    margin: 2rem;
+}
+
+
+
+.navbar-nav .nav-item .nav-link {
+    border-bottom: 5px solid rgb(228, 228, 122);
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+
+
+#demoInput {
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: 15px 0;
+    font-size: 24px;
+    text-align: right;
+    background: transparent;
+    color: white;
+}
+
+
+
+.icons {
+    height: 24px;
+    width: 24px;
+}
+
+
+
+.accordion-button:active {
+    background-color: rgb(34, 33, 33);
+    color: rgb(228, 228, 122);
+}
+
+
+
+.accordion-button:not(.collapsed) {
+    background-color: rgb(34, 33, 33);
+    color: rgb(228, 228, 122);
+}
+
+
+
+.accordion-collapse {
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(228, 228, 122);
+}
+
+
+
+.accordion-flush {
+    border: 2px solid rgb(228, 228, 122);
+}
+
+
+
+.accordion-body {
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(228, 228, 122);
+}
+
+
+
+.accordion-button {
+    background-color: rgb(34, 33, 33);
+    color: rgb(228, 228, 122);
+    border: 1px solid rgb(228, 228, 122);
+}
+
+
+
+    .accordion-button:active {
+        background-color: rgb(34, 33, 33);
+        color: rgb(228, 228, 122);
+        border: 1px solid rgb(228, 228, 122);
+    }
+
+
+
+.accordion-header {
+    background-color: transparent;
+    color: rgb(228, 228, 122);
+}
+
+
+
+
+button.accordion-button.collapsed::after {
+    background-color: rgb(34, 33, 33);
+    border: 1px solid rgb(228, 228, 122);
+    color: rgb(228, 228, 122);
+    font: bold;
+}
+
+
+
+
+.accordion-item {
+    background-color: rgb(34, 33, 33);
+    color: rgb(228, 228, 122);
+}
+
+#plus {
+    display: inline-flexbox;
+    padding: 6px 16px;
+    font-size: 24px;
+    font: bold;
+    margin-right: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(34, 33, 33);
+    background-color: rgb(245, 245, 81);
+}
+
+
+
+    #plus:active {
+        background-color: rgb(169, 169, 55);
+        box-shadow: 0 5px #666;
+    }
+
+
+
+#minus {
+    display: inline-flexbox;
+    padding: 6px 16px;
+    font-size: 24px;
+    font: bold;
+    margin-left: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(34, 33, 33);
+    background-color: rgb(245, 245, 81);
+}
+
+
+
+    #minus:active {
+        background-color: rgb(169, 169, 55);
+        box-shadow: 0 5px #666;
+    }
+
+
+
+
+/* .consumption {
+    color:rgb(245, 245, 81);
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    background-color:rgb(34, 33, 33);
+    border:1px solid rgb(245, 245, 81);
+    border-radius:3px;
+}
+
+.consumption:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+/* color: rgb(255, 255, 30);
+    font-size: 20px;
+    font: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+/* color:yellow; */
+
+
+
+
+/* } */
+.line {
+    border-top: 2px solid white;
+    width: 75vw;
+    margin-left: 8%;
+}
