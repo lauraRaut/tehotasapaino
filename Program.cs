@@ -1,12 +1,11 @@
-using active_directory_aspnetcore_webapp_openidconnect_v2.Models;
+using Tehotasapaino.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.ApiHelper;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.TestModel;
+using static Tehotasapaino.Models.ApiHelper;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2
+namespace Tehotasapaino
 {
     public class Program
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Graph;
-using static active_directory_aspnetcore_webapp_openidconnect_v2.Models.DayAheadPrice;
+using static Tehotasapaino.Models.DayAheadPrice;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+namespace Tehotasapaino.Models
 {
     public class IndexViewModel
     {

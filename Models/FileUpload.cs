@@ -7,7 +7,8 @@ using Microsoft.Graph;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace active_directory_aspnetcore_webapp_openidconnect_v2.Models
+
+namespace Tehotasapaino.Models
 {
     //Model for response status and message after performing X operation.
     public class FileUpload

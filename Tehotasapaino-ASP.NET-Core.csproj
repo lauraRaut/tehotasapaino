@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-active_directory_aspnetcore_webapp_openidconnect_v2-EBA77524-2042-46B7-839E-366CB0F19D8C</UserSecretsId>
-    <RootNamespace>active_directory_aspnetcore_webapp_openidconnect_v2</RootNamespace>
+    <UserSecretsId>Tehotasapaino-EBA77524-2042-46B7-839E-366CB0F19D8C</UserSecretsId>
+    <RootNamespace>Tehotasapaino</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,10 @@
     <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="1.25.1" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.25.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 </Project>
