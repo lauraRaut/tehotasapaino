@@ -1,0 +1,15 @@
+<svg id="pesukonesvg" width="3.5em" height="3.5em"  viewBox="0 0 43 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_227_200)">
+<path d="M42.0611 49.5583C42.0611 52.3609 40.1693 55.1636 37.3666 55.1636H5.62636C2.40329 55.1636 0.931885 52.3609 0.931885 49.5583V5.62636C0.931885 2.82369 2.82369 0.931885 5.97669 0.931885H37.3666C40.1693 0.931885 42.0611 2.47335 42.0611 5.62636V49.5583Z" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+<path d="M36.6379 34.634C36.6379 42.993 29.8204 49.8105 21.4614 49.8105C13.1024 49.8105 6.28491 42.993 6.28491 34.634C6.28491 26.2751 13.1024 19.4576 21.4614 19.4576C29.8204 19.4576 36.6379 26.2751 36.6379 34.634V34.634Z" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+<path d="M32.5111 34.634C32.5111 40.6738 27.5714 45.6135 21.5316 45.6135C15.4918 45.6135 10.5521 40.6738 10.5521 34.634C10.5521 28.5943 15.4918 23.6546 21.5316 23.6546C27.5714 23.6546 32.5111 28.5943 32.5111 34.634V34.634Z" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+<path d="M34.6131 5.94168C34.6131 4.77156 33.6812 3.83968 32.5111 3.83968C31.3409 3.83968 30.4091 4.77156 30.4091 5.94168C30.4091 7.1118 31.3409 8.04368 32.5111 8.04368C33.6812 8.04368 34.6131 7.1118 34.6131 5.94168Z" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+<path d="M0.931885 11.0215H42.0611" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+<path d="M10.5591 34.634C10.5591 34.634 15.6249 31.9505 22.4284 35.9443C26.6604 38.4316 32.511 34.634 32.511 34.634" stroke="white" stroke-width="1.87078" stroke-miterlimit="13.33" stroke-linecap="round"/>
+</g>
+<defs>
+<clipPath id="clip0_227_200">
+<rect width="43" height="56.1025" fill="white"/>
+</clipPath>
+</defs>
+</svg>

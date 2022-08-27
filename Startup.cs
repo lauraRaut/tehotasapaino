@@ -28,6 +28,7 @@ namespace Tehotasapaino
             services.AddDbContext<TehotasapainoContext>();
             services.AddScoped<UserService>();
             services.AddScoped<UserElectricityConsumptionDataService>();
+            services.AddMvc().AddRazorRuntimeCompilation();
 
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 

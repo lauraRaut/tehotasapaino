@@ -31,14 +31,12 @@ namespace Tehotasapaino.Models
             _logger.LogInformation($"Creating consumption list");
 
             averagedUserConsumption = BuildDataAnalysisModelFromCSV(fileFromUser)
-                           .Select(record =>
-                                   new UserElectricityConsumptionData
-                                   {
-                                       WeekNum = record.Key.WeekNum,
-                                       WeekDay = record.Key.DayOfWeek,
-                                       Hour = record.Key.Hour,
-                                       AverageConsumptionkWh = record.Value.Average()
-                                   }).ToList();
+                                     .Select(record => new UserElectricityConsumptionData {
+                                                                                              WeekNum = record.Key.WeekNum,
+                                                                                              WeekDay = record.Key.DayOfWeek,
+                                                                                              Hour = record.Key.Hour,
+                                                                                              AverageConsumptionkWh = record.Value.Average()
+                                                                                           }).ToList();
 
             return averagedUserConsumption;
         }
@@ -75,7 +73,7 @@ namespace Tehotasapaino.Models
                     else
                     {
                         dataPoints.Add(record, new List<decimal> { kWhConsumption });
-                    }   
+                    }
                 }
             }
             _logger.LogInformation($"Parsing CSV done");
@@ -126,10 +124,10 @@ namespace Tehotasapaino.Models
             else
             {
                 // convert the object to a Book object
-                DateData comparedBook = (DateData)compared;
+                DateData comparedRecord = (DateData)compared;
 
                 // if the values of the object variables are equal, the objects are, too
-                return this.WeekNum == comparedBook.WeekNum && this.DayOfWeek == comparedBook.DayOfWeek && this.Hour == comparedBook.Hour;
+                return this.WeekNum == comparedRecord.WeekNum && this.DayOfWeek == comparedRecord.DayOfWeek && this.Hour == comparedRecord.Hour;
             }
         }
 

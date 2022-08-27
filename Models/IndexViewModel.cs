@@ -41,11 +41,50 @@ namespace Tehotasapaino.Models
         {
 
             public List<Point> DayAheadPrices { get; set; } = new List<Point>();
+            public string maxPrice {
+                get
+                {
+                    return this.DayAheadPrices.Max(x => x.Priceamount).ToString();
+                }
+                set { } 
+            }
+            public string maxPriceTimeStamp
+            {
+                get
+                {
+                    DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.maxPrice))
+                                       .Select(y => y.PricePosTimeStamp).Single();
 
+                    return $"From {startPos:HH} to {startPos.AddHours(1):HH}";
+                }
+                set { }
+            }
+
+
+
+            public string minPrice
+            {
+                get
+                {
+                    return this.DayAheadPrices.Min(x => x.Priceamount).ToString();
+                }
+                set { }
+            }
+
+            public string minPriceTimeStamp
+            {
+                get
+                {
+                    return this.DayAheadPrices
+                        .Where(x => x.Priceamount == decimal.Parse(this.minPrice))
+                        .Select(y => y.PricePosTimeStamp).Single().ToString("HH:mm");
+                }
+                set { }
+            }
 
             public DayAHeadPriceData(List<Point> dayAheadPrice) 
             {
-                this.DayAheadPrices = dayAheadPrice;
+                this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-3)).Take(24).ToList();
             }
 
         }

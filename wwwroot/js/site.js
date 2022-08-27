@@ -25,33 +25,28 @@
 
 
 window.onload = function () {
-    const topicData = JSON.parse(document.getElementById('appdata').dataset.obj);
-    console.log(topicData);
-    console.log(topicData[0].position);
-   
+    const priceData = JSON.parse(document.getElementById('appdata').dataset.obj);
+    console.log(priceData);
 
+    const priceList = priceData.map(sortPricesFromData);
 
-    const priceList = topicData.map(sortPricesFromData);
-
-    function sortPricesFromData(topicData) {
-        return topicData.priceamount;
+    function sortPricesFromData(priceData) {
+        return priceData.Priceamount;
     }
 
-    console.log(priceList);
+    const hourPositionList = priceData.map(sortPositionsFromData);
 
-    const hourPositionList = topicData.map(sortPositionsFromData);
-
-    function sortPositionsFromData(topicData) {
-        return topicData.position;
+    function sortPositionsFromData(priceData) {
+        return priceData.Position;
     }
+
     showChart(priceList, hourPositionList);
-
 }
 
 
     function showChart(priceList, hourPositionList) {
 
-        const ctx = document.getElementById("myChart");
+        const ctx = document.getElementById("priceConsumptionGraph");
         // Mychartista voi tehdä funktion, joka ottaa sisään x ja y koordinaatit sisään
         const myChart = new Chart(ctx, {
             type: 'line',

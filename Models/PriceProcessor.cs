@@ -17,84 +17,74 @@ using Newtonsoft.Json.Linq;
 using System.Xml;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
+using System.Xml.Linq;
 
 namespace Tehotasapaino.Models
 {
 
 
-        public class PriceProcessor
+    public class PriceProcessor
+    {
+        private readonly IConfiguration Configuration;
+        public PriceProcessor() { }
+
+
+        public List<Point> GetPricesPerSearch()
         {
-            private readonly IConfiguration Configuration;
+            //string apikey = this.Configuration["ApiKey:DayAhedPrice"];
+            string apikey = "0ea14323-e50b-4de2-8810-05ee1c84dd06";
+            DateTime today = DateTime.Today;
+            DateTime yesterday = today.AddDays(-1);
+            DateTime tomorrow = today.AddDays(1); 
+
+            string yesterdayFormatted = yesterday.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture);
+            string tomorrowFormatted = tomorrow.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture);
+
+            // Adding the key-value pairs I want to look up in my httpcall.
+            IDictionary<string, string> searchterms = new Dictionary<string, string>();
+            searchterms.Add("DocumentType", "A44");
+            searchterms.Add("in_Domain", "10YFI-1--------U");
+            searchterms.Add("out_Domain", "10YFI-1--------U");
+            searchterms.Add("periodStart", yesterdayFormatted);
+            searchterms.Add("periodEnd", tomorrowFormatted);
 
 
-            public PriceProcessor(IConfiguration configuration)
+            var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", apikey, searchterms);
+            if (res.IsCompletedSuccessfully)
             {
-                Configuration = configuration;
-            }
-            public PriceProcessor() { }
-       
-
-            public List<Point> GetPricesPerSearch()
-            {
-                //string apikey = this.Configuration["ApiKey:DayAhedPrice"];
-                string apikey = "0ea14323-e50b-4de2-8810-05ee1c84dd06";
-                var today = DateTime.Today;
-                var todayFormatted = today.ToString("yyyy-MM-dd");
-
-                // Adding the key-value pairs I want to look up in my httpcall.
-                IDictionary<string, string> searchterms = new Dictionary<string, string>();
-                searchterms.Add("DocumentType", "A44");
-                searchterms.Add("in_Domain", "10YFI-1--------U");
-                searchterms.Add("out_Domain", "10YFI-1--------U");
-                searchterms.Add("TimeInterval", todayFormatted + "T00:00Z/" + todayFormatted + "T03:00Z");
-
-
-                var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", apikey, searchterms);
-                if (res.IsCompletedSuccessfully)
-                {
-                   return HourandPriceKeyValuePairs(res.Result.ToString());
-
-                }
-                return new List<Point>();
+                return HourandPriceKeyValuePairs(res.Result.ToString());
 
             }
-
-            public static List<Point> HourandPriceKeyValuePairs(string xmlFromApi)
-            {
-                List<Point> prices = new List<Point>();
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlFromApi);
-                XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc.NameTable);
-                nsMgr.AddNamespace("nm", "urn:iec62325.351:tc57wg16:451-3:publicationdocument:7:0");
-                XmlNodeList xnList = doc.SelectNodes("/nm:Publication_MarketDocument/nm:TimeSeries", nsMgr);
-
-                foreach (XmlNode timeSeriesNode in xnList)
-                {
-                    XmlNodeList periodNodeList = timeSeriesNode.SelectNodes("//nm:Period", nsMgr);
-                    foreach (XmlNode periodNode in periodNodeList)
-                    {
-                        DateTime startDate = DateTime.Parse(periodNode["timeInterval"]["start"].InnerText);
-                        foreach (XmlNode pointNode in periodNode.ChildNodes)
-                        {
-                            if (pointNode.Name == "Point")
-                            {
-                                int hour = int.Parse(pointNode["position"].InnerText);
-                                decimal price = decimal.Parse(pointNode["price.amount"].InnerText, CultureInfo.InvariantCulture);
-                                DateTime daterange = startDate.AddHours(hour - 1);
-                                Point nextDayPrices = new Point();
-
-                                nextDayPrices.position = hour;
-                                nextDayPrices.priceamount = price;
-                                nextDayPrices.dateRange = daterange;
-                                prices.Add(nextDayPrices);
-
-                            }
-                        }
-                    }
-                }
-                return prices;
-            }
+            return new List<Point>();
 
         }
-    
+
+        public static List<Point> HourandPriceKeyValuePairs(string xmlFromApi)
+        {
+            List<Point> prices = new List<Point>();
+
+            XElement docXElem = XElement.Parse(xmlFromApi);
+            XNamespace ns2 = RemoveWhitespace(@"urn:iec62325.351:tc57wg16: 451 - 3:publicationdocument: 7:0");
+            prices = (from e in docXElem.Elements(ns2 + "TimeSeries").Elements(ns2 + "Period")
+                             let startTime = e.Element(ns2 + "timeInterval").Element(ns2 + "start").Value
+                             from p in e.Elements(ns2 + "Point")
+                             let hour = int.Parse(p.Element(ns2 + "position").Value)
+                             let kWhprice = decimal.Parse(p.Element(ns2 + "price.amount").Value, CultureInfo.InvariantCulture)/10
+                             select new Point { 
+                                 PricePosTimeStamp = DateTime.Parse(startTime).AddHours(hour-1), 
+                                 Position = hour, 
+                                 Priceamount = Decimal.Round(kWhprice)}).ToList();
+            return prices;
+        }
+
+        private static string RemoveWhitespace(string input)
+        {
+            return new string(input.ToCharArray()
+                .Where(c => !Char.IsWhiteSpace(c))
+                .ToArray());
+        }
+
+    }
+
+
 }

@@ -4,18 +4,10 @@
 }
 
 
-
-.chart-container {
-    position: relative;
-    margin: auto;
-    height: 20vh;
-    width: 80vw;
+.calc-wrapper {
+    margin-bottom: 180px;
+    z-index: 999;
 }
-
-.chartSpace {
-    max-width: 500px;
-}
-
 
 .custom-file-upload {
     color: rgb(228, 228, 122);
@@ -123,6 +115,7 @@ input[type="file"] {
 
 
 .accordion-button:not(.collapsed) {
+
     background-color: rgb(34, 33, 33);
     color: rgb(228, 228, 122);
 }
