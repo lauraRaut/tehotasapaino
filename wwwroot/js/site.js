@@ -60,35 +60,54 @@ window.onload = function () {
                 datasets: [{
                     label: 'Sähkönhinta',
                     data: priceList,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+                    stepped: true,
+                    borderColor: "rgba(255,99,132,1)",
+                    borderWidth: 2,
+                    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                    hoverBorderColor: "rgba(255,99,132,1)"
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: true,
                 scales: {
                     y: {
 
                         beginAtZero: true
+                    },
+                    x: {
+                        grid: {
+                            display: true
+                        }
                     }
                 }
             }
 
         });
 
+}
+
+document.addEventListener('click', function (event) {
+    const id = event.target.dataset.id;
+    if (!id) return;
+
+    if (id === "") {
+
     }
+
+    let elem = document.getElementById(id);
+
+    elem.hidden = !elem.hidden;
+});
+
+
+async function showUploadModal(event) {
+    const topicID = event.target.dataset.id;
+    const modalID = "removeModal-" + topicID;
+    const myModal = new bootstrap.Modal(document.getElementById(modalID), {
+        keyboard: false,
+        backdrop: "static"
+    });
+    myModal.show();
+}
 

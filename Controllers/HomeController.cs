@@ -36,9 +36,6 @@ namespace Tehotasapaino.Controllers
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
 
-            //Metodikutsu tiedostonkäsittelijälle
-           // await _userService.AddUserAndUserConsumptionDataToDb(user.Mail, fileFromUser);
-
             IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
             
             return View(indexViewModel);
@@ -86,12 +83,16 @@ namespace Tehotasapaino.Controllers
         }
 
         //Adding a message that upload succeeded and staying in the Index-view
+        [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         [HttpPost]
         public async Task<ActionResult> FileUpload(Microsoft.AspNetCore.Http.IFormFile file)
         {
             await UploadFile(file);
+            var user = await _graphServiceClient.Me.Request().GetAsync();
             TempData["msg"] = "File uploaded successfully.";
-            
+            //Metodikutsu tiedostonkäsittelijälle
+            // await _userService.AddUserAndUserConsumptionDataToDb(user.Mail, fileFromUser);
+
             return RedirectToAction(nameof(Index));
         }
 

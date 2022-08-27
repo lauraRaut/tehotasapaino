@@ -6,8 +6,10 @@
 
 
 .chart-container {
-    display: flex;
-    justify-content: center;
+    position: relative;
+    margin: auto;
+    height: 20vh;
+    width: 80vw;
 }
 
 .chartSpace {
