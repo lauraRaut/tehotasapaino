@@ -11,7 +11,7 @@ using static System.Net.Http.HttpClient;
 using System.Text;
 using System.Text.Json;
 using System.Xml.Serialization;
-using static Tehotasapaino.Models.ApiHelper;
+using static Tehotasapaino.Models.DayAHeadPriceAPIClient;
 using static Tehotasapaino.Models.DayAheadPrice;
 using Newtonsoft.Json.Linq;
 using System.Xml;
@@ -23,10 +23,10 @@ namespace Tehotasapaino.Models
 {
 
 
-    public class PriceProcessor
+    public class PriceProcessorService
     {
         private readonly IConfiguration Configuration;
-        public PriceProcessor() { }
+        public PriceProcessorService() { }
 
 
         public List<Point> GetPricesPerSearch()
@@ -49,7 +49,7 @@ namespace Tehotasapaino.Models
             searchterms.Add("periodEnd", tomorrowFormatted);
 
 
-            var res = ApiHelper.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", apikey, searchterms);
+            var res = DayAHeadPriceAPIClient.HttpGetRequestForPrices("https://web-api.tp.entsoe.eu/api?", apikey, searchterms);
             if (res.IsCompletedSuccessfully)
             {
                 return HourandPriceKeyValuePairs(res.Result.ToString());

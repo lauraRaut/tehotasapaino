@@ -18,7 +18,13 @@
 //axios.
 
 
+ul.onclick = function (event) {
+    const ulElem = event.target.closest('li');
 
+    if (!ulElem) return; 
+
+    console.log(ulElem);
+};
 
 
 

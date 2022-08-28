@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Serialization;
-using static Tehotasapaino.Models.ApiHelper;
+using static Tehotasapaino.Models.DayAHeadPriceAPIClient;
 using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,7 +21,7 @@ namespace Tehotasapaino.Models
 {
 
 
-    public class ApiHelper
+    public class DayAHeadPriceAPIClient
     {
         // Creating a generic HTTP get call that takes in the url (https://transparency.entsoe.eu/api? 
         // & the individual security token Sampsa requested from the service provider

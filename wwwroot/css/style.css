@@ -224,7 +224,9 @@ button.accordion-button.collapsed::after {
     }
 
 
-
+.modal-content {
+    background-color: rgb(34, 33, 33) !important;
+}
 
 /* .consumption {
     color:rgb(245, 245, 81);

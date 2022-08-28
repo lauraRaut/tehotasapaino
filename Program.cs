@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
-using static Tehotasapaino.Models.ApiHelper;
+using static Tehotasapaino.Models.DayAHeadPriceAPIClient;
 
 namespace Tehotasapaino
 {

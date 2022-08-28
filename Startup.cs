@@ -28,6 +28,7 @@ namespace Tehotasapaino
             services.AddDbContext<TehotasapainoContext>();
             services.AddScoped<UserService>();
             services.AddScoped<UserElectricityConsumptionDataService>();
+            services.AddScoped<HueLightService>();
             services.AddMvc().AddRazorRuntimeCompilation();
 
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
@@ -70,11 +71,17 @@ namespace Tehotasapaino
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "lightalertconfig",
+                    pattern: "{controller=PriceLightAlert}/{action=UserPriceAlertConfigurator}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

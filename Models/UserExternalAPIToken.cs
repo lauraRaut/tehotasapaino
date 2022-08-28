@@ -11,10 +11,10 @@ namespace Tehotasapaino.Models
         public int UserInformationId { get; set; }
         public UserInformation UserInformation { get; set; }
         public string ProviderName { get; set; }
-        public string APIToken { get; set; }
-        public DateTime LastRefreshTimeStamp { get; set; }
-        public int ExpirationTime { get; set; }
-
-
+        public DateTime CreatedDate { get; set; }
+        public string Access_token { get; set; }
+        public int Expires_in { get; set; }
+        public string Refresh_token { get; set; } = "";
+        public string UserNameProvider { get; set; }
     }
 }

@@ -2,19 +2,18 @@
 <div class="modal" tabindex="-1" id="uploadFileModal" aria-labelledby="uploadFileModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="">Upload consumption data"</h5>
+            <div class="modal-header ">
+                <h5 class="modal-title" id="">Upload consumption data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <p>Upload CSV File</p>
                 <form action="BufferedSingleFileUploadPhysical/?handler=Upload"
                       enctype="multipart/form-data" onsubmit="uploadFile(this);return false;" method="post">
-
-
                     <div class="text-center mt-0">
-                        <label class="custom-file-upload">
+                        <label class="custom-file-upload m-1">
                             <input id="FileUpload_FormFile" type="file" name="FileUpload.FormFile" />
-                            Upload data
+                            Select File
                         </label>
                     </div>
                     <div style="margin-top:15px">
@@ -25,7 +24,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <div id="uploadConfirmedbtnWrapper">
-                    <button data-id=uploadConfirmedbtn type="button" class="btn btn-outline-dark text-dark" data-action="uploadConfirmed">Upload</button>
+                    <input class="custom-file-upload p-2" data-id="uploadfile" data-action="uploadFileBtn" type="button" value="Start Upload" />
                 </div>
             </div>
         </div>
