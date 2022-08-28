@@ -23,7 +23,6 @@
         <div class="card-body">
             <canvas id="priceConsumptionGraph" class=""></canvas>
         </div>
-        <!--tässä joku kikka jolla tietyllä leveydellä otetaan käyttöön 75% levyinen grafiikka.-->
     </div>
 </div>
 <!-- Space for details and price       -->
@@ -57,7 +56,6 @@
         </li>
         <li class="me-auto"></li>
     </ul>
-
 
 <div class="calc-wrapper">
     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -137,14 +135,13 @@
         </div>
     </div>
 </div>
+</div>
 <partial name="_PartialFileUploadModal" />
 <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 
-
-
     <div class="bottom-info-box bg-dark fixed-bottom w-100">
         <span>@Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/footerwiggle3.svg"))</span>
-        <ul class="d-flex list-unstyled mt-auto">
+        <ul class="d-flex list-unstyled mt-auto w-100">
             <li class="me-auto"></li>
             <li class="d-flex align-items-center my-2 ms-3">
                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
@@ -163,36 +160,6 @@
         </ul>
 
     </div>
-
-
-    <!--
-    <footer class="footer bg-dark w-100 py-3 position-absolute bottom-0 start-50 translate-middle-x">
-        <div class="container">
-            <div class="row">
-                <div class="col-1 d-flex justify-content-start align-items-center">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
-                </div>
-                <div class="col-5 d-flex justify-content-start align-items-start">
-                    <p>Sähkönkulutus:</p>
-                </div>
-                <div class="col-1 d-flex justify-content-start align-items-center">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
-                </div>
-                <div class="col-5 d-flex justify-content-start">
-                    <p>Sähkönhinta:</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center ">
-                    <p>100 kWh</p>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <p>100 kWh</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    -->
     <script>
 
         function increment() {

@@ -31,12 +31,12 @@ namespace Tehotasapaino.Models
             _logger.LogInformation($"Creating consumption list");
 
             averagedUserConsumption = BuildDataAnalysisModelFromCSV(fileFromUser)
-                                     .Select(record => new UserElectricityConsumptionData {
-                                                                                              WeekNum = record.Key.WeekNum,
-                                                                                              WeekDay = record.Key.DayOfWeek,
-                                                                                              Hour = record.Key.Hour,
-                                                                                              AverageConsumptionkWh = record.Value.Average()
-                                                                                           }).ToList();
+                                                .Select(record => new UserElectricityConsumptionData {
+                                                                                                        WeekNum = record.Key.WeekNum,
+                                                                                                        WeekDay = record.Key.DayOfWeek,
+                                                                                                        Hour = record.Key.Hour,
+                                                                                                        AverageConsumptionkWh = record.Value.Average()
+                                                                                                     }).ToList();
 
             return averagedUserConsumption;
         }

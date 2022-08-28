@@ -67,11 +67,18 @@ window.onload = function () {
                 maintainAspectRatio: true,
                 scales: {
                     y: {
-
+                        ticks: {
+                            color: "white"
+                        },
+                        grid: { color: "rgba(255,255,255,0.2"},
                         beginAtZero: true
                     },
                     x: {
+                        ticks: {
+                            color: "white"
+                        },
                         grid: {
+                            color: "rgba(255,255,255,0.2",
                             display: true
                         }
                     }

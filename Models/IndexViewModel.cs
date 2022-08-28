@@ -55,7 +55,7 @@ namespace Tehotasapaino.Models
                     DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.maxPrice))
                                        .Select(y => y.PricePosTimeStamp).Single();
 
-                    return $"From {startPos:HH} to {startPos.AddHours(1):HH}";
+                    return $"Between {startPos:HH} - {startPos.AddHours(1):HH}";
                 }
                 set { }
             }
@@ -75,16 +75,16 @@ namespace Tehotasapaino.Models
             {
                 get
                 {
-                    return this.DayAheadPrices
-                        .Where(x => x.Priceamount == decimal.Parse(this.minPrice))
-                        .Select(y => y.PricePosTimeStamp).Single().ToString("HH:mm");
+                    DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.minPrice))
+                        .Select(y => y.PricePosTimeStamp).Single();
+                    return $"Between {startPos:HH} - {startPos.AddHours(1):HH}";
                 }
                 set { }
             }
 
             public DayAHeadPriceData(List<Point> dayAheadPrice) 
             {
-                this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-3)).Take(24).ToList();
+                this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();
             }
 
         }

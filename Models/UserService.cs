@@ -51,6 +51,12 @@ namespace Tehotasapaino.Models
             }
         }
 
+        public async Task<UserElectricityConsumptionData> GetUserElectricityConsumptionData(User userFromAzure) 
+        { 
+            throw new Exception("not implemented");
+        
+        }
+
         public async Task<IndexViewModel> CreateIndexViewModel(User userFromAzureAD) 
         {
             bool userExcists = await CheckUserExistDbAsync(userFromAzureAD.Mail);
