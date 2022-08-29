@@ -25,14 +25,16 @@ namespace Tehotasapaino.Models
 
     public class PriceProcessorService
     {
-        private readonly IConfiguration Configuration;
-        public PriceProcessorService() { }
+        private readonly IConfiguration _config;
+        public PriceProcessorService(IConfiguration config) 
+        {
+            _config = config;
+        }
 
 
         public List<Point> GetPricesPerSearch()
         {
-            //string apikey = this.Configuration["ApiKey:DayAhedPrice"];
-            string apikey = "0ea14323-e50b-4de2-8810-05ee1c84dd06";
+            string apikey = this._config.GetValue<string>("Tehotasapaino:DayAHeadPriceApiKey");
             DateTime today = DateTime.Today;
             DateTime yesterday = today.AddDays(-1);
             DateTime tomorrow = today.AddDays(1); 

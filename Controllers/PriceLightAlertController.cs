@@ -46,13 +46,13 @@ namespace Tehotasapaino.Controllers
         [HttpPost, ActionName("lightstate")]
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Start(LightState requestedLightState)
+        public async Task<IActionResult> SetLightState(LightState requestedLightState)
         {
             _logger.LogInformation($"POST lightstate received {requestedLightState}");
             try
             {
                 var user = await _graphServiceClient.Me.Request().GetAsync();
-                UserExternalAPIToken userHueAPIToken = await _userService.GetUserExternalAPITokenData(user, "Hue");
+                UserExternalAPIToken userHueAPIToken = await _userService.GetUserExternalAPITokenDataAsync(user, "Hue");
                 
                 try
                 {

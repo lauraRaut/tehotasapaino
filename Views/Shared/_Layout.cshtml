@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using TempDataExtensions;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,17 @@
     <link rel="stylesheet" asp-append-version="true" href="~/css/style.css" />
 </head>
 <body>
+    @if (TempData.Get<SuccessMessage>("UserMessage") != null)
+    {
+        var message = TempData.Get<SuccessMessage>("UserMessage") as Tehotasapaino.Models.SuccessMessage;
+        <div class="alert @message.CssClassName d-flex align-items-center alert-dismissible fade show" role="alert">
+            <i class="bi bi-file-earmark-check-fill me-2" width="2em" height="2em"></i>
+            <div><strong>@message.Title</strong> @message.DisplayMessage</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+
+
+        </div>
+    }
     <div id="JSAlertPlaceholder" style="z-index:2000; position:absolute; width:100%;"></div>
     <header>
         <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
@@ -30,7 +42,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
