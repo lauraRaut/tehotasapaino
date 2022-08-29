@@ -110,4 +110,19 @@ async function showUploadModal(event) {
     });
     myModal.show();
 }
+var averagePrice = document.getElementById('averagePrice').innerText;
+
+function CalculateMachine(id, priceid) {
+    var result = document.getElementById(id).value;
+    var calc = result * averagePrice;
+
+    document.getElementById(priceid).innerHTML = calc;
+    
+  
+}
+
+
+
+
+
 

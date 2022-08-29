@@ -82,6 +82,18 @@ namespace Tehotasapaino.Models
                 set { }
             }
 
+            public int averagePrice
+            {
+                get
+                {
+                   int averagePrice = (Convert.ToInt32(minPrice) + Convert.ToInt32(maxPrice)) / 2;
+                    return averagePrice;
+                }
+
+                set { }
+                
+            }
+
             public DayAHeadPriceData(List<Point> dayAheadPrice) 
             {
                 this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();

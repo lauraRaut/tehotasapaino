@@ -60,7 +60,8 @@
         <li class="d-flex align-items-center my-2 ms-3">
             @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/kiinteahinta.svg"))
             <span class="ms-3 my-2">
-                Fixed price is <br /> 30 c/kWh
+                Fixed price is <br /> <span id="averagePrice">  @Model.dayAHeadPriceData.averagePrice </span> c/kWh
+
             </span>
         </li>
         <li class="me-auto"></li>
@@ -77,10 +78,11 @@
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment()" id="plus">+</button>
-                            <button onclick="decrement()" id="minus">-</button>
+                            <button onclick="increment('demoInput')" id="plus">+</button>
+                            <button onclick="decrement('demoInput')" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
                             <input id=demoInput type=number min=0 max=100>
+                            <button id="testi" onclick="Pesukone()">Klik</button>
                         </div>
                     </div>
                 </div>
@@ -107,10 +109,12 @@
                 <div id="flush-collapseOne2" class="accordion-collapse collapse" aria-labelledby="flush-headingOne2" data-bs-parent="#accordionFlushExample2">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment()" id="plus">+</button>
-                            <button onclick="decrement()" id="minus">-</button>
+                            <p>Mixed laundry programme in 40 c degrees.</p><br />
+                            <button onclick="increment('laundryMachine', 'laundryCost')" id="plus">+</button>
+                            <button onclick="decrement('laundryMachine', 'laundryCost')" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
+                            <input id=laundryMachine type=number min=0 max=100><br />
+                            <p>Price in your electricity bill: </p> <p id="laundryCost"> </p> €
                         </div>
                     </div>
                 </div>
@@ -134,10 +138,10 @@
                 <div id="flush-collapseOne3" class="accordion-collapse collapse" aria-labelledby="flush-headingOne3" data-bs-parent="#accordionFlushExample3">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment()" id="plus">+</button>
-                            <button onclick="decrement()" id="minus">-</button>
+                            <button onclick="increment('shower')" id="plus">+</button>
+                            <button onclick="decrement('shower')" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
+                            <input id=shower type=number min=0 max=100>
                         </div>
                     </div>
                 </div>
@@ -161,10 +165,10 @@
                 <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment()" id="plus">+</button>
-                            <button onclick="decrement()" id="minus">-</button>
+                            <button onclick="increment('dishWasher')" id="plus">+</button>
+                            <button onclick="decrement('dishWasher')" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
+                            <input id=dishWasher type=number min=0 max=100>
                         </div>
                     </div>
                 </div>
@@ -199,11 +203,13 @@
 </div>
 <script>
 
-    function increment() {
-        document.getElementById('demoInput').stepUp();
+    function increment(id, priceid) {
+        document.getElementById(id).stepUp();
+        CalculateMachine(id, priceid);
     }
-    function decrement() {
-        document.getElementById('demoInput').stepDown();
+    function decrement(id, priceid) {
+        document.getElementById(id).stepDown();
+        CalculateMachine(id, priceid);
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
