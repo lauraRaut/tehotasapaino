@@ -112,14 +112,14 @@ async function showUploadModal(event) {
 }
 var averagePrice = document.getElementById('averagePrice').innerText;
 
-function CalculateMachine(id, priceid) {
+function CalculateMachine(id, priceid, kwh) {
     var result = document.getElementById(id).value;
-    var calc = result * averagePrice;
+    var calc = (result * kwh) * averagePrice / 100;
 
-    document.getElementById(priceid).innerHTML = calc;
+    document.getElementById(priceid).innerHTML = calc.toFixed(2);
     
-  
 }
+
 
 
 

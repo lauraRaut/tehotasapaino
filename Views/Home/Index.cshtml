@@ -72,17 +72,17 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Tips for eletricity consumption
+                        Sauna
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment('demoInput')" id="plus">+</button>
-                            <button onclick="decrement('demoInput')" id="minus">-</button>
-                            <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
-                            <button id="testi" onclick="Pesukone()">Klik</button>
+                            <p>Using the sauna for 1.5 hours.</p><br />
+                            <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
+                            <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+                            <input id=sauna type=number min=0 max=100>
+                            <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> €
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                             <li class="d-flex align-items-center me-3">
                                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/pesukamaaoptimoitu.svg"))
                                 <span class="m-3">
-                                    Tips for eletricity consumption
+                                    Laundry machine
                                 </span>
                             </li>
                         </ul>
@@ -110,9 +110,8 @@
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
                             <p>Mixed laundry programme in 40 c degrees.</p><br />
-                            <button onclick="increment('laundryMachine', 'laundryCost')" id="plus">+</button>
-                            <button onclick="decrement('laundryMachine', 'laundryCost')" id="minus">-</button>
-                            <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
+                            <button onclick="increment('laundryMachine', 'laundryCost', 0.6)" id="plus">+</button>
+                            <button onclick="decrement('laundryMachine', 'laundryCost', 0.6)" id="minus">-</button>
                             <input id=laundryMachine type=number min=0 max=100><br />
                             <p>Price in your electricity bill: </p> <p id="laundryCost"> </p> €
                         </div>
@@ -129,7 +128,7 @@
                             <li class="d-flex align-items-center me-3">
                                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/suihku.svg"))
                                 <span class="m-3">
-                                    Tips for eletricity consumption
+                                    Shower
                                 </span>
                             </li>
                         </ul>
@@ -138,10 +137,12 @@
                 <div id="flush-collapseOne3" class="accordion-collapse collapse" aria-labelledby="flush-headingOne3" data-bs-parent="#accordionFlushExample3">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment('shower')" id="plus">+</button>
-                            <button onclick="decrement('shower')" id="minus">-</button>
-                            <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=shower type=number min=0 max=100>
+                            <p>
+                                37 c shower for 5 minutes, 12 litres of water. </p> <br />
+                                <button onclick="increment('shower', 'showerCost', 2.1 )" id="plus">+</button>
+                                <button onclick="decrement('shower', 'showerCost', 2.1 )" id="minus">-</button>
+                                <input id=shower type=number min=0 max=100>
+                            <p>Price in your electricity bill: </p> <p id="showerCost"> </p> €
                         </div>
                     </div>
                 </div>
@@ -156,7 +157,7 @@
                             <li class="d-flex align-items-center me-3">
                                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/tiskikamaaoptimoitu.svg"))
                                 <span class="m-3">
-                                    Tips for eletricity consumption
+                                    Dishwasher
                                 </span>
                             </li>
                         </ul>
@@ -165,10 +166,69 @@
                 <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment('dishWasher')" id="plus">+</button>
-                            <button onclick="decrement('dishWasher')" id="minus">-</button>
-                            <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
+                            <p>
+                                Basic washing programme with warm mater.
+                            </p> <br />
+                            <button onclick="increment('dishWasher', 'dishWasherCost', 1.2)" id="plus">+</button>
+                            <button onclick="decrement('dishWasher', 'dishWasherCost', 1.2)" id="minus">-</button>
                             <input id=dishWasher type=number min=0 max=100>
+                            <p>Price in your electricity bill: </p> <p id="dishWasherCost"> </p> €
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample4">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne5">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne5" aria-expanded="false" aria-controls="flush-collapseOne3">
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="d-flex align-items-center me-3">
+                                <span class="m-3">
+                                    Gaming console & TV
+                                </span>
+                            </li>
+                        </ul>
+                    </button>
+                </h2>
+                <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-left mt-1 mb-1">
+                            <p>Using gaming console and a television for one hour. </p> <br />
+                            <button onclick="increment('gamingConsole', 'gamingConsoleCost', 0.31)" id="plus">+</button>
+                            <button onclick="decrement('gamingConsole', 'gamingConsoleCost', 0.31)" id="minus">-</button>
+                            <input id=gamingConsole type=number min=0 max=100>
+                            <p>Price in your electricity bill: </p> <p id="gamingConsoleCost"> </p> €
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample4">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne6">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne6" aria-expanded="false" aria-controls="flush-collapseOne3">
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="d-flex align-items-center me-3">
+                                <span class="m-3">
+                                    Coffee machine
+                                </span>
+                            </li>
+                        </ul>
+                    </button>
+                </h2>
+                <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-left mt-1 mb-1">
+                            <p>
+                                Basic washing programme with warm mater.
+                            </p> <br />
+                            <button onclick="increment('coffeeMachine', 'coffeeMachineCost', 0.01)" id="plus">+</button>
+                            <button onclick="decrement('coffeeMachine', 'coffeeMachineCost', 0.01)" id="minus">-</button>
+                            <input id=coffeeMachine type=number min=0 max=100>
+                            <p>Price in your electricity bill: </p> <p id="coffeeMachineCost"> </p> €
                         </div>
                     </div>
                 </div>
@@ -203,13 +263,13 @@
 </div>
 <script>
 
-    function increment(id, priceid) {
+    function increment(id, priceid, kwh) {
         document.getElementById(id).stepUp();
-        CalculateMachine(id, priceid);
+        CalculateMachine(id, priceid, kwh);
     }
-    function decrement(id, priceid) {
+    function decrement(id, priceid, kwh) {
         document.getElementById(id).stepDown();
-        CalculateMachine(id, priceid);
+        CalculateMachine(id, priceid, kwh);
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
