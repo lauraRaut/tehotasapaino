@@ -87,7 +87,7 @@ namespace Tehotasapaino.Controllers
         [HttpPost]
         public async Task<ActionResult> FileUpload(Microsoft.AspNetCore.Http.IFormFile file)
         {
-            await UploadFile(file);
+            //await UploadFile(file);
             var user = await _graphServiceClient.Me.Request().GetAsync();
             TempData["msg"] = "File uploaded successfully.";
             //Metodikutsu tiedostonkäsittelijälle

@@ -94,7 +94,7 @@
 
                         <ul class="d-flex list-unstyled mt-auto">
                             <li class="d-flex align-items-center me-3">
-                                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/pesukone.svg"))
+                                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/pesukamaaoptimoitu.svg"))
                                 <span class="m-3">
                                     Tips for eletricity consumption
                                 </span>
@@ -143,6 +143,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample4">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne4" aria-expanded="false" aria-controls="flush-collapseOne3">
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="d-flex align-items-center me-3">
+                                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/tiskikamaaoptimoitu.svg"))
+                                <span class="m-3">
+                                    Tips for eletricity consumption
+                                </span>
+                            </li>
+                        </ul>
+                    </button>
+                </h2>
+                <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-left mt-1 mb-1">
+                            <button onclick="increment()" id="plus">+</button>
+                            <button onclick="decrement()" id="minus">-</button>
+                            <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
+                            <input id=demoInput type=number min=0 max=100>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <partial name="_PartialFileUploadModal" />
