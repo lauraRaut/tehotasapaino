@@ -60,7 +60,7 @@ namespace Tehotasapaino.Controllers
             {
 
                 TempData.Put("UserMessage", new SuccessMessage()
-                { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"Termination failed!{e.ToString()}" });
+                { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"Termination failed! With error msg:  {e.ToString()}" });
                 return RedirectToAction(nameof(Index));
             }
         }
