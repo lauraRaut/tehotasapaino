@@ -16,9 +16,9 @@ namespace Tehotasapaino.Models
 
         public bool HasUploadedData { get; set; }
 
+        public UserAlertLightInformation UserAlertLightInformation { get; set; }
         public ICollection<UserElectricityConsumptionData> UserElectricityConsumptionDatas { get; set; }
         public ICollection<UserExternalAPIToken> UserExternalAPITokens { get; set; }
-
 
     }
 }

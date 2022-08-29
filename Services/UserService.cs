@@ -69,6 +69,16 @@ namespace Tehotasapaino.Models
             return dbUser;
         }
 
+        public async Task<UserInformation> GetDbUserWithTokenAndAlertLightDataAsync(User userFromAzure)
+        {
+
+            UserInformation dbUser = await _DbContext.UserData.Include(token => token.UserExternalAPITokens)
+                                                              .Include(light => light.UserAlertLightInformation)
+                                                              .FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
+            return dbUser;
+        }
+
+
         public UserExternalAPIToken GetTokenFromUser(UserInformation userData, string service)
         {
 

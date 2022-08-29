@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Tehotasapaino.Models
 {
-    public class LightState
+    public class LightStateFromTestPage
     {
-        public string AlertLihgtColor { get; set; }
+        public string AlertLightHexColor { get; set; }
         public bool isPriceHight { get; set; }
     }
 }
