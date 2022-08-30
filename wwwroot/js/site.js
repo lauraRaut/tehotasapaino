@@ -61,6 +61,7 @@ window.onload = function () {
                     hoverBackgroundColor: "rgba(255,99,132,0.4)",
                     hoverBorderColor: "rgba(255,99,132,1)"
                 }]
+
             },
             options: {
                 responsive: true,
