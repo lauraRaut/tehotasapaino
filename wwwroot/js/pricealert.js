@@ -25,7 +25,7 @@ document.addEventListener('click', function (event) {
         postLightStateToServer();
     }
 
-    if (event.target.dataset.setLightColor === "#E4E47A" || event.target.dataset.setLightColor === "#FF6363" || event.target.dataset.setLightColor === "#00FF21") {
+    if (event.target.dataset.setLightColor === "E4E47A" || event.target.dataset.setLightColor === "FF6363" || event.target.dataset.setLightColor === "00FF21") {
         console.log(event.target.dataset.setLightColor);
         postLightStateToServer(event);
     }
@@ -35,8 +35,8 @@ document.addEventListener('click', function (event) {
 function postLightStateToServer(event) {
     
     axios.post('/PriceLightAlert/lightstate', {
-        AlertLihgtColor: event.target.dataset.setLightColor,
-        isPriceHight: true
+        AlertLightHexColor: event.target.dataset.setLightColor,
+        isPriceHight: 'true'
     })
         .then((response) => {
             console.log(response);
