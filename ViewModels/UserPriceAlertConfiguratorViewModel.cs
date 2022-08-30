@@ -11,9 +11,9 @@ namespace Tehotasapaino.Models
     {
         public LoggedInPerson loggedInPerson { get; set; }
         public DayAHeadPriceData dayAHeadPriceData { get; set; }
-        public UserPriceAlertConfiguratorViewModel(User userFromAzureAD, bool isInPriceAlertBetaProgram, List<Point> priceList) 
+        public UserPriceAlertConfiguratorViewModel(User userFromAzureAD, bool isInPriceAlertBetaProgram, bool hasUserAddedAlertLight, List<Point> priceList) 
         {
-            this.loggedInPerson = new LoggedInPerson(userFromAzureAD, isInPriceAlertBetaProgram);
+            this.loggedInPerson = new LoggedInPerson(userFromAzureAD, isInPriceAlertBetaProgram, hasUserAddedAlertLight);
             this.dayAHeadPriceData = new DayAHeadPriceData(priceList);
         }
 
@@ -25,13 +25,15 @@ namespace Tehotasapaino.Models
             public string LastName { get; set; }
             public string Email { get; set; }            
             public bool isInPriceAlertBetaProgram { get; set; }
+            public bool hasAddedLight { get; set; }
 
-            public LoggedInPerson(User userFromAzureAD, bool isPriceInPriceAlertProgram)
+            public LoggedInPerson(User userFromAzureAD, bool isPriceInPriceAlertProgram, bool hasUserAddedAlertLight)
             {
                 this.FirstName = userFromAzureAD.GivenName;
                 this.LastName = userFromAzureAD.Surname;
                 this.Email = userFromAzureAD.Mail;
                 this.isInPriceAlertBetaProgram = isPriceInPriceAlertProgram;
+                this.hasAddedLight = hasUserAddedAlertLight;
             }
         }
 

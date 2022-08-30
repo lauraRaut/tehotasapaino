@@ -57,7 +57,6 @@ namespace Tehotasapaino.Models
         public async Task<UserElectricityConsumptionData> GetUserElectricityConsumptionData(User userFromAzure)
         {
             throw new Exception("not implemented");
-
         }
 
 
@@ -69,26 +68,8 @@ namespace Tehotasapaino.Models
             return dbUser;
         }
 
-        public async Task<UserInformation> GetDbUserWithTokenAndAlertLightDataAsync(User userFromAzure)
-        {
-
-            UserInformation dbUser = await _DbContext.UserData.Include(token => token.UserExternalAPITokens)
-                                                              .Include(light => light.UserAlertLightInformation)
-                                                              .FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
-            return dbUser;
-        }
-
-
-        public UserExternalAPIToken GetTokenFromUser(UserInformation userData, string service)
-        {
-
-            UserExternalAPIToken userTokenData = userData.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == service);
-            return userTokenData;
-        }
-
         public async Task<UserExternalAPIToken> GetUserExternalAPITokenDataAsync(User userFromAzure, string service)
         {
-
             UserInformation dbUser = await this.GetDbUserWithTokenData(userFromAzure);
 
             if (dbUser == null)
@@ -98,7 +79,7 @@ namespace Tehotasapaino.Models
 
             }
 
-            UserExternalAPIToken userToken = this.GetTokenFromUser(dbUser, service);
+            UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == service);
 
             if (userToken == null)
             {
@@ -106,10 +87,35 @@ namespace Tehotasapaino.Models
             }
 
             return userToken;
-
         }
 
-        public async Task DeleteUserFromDbAsync(User userFromAzure) 
+        public async Task<UserInformation> GetDbUserWithTokenAndAlertLightDataAsync(User userFromAzure)
+        {
+
+            UserInformation dbUser = await _DbContext.UserData.Include(token => token.UserExternalAPITokens)
+                                                              .Include(light => light.UserAlertLightInformation)
+                                                              .FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
+            if (dbUser == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+            UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue");
+
+            if (userToken == null)
+            {
+                throw new ArgumentException("User has no access to this service");
+            }
+
+            UserAlertLightInformation userAlertLight = dbUser.UserAlertLightInformation;
+            if (userAlertLight == null)
+            {
+                throw new ArgumentException("No light found");
+            }
+
+            return dbUser;
+        }
+
+        public async Task DeleteUserFromDbAsync(User userFromAzure)
         {
             UserInformation dbUser = await _DbContext.UserData.FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
             _DbContext.UserData.Remove(dbUser);
@@ -129,14 +135,21 @@ namespace Tehotasapaino.Models
         public async Task<UserPriceAlertConfiguratorViewModel> CreatePriceAlertViewModel(User userFromAzureAD)
         {
             bool isUserInPriceAlertProgram = false;
-            UserInformation dbUser = await this.GetDbUserWithTokenData(userFromAzureAD);
-            if (dbUser != null)
+            bool hasUserAddedAlertLight = false;
+            UserInformation dbUser = await this.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
+            if (dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue") != null)
             {
                 isUserInPriceAlertProgram = true;
             }
 
+            if (dbUser.UserAlertLightInformation != null)
+            {
+                hasUserAddedAlertLight = true;
+            }
+
             List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
-            UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram, nextDayPrices);
+            UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram, 
+                                                                                hasUserAddedAlertLight, nextDayPrices);
 
 
             return UserPriceAlertViewModel;

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using HueApi;
 using HueApi.BridgeLocator;
-using HueApi.ColorConverters;
+using HueApi.ColorConverters.Original.Extensions;
 using HueApi.Extensions;
 using HueApi.Models.Requests;
+using HueApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 
@@ -22,16 +23,27 @@ namespace Tehotasapaino.Models
             _userService = userService;
         }
 
-        public async Task SetAlertLightToDesiredState(User userFromAzureAD)
+        public async Task<HuePutResponse> SetAlertLightToDesiredState(User userFromAzureAD, LightStateFromTestPage requestedLightState)
         {
             UserLightAlertClient userLightClient = await InitializeAlertLightClientForSingleUserAsync(userFromAzureAD);
-            await TurnLightToDesiredState(userLightClient);
+            return await TurnLightToDesiredState(userLightClient, requestedLightState);
         }
 
-        public async Task SetAlertLightToDesiredState(UserInformation userFromDb)
+        private async Task SetAlertLightToDesiredState(UserInformation userFromDb)
+        {
+            //TODO
+            return;
+        }
+        private async Task<HuePutResponse> TurnLightToDesiredState(UserLightAlertClient AuthenticatedHueApiClient, LightStateFromTestPage requestedLightState)
         {
 
-            await TurnLightToDesiredState(userLightClient);
+            UpdateLight newLightStateReq = new UpdateLight()
+                                        .TurnOn()
+                                        .SetColor(new HueApi.ColorConverters.RGBColor(requestedLightState.AlertLightHexColor));
+            Guid userLightId = AuthenticatedHueApiClient.UserAlertLight;
+
+            HuePutResponse result = await AuthenticatedHueApiClient.UserHueClient.UpdateLightAsync(userLightId, newLightStateReq);
+            return result;
         }
 
         private async Task<UserLightAlertClient> InitializeAlertLightClientForSingleUserAsync(User userFromAzureAD) 
@@ -40,21 +52,13 @@ namespace Tehotasapaino.Models
             return new UserLightAlertClient(dbUser);
         }
 
-        private static async Task TurnLightToDesiredState(RemoteHueApi AuthenticatedHueApiClient)
+        private void LightRequestBuilder(string HEXColorCode) 
         {
-
-            var lights = await AuthenticatedHueApiClient.GetLightsAsync();
-
-            Console.WriteLine(lights);
-
-            var id = lights.Data.SingleOrDefault(x => x.Metadata.Name.Contains("Alertlamppu")).Id;
-
-            var req = new UpdateLight().TurnOff();
-            var result = await AuthenticatedHueApiClient.UpdateLightAsync(id, req);
-            Console.WriteLine(result);
+            UpdateLight req = new UpdateLight().TurnOn().SetColor(new HueApi.ColorConverters.RGBColor(HEXColorCode));
         }
-
     }
+
+    
     
     public class UserLightAlertClient
     {

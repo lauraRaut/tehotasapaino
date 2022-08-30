@@ -27,23 +27,31 @@
 
 
 
-    @if (Model.loggedInPerson.isInPriceAlertBetaProgram)
-    {
-        <ul class="d-flex list-unstyled mt-auto"data-lightOn>
-            <li class="me-auto"></li>
-            <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
-                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
-                <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
-            </li>
-            <li class="me-auto"></li>
-            <li class="d-flex align-items-center ms-3 my-2">
-                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
-                <input type="button" class="mx-3 my-2" value="Turn off"  data-set-light-state="Turn Off">
-                    
-            </li>
-            <li class="me-auto"></li>
-        </ul>
+    @{
+        if (Model.loggedInPerson.isInPriceAlertBetaProgram && Model.loggedInPerson.hasAddedLight)
+        {
+            <ul class="d-flex list-unstyled mt-auto" data-lightOn>
+                <li class="me-auto"></li>
+                <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
+                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
+                    <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
+                </li>
+                <li class="me-auto"></li>
+                <li class="d-flex align-items-center ms-3 my-2">
+                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
+                    <input type="button" class="mx-3 my-2" value="Turn off" data-set-light-state="Turn Off">
+
+                </li>
+                <li class="me-auto"></li>
+            </ul>
+        }
+        else
+        {
+            <h2>Please add alert light!</h2>
+        }
     }
+
+
 
 
 </div>
