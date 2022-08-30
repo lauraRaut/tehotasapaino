@@ -243,25 +243,42 @@
         <partial name="_PartialFileUploadModal" />
         <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 
-        <div class="bottom-info-box bg-dark fixed-bottom w-100">
-            <span>@Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/footerwiggle3.svg"))</span>
-            <ul class="d-flex list-unstyled mt-auto w-100">
-                <li class="me-auto"></li>
-                <li class="d-flex align-items-center my-2 ms-3">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
-                    <span class="ms-3 my-2">
-                        Sähkönkulutus <br /> 1 000 kWh
-                    </span>
-                </li>
-                <li class="me-auto"></li>
-                <li class="d-flex align-items-center ms-3 my-2">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
-                    <span class="mx-3 my-2">
-                        Sähkönhinta: <br /> 1 000 €
-                    </span>
-                </li>
-                <li class="me-auto"></li>
-            </ul>
+<div class="bottom-info-box bg-dark fixed-bottom w-100">
+    <div class="lineWrapper">
+
+        <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#D3D3D3" d="M0 0h334v11H0z" />
+            <g clip-path="url(#a)">
+                <path fill="#232323" d="M-27-879h390v991H-27z" />
+                <path fill="#232323" d="M-27 1h390v111H-27z" />
+                <path d="m1 10 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9m0 0 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9" stroke="#fff" />
+            </g>
+            <defs>
+                <clipPath id="a">
+                    <path fill="#fff" transform="translate(-27 -879)" d="M0 0h390v991H0z" />
+                </clipPath>
+            </defs>
+        </svg>
+
+    </div>
+
+    <ul class="d-flex list-unstyled mt-auto w-100">
+        <li class="me-auto"></li>
+        <li class="d-flex align-items-center my-2 ms-3">
+            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
+            <span class="ms-3 my-2">
+                Sähkönkulutus <br /> 1 000 kWh
+            </span>
+        </li>
+        <li class="me-auto"></li>
+        <li class="d-flex align-items-center ms-3 my-2">
+            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
+            <span class="mx-3 my-2">
+                Sähkönhinta: <br /> 1 000 €
+            </span>
+        </li>
+        <li class="me-auto"></li>
+    </ul>
 
         </div>
         <script>
