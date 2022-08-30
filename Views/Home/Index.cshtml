@@ -77,10 +77,10 @@
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <div class="d-flex justify-content-left mt-1 mb-1">
-                            <button onclick="increment()" id="plus">+</button>
+                            <button onclick="increment('washingMachine')" id="plus">+</button>
                             <button onclick="decrement()" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
+                            <input id=washingMachine type=number min=0 max=100>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             <button onclick="increment()" id="plus">+</button>
                             <button onclick="decrement()" id="minus">-</button>
                             <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"> </iconify-icon>
-                            <input id=demoInput type=number min=0 max=100>
+                            <input id="washingMachine" type=number min=0 max=100>
                         </div>
                     </div>
                 </div>
@@ -199,8 +199,10 @@
 </div>
 <script>
 
-    function increment() {
-        document.getElementById('demoInput').stepUp();
+    function increment(id) {
+        let number = document.getElementById(id);
+        console.log(number);
+        
     }
     function decrement() {
         document.getElementById('demoInput').stepDown();
