@@ -1,0 +1,56 @@
+﻿@using Newtonsoft.Json;
+@using System.IO;
+@model UserPriceAlertConfiguratorViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["HomeSelectedClass"] = "text-white";
+    ViewData["PriceAlertSelectedClass"] = "";
+}
+
+<div class="text-center py-2">
+    <h1 class="display-4">Hi @(Model.loggedInPerson.FirstName)!</h1>
+    @if (!Model.loggedInPerson.isInPriceAlertBetaProgram)
+    {
+        <h2>This service is in development!<br /> Please come back when it is public</h2>
+    }
+</div>
+
+<div class="row justify-content-center">
+    <div class="card bg-transparent border border-0">
+        <div class="card-body">
+            <canvas id="priceConsumptionGraph" class=""></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+
+
+    @if (Model.loggedInPerson.isInPriceAlertBetaProgram)
+    {
+        <ul class="d-flex list-unstyled mt-auto"data-lightOn>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
+                <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
+            </li>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center ms-3 my-2">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
+                <input type="button" class="mx-3 my-2" value="Turn off"  data-set-light-state="Turn Off">
+                    
+            </li>
+            <li class="me-auto"></li>
+        </ul>
+    }
+
+
+</div>
+
+
+
+<script src="~/js/pricealert.js" asp-append-version="true"></script>
+<script src="~/lib/axios/axios.min.js"></script>
+<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+

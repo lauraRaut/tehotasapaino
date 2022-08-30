@@ -1,0 +1,33 @@
+﻿
+<div class="modal" tabindex="-1" id="uploadFileModal" aria-labelledby="uploadFileModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="">Upload consumption data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Upload CSV File</p>
+
+                <div class="text-center mt-0">
+                    <label class="custom-file-upload m-1">
+         <input id="fileSelect" form="fileUploadForm" type="file" name="fileFromUser" accept="text/csv" />
+          Select File
+      </label>
+                </div>
+                    <div style="margin-top:15px">
+                        <output name="result"></output>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div id="uploadConfirmedbtnWrapper">
+                <form id="fileUploadForm" method="post" action="/home/fileupload/" enctype="multipart/form-data">
+                    <input id="submitbtn" name="laheta" form="fileUploadForm" class="" type="submit" value="Start Upload" />
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

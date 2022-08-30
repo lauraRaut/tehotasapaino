@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tehotasapaino.Models;
 
 namespace Tehotasapaino.Migrations
 {
     [DbContext(typeof(TehotasapainoContext))]
-    partial class TehotasapainoContextModelSnapshot : ModelSnapshot
+    [Migration("20220826095910_AddedConsumptionDataAndUserTokenModels")]
+    partial class AddedConsumptionDataAndUserTokenModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,26 +57,20 @@ namespace Tehotasapaino.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Access_token")
+                    b.Property<string>("APIToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Expires_in")
+                    b.Property<int>("ExpirationTime")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("LastRefreshTimeStamp")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProviderName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Refresh_token")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("UserInformationId")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserNameProvider")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserExternalAPITokenId");
 

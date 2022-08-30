@@ -100,26 +100,23 @@ body {
   width:24px;
 }
 
-.accordion-button:active {
-    background-color: black;
-    color:rgb(228, 228, 122);
+.arrowLeft {
+  height:36px;
+  width:36px;
+  transform: rotate(-90deg);
 }
 
-.accordion-button:not(.collapsed) {
-    background-color: black;
-    color:rgb(228, 228, 122);
+.arrowRight {
+  height:36px;
+  width:36px;
+  transform: rotate(90deg)
 }
 
-.accordion-collapse {
-
-    background-color: black;
-    border: 1px solid rgb(228, 228, 122); 
+.exclamation {
+  width:36px;
+  height:36px;
 }
 
-.accordion-flush {
-
-    border: 2px solid rgb(228, 228, 122);
-}
 
 .accordion-body {
   background-color: black;

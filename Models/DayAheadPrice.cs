@@ -12,15 +12,15 @@ namespace Tehotasapaino.Models
 
             public class Point
             {
-                public int position { get; set; }
-                public decimal priceamount { get; set; }
+                public int Position { get; set; }
+                public decimal Priceamount { get; set; }
 
-                public DateTime dateRange { get; set; }
+                public DateTime PricePosTimeStamp { get; set; }
 
                 public override string ToString()
                 {
 
-                    return String.Format("{0}\n" + "{1}\n", position, priceamount);
+                    return String.Format("{0}\n" + "{1}\n", Position, Priceamount);
                 }
             }
         }

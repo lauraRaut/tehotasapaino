@@ -7,14 +7,14 @@ using static Tehotasapaino.Models.DayAheadPrice;
 
 namespace Tehotasapaino.Models
 {
-    public class IndexViewModel
+    public class UserPriceAlertConfiguratorViewModel
     {
         public LoggedInPerson loggedInPerson { get; set; }
         public DayAHeadPriceData dayAHeadPriceData { get; set; }
-        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList) 
+        public UserPriceAlertConfiguratorViewModel(User userFromAzureAD, bool isInPriceAlertBetaProgram, List<Point> priceList) 
         {
-            loggedInPerson = new LoggedInPerson(userFromAzureAD, isRegistered);
-            dayAHeadPriceData = new DayAHeadPriceData(priceList);
+            this.loggedInPerson = new LoggedInPerson(userFromAzureAD, isInPriceAlertBetaProgram);
+            this.dayAHeadPriceData = new DayAHeadPriceData(priceList);
         }
 
         
@@ -23,18 +23,16 @@ namespace Tehotasapaino.Models
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
-            public string Email { get; set; }
-            public bool isRegisteredToService {get;set;}
+            public string Email { get; set; }            
+            public bool isInPriceAlertBetaProgram { get; set; }
 
-            public LoggedInPerson(User userFromAzureAD, bool isRegistered)
+            public LoggedInPerson(User userFromAzureAD, bool isPriceInPriceAlertProgram)
             {
                 this.FirstName = userFromAzureAD.GivenName;
                 this.LastName = userFromAzureAD.Surname;
                 this.Email = userFromAzureAD.Mail;
-                this.isRegisteredToService = isRegistered;
+                this.isInPriceAlertBetaProgram = isPriceInPriceAlertProgram;
             }
-
-
         }
 
         public class DayAHeadPriceData 
@@ -42,10 +40,9 @@ namespace Tehotasapaino.Models
 
             public List<Point> DayAheadPrices { get; set; } = new List<Point>();
 
-
             public DayAHeadPriceData(List<Point> dayAheadPrice) 
             {
-                this.DayAheadPrices = dayAheadPrice;
+                this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();
             }
 
         }

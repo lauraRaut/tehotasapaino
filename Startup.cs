@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Tehotasapaino.Models;
 
 namespace Tehotasapaino
@@ -25,8 +26,15 @@ namespace Tehotasapaino
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TehotasapainoContext>();
+            services.AddDbContext<TehotasapainoContext>(options =>
+                     options.UseSqlServer(Configuration.GetValue<string>("Tehotasapaino:ConnectionString")));
+
             services.AddScoped<UserService>();
+            services.AddScoped<UserElectricityConsumptionDataService>();
+            services.AddScoped<HueLightService>();
+            services.AddScoped<PriceProcessorService>();
+            
+            services.AddMvc().AddRazorRuntimeCompilation();
 
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
@@ -68,11 +76,17 @@ namespace Tehotasapaino
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "lightalertconfig",
+                    pattern: "{controller=PriceLightAlert}/{action=UserPriceAlertConfigurator}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

@@ -3,9 +3,6 @@
 
 // Write your JavaScript code.
 
-
-//const axios = require('axios').default;
-
 //async function uploadFile (event) {
 //    const file = event.target.files[0]
 //    axios.post('upload_file', file, {
@@ -18,9 +15,30 @@
 //axios.
 
 
+document.addEventListener('click', function (event) {
 
+    console.log(event.target.dataset);
 
+    if (event.target.dataset.setLightState === "Turn Off") { // if the attribute exists...
+        console.log("Turn Off");
+        console.log(event.target.dataset);
+        postLightStateToServer();
+    }
 
+});
+
+function postLightStateToServer() {
+
+    axios.post('/PriceLightAlert/lightstate', {
+        firstName: 'Finn',
+        lastName: 'Williams'
+    })
+        .then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
+}
 
 
 
@@ -110,19 +128,4 @@ async function showUploadModal(event) {
     });
     myModal.show();
 }
-var averagePrice = document.getElementById('averagePrice').innerText;
-
-function CalculateMachine(id, priceid, kwh) {
-    var result = document.getElementById(id).value;
-    var calc = (result * kwh) * averagePrice / 100;
-
-    document.getElementById(priceid).innerHTML = calc.toFixed(2);
-    
-}
-
-
-
-
-
-
 
