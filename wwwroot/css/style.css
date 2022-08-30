@@ -267,6 +267,9 @@ button.accordion-button.collapsed::after {
 
 /* } */
 
+
+
+
 @media only screen and (min-width: 768px) {
 
 .lineSvg {
@@ -276,3 +279,6 @@ button.accordion-button.collapsed::after {
 }
 
 }
+
+
+
