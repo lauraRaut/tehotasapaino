@@ -38,8 +38,9 @@
 
   <ItemGroup>
     <Reference Include="TempDataExtensions">
-      <HintPath>..\..\TempDataExtensions\TempDataExtensions\bin\Debug\netcoreapp3.1\TempDataExtensions.dll</HintPath>
+      <HintPath>TempDataExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
+
 
 </Project>

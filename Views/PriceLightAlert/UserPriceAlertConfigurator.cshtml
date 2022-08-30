@@ -27,31 +27,31 @@
 
 
 
-    @{
-        if (Model.loggedInPerson.isInPriceAlertBetaProgram && Model.loggedInPerson.hasAddedLight)
-        {
-            <ul class="d-flex list-unstyled mt-auto" data-lightOn>
-                <li class="me-auto"></li>
-                <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
-                    <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
-                </li>
-                <li class="me-auto"></li>
-                <li class="d-flex align-items-center ms-3 my-2">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
-                    <input type="button" class="mx-3 my-2" value="Turn off" data-set-light-state="Turn Off">
+    @if (Model.loggedInPerson.isInPriceAlertBetaProgram)
+    {
+        <h4>Test colors different colors by clicking on box</h4>
+    <div class="gy-3">
+        <div class="d-flex justify-content-center">
+            <div class="p-4 mx-3 rounded" style="background-color: #E4E47A" data-set-light-color="#E4E47A"></div>
+            <div class="p-4 mx-3 rounded"  style="background-color: #FF6363" data-set-light-color="#FF6363"></div>
+            <div class="p-4 mx-3 rounded"  style="background-color: #00FF21"  data-set-light-color="#00FF21"></div>
+        </div>
+    </div>
+        <ul class="d-flex list-unstyled mt-auto" data-lightOn>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
+                <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
+            </li>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center ms-3 my-2">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
+                <input type="button" class="mx-3 my-2" value="Turn off" data-set-light-state="Turn Off">
 
-                </li>
-                <li class="me-auto"></li>
-            </ul>
-        }
-        else
-        {
-            <h2>Please add alert light!</h2>
-        }
+            </li>
+            <li class="me-auto"></li>
+        </ul>
     }
-
-
 
 
 </div>

@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
-    <title>Tehotasapaino</title>
+   
 </head>
 <body>
 
@@ -19,13 +11,12 @@
     
     <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item "> <!--active oli nav-item active-->
               <a class="nav-link h3 text-white" href="#">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link  h3" style="color:rgb(228, 228, 122);" href="#">Price alerts</a>
             </li>
-          
           </ul>
     
       </nav>
@@ -77,29 +68,49 @@
         </div>   
         
         
-        <div class="accordion accordion-flush" id="accordionExample">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                  Tips for eletricity consumption
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <input id=demoInput type=number min=0 max=100>
+                    <div class="d-flex justify-content-left mt-1 mb-1">
                     <button onclick="increment()" id="plus">+</button>
                     <button onclick="decrement()" id="minus">-</button>
-                    <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="50" height="50" flip="horizontal"></iconify-icon>
+                    <iconify-icon inline icon="mdi:washing-machine" id="washingMachine" width="60" height="60" flip="horizontal"></iconify-icon>
+                    <input id=demoInput type=number min=0 max=100>
                 </div>
               </div>
             </div>
         </div>   
 
+
+
             <!--Button for consumption tips-->
             <!-- <div class="text-center"> 
-                <button type="button" class="consumption" id="flip">Tips for electricity consumption </button> -->
-                
+<<<<<<< HEAD
+                <button type="button" class="consumption" id="flip">Tips for electricity consumption </button>
+                 -->
+
+
             <!--Panel for washing machine-->
+
+                <!-- <div id="panel">
+                <div class="d-flex justify-content-left mt-2 mb-2">
+                <button onclick="increment()" id="plus">+</button>
+                <button onclick="decrement()" id="minus">-</button>
+                <iconify-icon icon="mdi:washing-machine" id="washingMachine" width="55" height="55" flip="horizontal"></iconify-icon>
+                <input id=demoInput type=number min=0 max=100>
+                 </div> -->
+            <!-- </div>
+        </div>
+        </div>
+    </div>    
+        </div> --> 
+
                 <!-- <div id="panel">
                     <input id=demoInput type=number min=0 max=100>
                     <button onclick="increment()" id="plus">+</button>
@@ -147,11 +158,6 @@
                 
     </div> 
     
-    
-
-            
-
-        
 
 
     <script>
@@ -193,9 +199,7 @@
                 }
   }
         
-});
-
-       
+});    
     </script>
 
 <!--jQuery Library for slideToggle-->    
@@ -204,25 +208,39 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
 
-<script>
+<!-- <script>
 //Lauran scriptit
 
     //SlideToggle to drop "tips for electricity consumption"
     $(document).ready(function(){
-     let panel = document.getElementById("panel");
-     panel.style.display = 'none';   
+    let panel = document.getElementById("panel");
+    panel.style.display = "none";
+
     $("#flip").click(function(){
     $("#panel").slideToggle("slow");
-
-    });
+    
+   });
+  
 });
 
-</script>
+</script> -->
 
 <script>
     var acc = document.getElementsByClassName("consumption");
     var i;
     
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.Toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+      });
+    }
+
     // for (i = 0; i < acc.length; i++) {
     //   acc[i].addEventListener("click", function() {
     //     this.classList.toggle("active");
@@ -236,6 +254,8 @@
     // }
     </script>
   
+
+ <!--increment & decrement functions - how them look when panel is open or closed-->
   <script>
     function increment() {
        document.getElementById('demoInput').stepUp();
