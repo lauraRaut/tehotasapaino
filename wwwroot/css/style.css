@@ -112,6 +112,16 @@ input[type="file"] {
     color: rgb(228, 228, 122);
 }
 
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0, .125);
+}
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e4e47a'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+
 
 
 .accordion-button:not(.collapsed) {
@@ -124,20 +134,20 @@ input[type="file"] {
 
 .accordion-collapse {
     background-color: rgb(34, 33, 33);
-    border: 1px solid rgb(228, 228, 122);
+    
 }
 
 
 
 .accordion-flush {
-    border: 2px solid rgb(228, 228, 122);
+    border-top: 1px solid white;
 }
 
 
 
 .accordion-body {
     background-color: rgb(34, 33, 33);
-    border: 1px solid rgb(228, 228, 122);
+   
 }
 
 
@@ -145,7 +155,7 @@ input[type="file"] {
 .accordion-button {
     background-color: rgb(34, 33, 33);
     color: rgb(228, 228, 122);
-    border: 1px solid rgb(228, 228, 122);
+    
 }
 
 
@@ -153,7 +163,7 @@ input[type="file"] {
     .accordion-button:active {
         background-color: rgb(34, 33, 33);
         color: rgb(228, 228, 122);
-        border: 1px solid rgb(228, 228, 122);
+        
     }
 
 
@@ -168,7 +178,7 @@ input[type="file"] {
 
 button.accordion-button.collapsed::after {
     background-color: rgb(34, 33, 33);
-    border: 1px solid rgb(228, 228, 122);
+  
     color: rgb(228, 228, 122);
     font: bold;
 }
@@ -179,6 +189,7 @@ button.accordion-button.collapsed::after {
 .accordion-item {
     background-color: rgb(34, 33, 33);
     color: rgb(228, 228, 122);
+    border-bottom:none;
 }
 
 #plus {
@@ -255,8 +266,13 @@ button.accordion-button.collapsed::after {
 
 
 /* } */
-.line {
-    border-top: 2px solid white;
-    width: 75vw;
-    margin-left: 8%;
+
+@media only screen and (min-width: 768px) {
+
+.lineSvg {
+
+    width:100em;
+    height:1.5em;
+}
+
 }
