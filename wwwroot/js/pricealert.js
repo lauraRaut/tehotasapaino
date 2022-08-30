@@ -3,9 +3,6 @@
 
 // Write your JavaScript code.
 
-
-//const axios = require('axios').default;
-
 //async function uploadFile (event) {
 //    const file = event.target.files[0]
 //    axios.post('upload_file', file, {
@@ -18,15 +15,30 @@
 //axios.
 
 
-ul.onclick = function (event) {
-    const ulElem = event.target.closest('li');
+document.addEventListener('click', function (event) {
 
-    if (!ulElem) return; 
+    console.log(event.target.dataset);
 
-    console.log(ulElem);
-};
+    if (event.target.dataset.setLightState === "Turn Off") { // if the attribute exists...
+        console.log("Turn Off");
+        console.log(event.target.dataset);
+        postLightStateToServer();
+    }
 
+});
 
+function postLightStateToServer() {
+
+    axios.post('/PriceLightAlert/lightstate', {
+        firstName: 'Finn',
+        lastName: 'Williams'
+    })
+        .then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
+}
 
 
 

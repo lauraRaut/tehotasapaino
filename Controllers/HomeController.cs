@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
 using Tehotasapaino.Models;
+using TempDataExtensions;
 
 namespace Tehotasapaino.Controllers
 {
@@ -40,6 +41,30 @@ namespace Tehotasapaino.Controllers
             
             return View(indexViewModel);
         }
+
+        [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
+        public async Task<IActionResult> DeleteUser()
+        {
+            try
+            {
+                var user = await _graphServiceClient.Me.Request().GetAsync();
+                await _userService.DeleteUserFromDbAsync(user);
+
+                TempData.Put("UserMessage", new SuccessMessage()
+                { CssClassName = "alert-success", Title = "Success!", DisplayMessage = "You have been terminated!" });
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            catch (Exception e)
+            {
+
+                TempData.Put("UserMessage", new SuccessMessage()
+                { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"Termination failed! With error msg:  {e.ToString()}" });
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -85,15 +110,43 @@ namespace Tehotasapaino.Controllers
         //Adding a message that upload succeeded and staying in the Index-view
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         [HttpPost]
-        public async Task<ActionResult> FileUpload(Microsoft.AspNetCore.Http.IFormFile file)
+        public async Task<ActionResult> FileUpload(IFormFile fileFromUser)
         {
-            //await UploadFile(file);
-            var user = await _graphServiceClient.Me.Request().GetAsync();
-            TempData["msg"] = "File uploaded successfully.";
-            //Metodikutsu tiedostonkäsittelijälle
-            // await _userService.AddUserAndUserConsumptionDataToDb(user.Mail, fileFromUser);
+            try
+            {
+                var user = await _graphServiceClient.Me.Request().GetAsync();
+                //Metodikutsu tiedostonkäsittelijälle
+                await _userService.AddUserAndUserConsumptionDataToDbAsync(user.Mail, fileFromUser);
 
-            return RedirectToAction(nameof(Index));
+                TempData.Put("UserMessage", new SuccessMessage()
+                { CssClassName = "alert-success", Title = "Success!", DisplayMessage = "Thank you for registering! Data saved and analysed! " });
+
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            catch (ArgumentException args) 
+            {
+                if (args.Message.Contains("User found with email"))
+                {
+                    TempData.Put("UserMessage", new SuccessMessage()
+                    { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"File upload failed! You have already uploaded data. Data update is not currently supported." });
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    TempData.Put("UserMessage", new SuccessMessage()
+                    { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"File upload failed!{args.ToString()}" });
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception e)
+            {
+
+                TempData.Put("UserMessage", new SuccessMessage()
+                { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"File upload failed!{e.ToString()}" });
+                return RedirectToAction(nameof(Index));
+            }
         }
 
     }

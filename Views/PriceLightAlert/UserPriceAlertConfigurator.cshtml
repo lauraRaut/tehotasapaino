@@ -29,20 +29,17 @@
 
     @if (Model.loggedInPerson.isInPriceAlertBetaProgram)
     {
-        <ul class="d-flex list-unstyled mt-auto">
+        <ul class="d-flex list-unstyled mt-auto"data-lightOn>
             <li class="me-auto"></li>
-            <li class="d-flex align-items-center my-2 ms-3">
+            <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
-                <span class="ms-3 my-2">
-                    Turn on
-                </span>
+                <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
             </li>
             <li class="me-auto"></li>
             <li class="d-flex align-items-center ms-3 my-2">
                 @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
-                <span class="mx-3 my-2">
-                    Turn off
-                </span>
+                <input type="button" class="mx-3 my-2" value="Turn off"  data-set-light-state="Turn Off">
+                    
             </li>
             <li class="me-auto"></li>
         </ul>
@@ -53,6 +50,7 @@
 
 
 
-
+<script src="~/js/pricealert.js" asp-append-version="true"></script>
+<script src="~/lib/axios/axios.min.js"></script>
 <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 

@@ -110,4 +110,19 @@ async function showUploadModal(event) {
     });
     myModal.show();
 }
+var averagePrice = document.getElementById('averagePrice').innerText;
+
+function CalculateMachine(id, priceid, kwh) {
+    var result = document.getElementById(id).value;
+    var calc = (result * kwh) * averagePrice / 100;
+
+    document.getElementById(priceid).innerHTML = calc.toFixed(2);
+    
+}
+
+
+
+
+
+
 

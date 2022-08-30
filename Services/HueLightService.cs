@@ -19,30 +19,34 @@ namespace Tehotasapaino.Models
 
         public async Task ControlLightState(LightState userRequestedState, UserExternalAPIToken userAPIToken) 
         {
-            string userHueUsername = "";
-            string userBearerToken = "";
+            string userHueUsername = "RI1GXSUWxBokc0oSjqq9Yvofqf5mVf97GJrk80Zk";
+            string userBearerToken = "vTxHDvCNrl1z9ULnOnaErh1ZXg3E";
+            //Guid lampID = "aeccabe4-5acc-484e-9177-30ed40e2fe04";
             RemoteHueApi HueClient = new RemoteHueApi(userHueUsername, userBearerToken);
 
             var bridges = await HueClient.GetBridgesAsync();
+
 
             if (bridges == null)
             {
                 throw new ArgumentException("No Hue bridge found!");
             }
 
-            if (userRequestedState.isPriceHight)
-            {
+
+            
                await TurnLightToDesiredState(HueClient);
-            }
+            
         }
 
         private static async Task TurnLightToDesiredState(RemoteHueApi AuthenticatedHueApiClient) 
         {
 
             var lights = await AuthenticatedHueApiClient.GetLightsAsync();
+
             Console.WriteLine(lights);
 
-            var id = lights.Data.Last().Id;
+            var id = lights.Data.SingleOrDefault(x => x.Metadata.Name.Contains("Alertlamppu")).Id;
+        
             var req = new UpdateLight().TurnOff();
             var result = await AuthenticatedHueApiClient.UpdateLightAsync(id, req);
             Console.WriteLine(result);

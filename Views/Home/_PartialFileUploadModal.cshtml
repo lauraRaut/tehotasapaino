@@ -8,24 +8,25 @@
             </div>
             <div class="modal-body">
                 <p>Upload CSV File</p>
-                <form action="BufferedSingleFileUploadPhysical/?handler=Upload"
-                      enctype="multipart/form-data" onsubmit="uploadFile(this);return false;" method="post">
-                    <div class="text-center mt-0">
-                        <label class="custom-file-upload m-1">
-                            <input id="FileUpload_FormFile" type="file" name="FileUpload.FormFile" />
-                            Select File
-                        </label>
-                    </div>
+
+                <div class="text-center mt-0">
+                    <label class="custom-file-upload m-1">
+         <input id="fileSelect" form="fileUploadForm" type="file" name="fileFromUser" accept="text/csv" />
+          Select File
+      </label>
+                </div>
                     <div style="margin-top:15px">
                         <output name="result"></output>
                     </div>
-                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <div id="uploadConfirmedbtnWrapper">
-                    <input class="custom-file-upload p-2" data-id="uploadfile" data-action="uploadFileBtn" type="button" value="Start Upload" />
-                </div>
+                <form id="fileUploadForm" method="post" action="/home/fileupload/" enctype="multipart/form-data">
+                    <input id="submitbtn" name="laheta" form="fileUploadForm" class="" type="submit" value="Start Upload" />
+                </form>
+                    </div>
             </div>
         </div>
     </div>

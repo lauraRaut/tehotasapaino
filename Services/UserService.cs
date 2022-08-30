@@ -13,10 +13,13 @@ namespace Tehotasapaino.Models
     {
         private readonly TehotasapainoContext _DbContext;
         private readonly UserElectricityConsumptionDataService _ConsumptionData;
-        public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService)
+        private readonly PriceProcessorService _dayAheadPrice;
+        public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService,
+                            PriceProcessorService dayAheadPriceService)
         {
             _DbContext = context;
             _ConsumptionData = dataService;
+            _dayAheadPrice = dayAheadPriceService;
         }
 
         public async Task<bool> CheckUserExistDbAsync(string email)
@@ -30,7 +33,7 @@ namespace Tehotasapaino.Models
             return true;
         }
 
-        public async Task AddUserAndUserConsumptionDataToDb(string email, IFormFile fileFromUser)
+        public async Task AddUserAndUserConsumptionDataToDbAsync(string email, IFormFile fileFromUser)
         {
             bool userExcists = await CheckUserExistDbAsync(email);
             if (!userExcists)
@@ -73,7 +76,7 @@ namespace Tehotasapaino.Models
             return userTokenData;
         }
 
-        public async Task<UserExternalAPIToken> GetUserExternalAPITokenData(User userFromAzure, string service)
+        public async Task<UserExternalAPIToken> GetUserExternalAPITokenDataAsync(User userFromAzure, string service)
         {
 
             UserInformation dbUser = await this.GetDbUserWithTokenData(userFromAzure);
@@ -96,15 +99,19 @@ namespace Tehotasapaino.Models
 
         }
 
+        public async Task DeleteUserFromDbAsync(User userFromAzure) 
+        {
+            UserInformation dbUser = await _DbContext.UserData.FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
+            _DbContext.UserData.Remove(dbUser);
+            await _DbContext.SaveChangesAsync();
+        }
+
 
         public async Task<IndexViewModel> CreateIndexViewModel(User userFromAzureAD)
         {
             bool userExcists = await CheckUserExistDbAsync(userFromAzureAD.Mail);
-            PriceProcessorService processor = new PriceProcessorService();
-            List<Point> nextDayPrices = processor.GetPricesPerSearch();
-            //TODO metodikutsu dayahead pricelle
+            List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
             IndexViewModel newIndexViewModel = new IndexViewModel(userFromAzureAD, userExcists, nextDayPrices);
-
 
             return newIndexViewModel;
         }
@@ -118,9 +125,7 @@ namespace Tehotasapaino.Models
                 isUserInPriceAlertProgram = true;
             }
 
-
-            PriceProcessorService processor = new PriceProcessorService();
-            List<Point> nextDayPrices = processor.GetPricesPerSearch();
+            List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
             UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram, nextDayPrices);
 
 
