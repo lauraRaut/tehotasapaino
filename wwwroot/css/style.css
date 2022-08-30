@@ -115,7 +115,7 @@ input[type="file"] {
 }
 
 .accordion-button:focus {
-<<<<<<< HEAD
+
     box-shadow:none;
     border-color:rgba(0,0,0, .125);
 }
@@ -129,7 +129,6 @@ input[type="file"] {
 }
 
 
->>>>>>> main
 
 
 .accordion-button:not(.collapsed) {
@@ -142,33 +141,21 @@ input[type="file"] {
 
 .accordion-collapse {
     background-color: rgb(34, 33, 33);
-<<<<<<< HEAD
-   
-=======
-    
->>>>>>> main
+
 }
 
 
 
 .accordion-flush {
     border-top: 1px solid white;
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> main
+
 }
 
 
 
 .accordion-body {
     background-color: rgb(34, 33, 33);
-<<<<<<< HEAD
-    
-=======
-   
->>>>>>> main
+
 }
 
 
@@ -176,11 +163,8 @@ input[type="file"] {
 .accordion-button {
     background-color: rgb(34, 33, 33);
     color: rgb(228, 228, 122);
-<<<<<<< HEAD
    /* border: 1px solid rgb(228, 228, 122);*/
-=======
-    
->>>>>>> main
+
 }
 
 
@@ -203,11 +187,6 @@ input[type="file"] {
 
 button.accordion-button.collapsed::after {
     background-color: rgb(34, 33, 33);
-<<<<<<< HEAD
-    
-=======
-  
->>>>>>> main
     color: rgb(228, 228, 122);
     font: bold;
 }
@@ -308,8 +287,6 @@ button.accordion-button.collapsed::after {
     height:1.5em;
 }
 
-<<<<<<< HEAD
 
-=======
 }
->>>>>>> main
+
