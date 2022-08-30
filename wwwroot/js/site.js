@@ -27,6 +27,8 @@
 window.onload = function () {
     const priceData = JSON.parse(document.getElementById('appdata').dataset.obj);
     console.log(priceData);
+    const usageData = JSON.parse(document.getElementById('consumptiondata').dataset.obj);
+    console.log(usageData);
 
     const priceList = priceData.map(sortPricesFromData);
 
@@ -40,11 +42,12 @@ window.onload = function () {
         return priceData.Position;
     }
 
-    showChart(priceList, hourPositionList);
-}
+    showChart(priceList, hourPositionList, usageData);
+}//tähän mahdollisesti kutsun sisään usageData
+// uudessa chartissa uusi datasetti, mutta label edelleen hourPositionisr
 
 
-    function showChart(priceList, hourPositionList) {
+    function showChart(priceList, hourPositionList, usageData) {
 
         const ctx = document.getElementById("priceConsumptionGraph");
         // Mychartista voi tehdä funktion, joka ottaa sisään x ja y koordinaatit sisään
@@ -60,7 +63,19 @@ window.onload = function () {
                     borderWidth: 2,
                     hoverBackgroundColor: "rgba(255,99,132,0.4)",
                     hoverBorderColor: "rgba(255,99,132,1)"
-                }]
+                },
+                    {
+                        label: 'Oma kulutus',
+                        data: usageData,
+                        stepped: true,
+                        borderColor: "rgba(99, 255, 222,1)",
+                        borderWidth: 2,
+                        hoverBackgroundColor: "rgba(99, 255, 222,0.4)",
+                        hoverBorderColor: "rgba(99, 255, 222,1)"
+                    }
+
+
+                ]
             },
             options: {
                 responsive: true,

@@ -234,6 +234,8 @@
 </div>
 <partial name="_PartialFileUploadModal" />
 <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+<div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
+
 
 <div class="bottom-info-box bg-dark fixed-bottom w-100">
     <span>@Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/footerwiggle3.svg"))</span>

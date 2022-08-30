@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 using static Tehotasapaino.Models.DayAHeadPriceAPIClient;
+using static Tehotasapaino.Models.IndexViewModel;
 
 namespace Tehotasapaino
 {
@@ -11,7 +12,6 @@ namespace Tehotasapaino
     {
         public static async Task Main(string[] args)
         {
-
             CreateHostBuilder(args).Build().Run();
            
         }

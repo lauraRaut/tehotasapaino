@@ -11,10 +11,14 @@ namespace Tehotasapaino.Models
     {
         public LoggedInPerson loggedInPerson { get; set; }
         public DayAHeadPriceData dayAHeadPriceData { get; set; }
-        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList) 
+        public UserElectricityUsageData userElectricityConsumptionData {get; set;}
+
+
+        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList, List<UserElectricityConsumptionData> consumptionList) 
         {
             loggedInPerson = new LoggedInPerson(userFromAzureAD, isRegistered);
             dayAHeadPriceData = new DayAHeadPriceData(priceList);
+            userElectricityConsumptionData = new UserElectricityUsageData(consumptionList);
         }
 
         
@@ -100,5 +104,34 @@ namespace Tehotasapaino.Models
             }
 
         }
+
+        public class UserElectricityUsageData
+        {
+
+            public List<UserElectricityConsumptionData> DayConsumptionList { get; set; } = new List<UserElectricityConsumptionData>();
+
+            public UserElectricityUsageData(List<UserElectricityConsumptionData> consumptionList)
+            {
+                this.DayConsumptionList = consumptionList;
+                
+            }
+           
+          public List<decimal> DayConsumptionListForGraph
+            {
+                get
+                {
+                    return DayConsumptionList.Where(x => x.WeekNum ==35 && x.WeekDay == 2).Select(x => x.AverageConsumptionkWh).ToList();
+                }
+
+                set { }
+            }
+
+
+
+
+        }
+
+
+
     }
 }
