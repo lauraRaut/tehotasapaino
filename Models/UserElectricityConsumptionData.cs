@@ -10,6 +10,7 @@ namespace Tehotasapaino.Models
         public int UserElectricityConsumptionDataId { get; set; }
         public int UserInformationId { get; set; }
         public UserInformation UserInformation { get; set; }
+
         public int WeekNum { get; set; }
         public int WeekDay { get; set; }
         public int Hour { get; set; }

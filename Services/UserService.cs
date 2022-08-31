@@ -14,6 +14,8 @@ namespace Tehotasapaino.Models
         private readonly TehotasapainoContext _DbContext;
         private readonly UserElectricityConsumptionDataService _ConsumptionData;
         private readonly PriceProcessorService _dayAheadPrice;
+        
+
         public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService,
                             PriceProcessorService dayAheadPriceService)
         {
@@ -54,9 +56,14 @@ namespace Tehotasapaino.Models
             }
         }
 
-        public async Task<UserElectricityConsumptionData> GetUserElectricityConsumptionData(User userFromAzure)
+        public async Task<List<UserElectricityConsumptionData>> GetUserElectricityConsumptionData(User userFromAzure)
         {
-            throw new Exception("not implemented");
+
+            var dbConsumption = await _DbContext.UserConsumptionData.ToListAsync();
+          
+          //  throw new Exception("not implemented");
+            return dbConsumption;
+
         }
 
 
@@ -111,7 +118,8 @@ namespace Tehotasapaino.Models
         {
             bool userExcists = await CheckUserExistDbAsync(userFromAzureAD.Mail);
             List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
-            IndexViewModel newIndexViewModel = new IndexViewModel(userFromAzureAD, userExcists, nextDayPrices);
+            List<UserElectricityConsumptionData> dayElectricityUsage = await GetUserElectricityConsumptionData(userFromAzureAD);
+            IndexViewModel newIndexViewModel = new IndexViewModel(userFromAzureAD, userExcists, nextDayPrices, dayElectricityUsage);
 
             return newIndexViewModel;
         }

@@ -10,10 +10,14 @@ namespace Tehotasapaino.Models
     {
         public LoggedInPerson loggedInPerson { get; set; }
         public DayAHeadPriceData dayAHeadPriceData { get; set; }
-        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList)
+        public UserElectricityUsageData userElectricityConsumptionData {get; set;}
+
+
+        public IndexViewModel(User userFromAzureAD, bool isRegistered, List<Point> priceList, List<UserElectricityConsumptionData> consumptionList) 
         {
             loggedInPerson = new LoggedInPerson(userFromAzureAD, isRegistered);
             dayAHeadPriceData = new DayAHeadPriceData(priceList);
+            userElectricityConsumptionData = new UserElectricityUsageData(consumptionList);
         }
 
 
@@ -129,5 +133,89 @@ namespace Tehotasapaino.Models
             }
 
         }
+
+        public class UserElectricityUsageData
+        {
+
+            public List<UserElectricityConsumptionData> DayConsumptionList { get; set; } = new List<UserElectricityConsumptionData>();
+
+            public UserElectricityUsageData(List<UserElectricityConsumptionData> consumptionList)
+            {
+                this.DayConsumptionList = consumptionList;
+            }
+           
+          public List<decimal> DayConsumptionListForGraph
+            {
+                get
+                { //Use two-day range of days instead of DateTime Now 
+                  //use Take 24 , MAYBE  
+                    DateTime today = DateTime.Now;
+                    int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                    int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                    int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+                            
+                     return DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour-1).OrderBy(x => x.Hour)
+                            .Select(x => x.AverageConsumptionkWh).ToList();
+                }
+
+                set { }
+            }
+
+
+            public string TodayConsumptionFigure
+            {
+                get {
+
+                    DateTime today = DateTime.Now;
+                    int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                    int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                    int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+                    decimal sum = 0;
+
+                    var consumptionFigures = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                            .Select(x => x.AverageConsumptionkWh).ToList();
+
+                    foreach (var figure in consumptionFigures)
+                    {
+                        sum += figure;
+                    }
+
+                    return sum.ToString();
+                }
+
+                set { }
+            }
+
+
+        public string TodayConsumptionPrice
+        {
+            get
+            {
+                DateTime today = DateTime.Now;
+                int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+                var todayConsumptionPrice = 0;
+
+                List<decimal> consumptionFigures = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                        .Select(x => x.AverageConsumptionkWh).ToList();
+
+                List<int> hours = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                        .Select(x => x.Hour).ToList();
+
+                    for (int i = 0; i < consumptionFigures.Count; i++)
+                    {
+                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 10;
+
+                    }
+                    return todayConsumptionPrice.ToString();
+               }
+
+            set { }
+        }
+
     }
+
+
+}
 }
