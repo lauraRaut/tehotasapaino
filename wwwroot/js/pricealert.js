@@ -33,11 +33,22 @@ document.addEventListener('click', function (event) {
 });
 
 function postLightStateToServer(event) {
-    
-    axios.post('/PriceLightAlert/lightstate', {
-        AlertLightHexColor: event.target.dataset.setLightColor,
-        isPriceHight: 'true'
+
+    axios.interceptors.request.use(request => {
+        console.log('Starting Request', JSON.stringify(request, null, 2))
+        return request
     })
+
+    axios({
+        method: 'post',
+        url: "/PriceLightAlert/lightstate",
+        headers: { 'Content-Type': 'application/json'},
+        data: {
+            AlertLightHexColor: event.target.dataset.setLightColor,
+            isPriceHight: 'true'
+        }
+    })
+        .then((data) => console.log(data))
         .then((response) => {
             console.log(response);
         }, (error) => {

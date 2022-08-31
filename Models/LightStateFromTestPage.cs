@@ -8,6 +8,6 @@ namespace Tehotasapaino.Models
     public class LightStateFromTestPage
     {
         public string AlertLightHexColor { get; set; }
-        public bool isPriceHight { get; set; }
+        public string isPriceHight { get; set; }
     }
 }

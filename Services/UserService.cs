@@ -95,22 +95,6 @@ namespace Tehotasapaino.Models
             UserInformation dbUser = await _DbContext.UserData.Include(token => token.UserExternalAPITokens)
                                                               .Include(light => light.UserAlertLightInformation)
                                                               .FirstOrDefaultAsync(x => x.Email == userFromAzure.Mail);
-            if (dbUser == null)
-            {
-                throw new ArgumentException("User not found");
-            }
-            UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue");
-
-            if (userToken == null)
-            {
-                throw new ArgumentException("User has no access to this service");
-            }
-
-            UserAlertLightInformation userAlertLight = dbUser.UserAlertLightInformation;
-            if (userAlertLight == null)
-            {
-                throw new ArgumentException("No light found");
-            }
 
             return dbUser;
         }
@@ -134,25 +118,39 @@ namespace Tehotasapaino.Models
 
         public async Task<UserPriceAlertConfiguratorViewModel> CreatePriceAlertViewModel(User userFromAzureAD)
         {
-            bool isUserInPriceAlertProgram = false;
-            bool hasUserAddedAlertLight = false;
-            UserInformation dbUser = await this.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
-            if (dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue") != null)
+
+
+            try
             {
-                isUserInPriceAlertProgram = true;
-            }
+                bool isUserInPriceAlertProgram = false;
+                bool hasUserAddedAlertLight = false;
 
-            if (dbUser.UserAlertLightInformation != null)
+                UserInformation dbUser = await this.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
+
+                UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue");
+                if (userToken != null)
+                {
+                    isUserInPriceAlertProgram = true;
+                }
+
+                UserAlertLightInformation userAlertLight = dbUser.UserAlertLightInformation;
+                if (userAlertLight != null)
+                {
+                    hasUserAddedAlertLight = true;
+                }
+
+                List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
+                UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram,
+                                                                                    hasUserAddedAlertLight, nextDayPrices);
+                return UserPriceAlertViewModel;
+
+            }
+            catch (Exception args)
             {
-                hasUserAddedAlertLight = true;
+                throw new ArgumentException($"Failed to fetch any data {args.Message}");
             }
+            
 
-            List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
-            UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram, 
-                                                                                hasUserAddedAlertLight, nextDayPrices);
-
-
-            return UserPriceAlertViewModel;
         }
     }
 }

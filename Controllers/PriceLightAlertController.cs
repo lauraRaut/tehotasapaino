@@ -47,7 +47,7 @@ namespace Tehotasapaino.Controllers
         [HttpPost, ActionName("lightstate")]
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetLightState(LightStateFromTestPage requestedLightState)
+        public async Task<IActionResult> SetLightState([FromBody] LightStateFromTestPage requestedLightState)
         {
             _logger.LogInformation($"POST lightstate received {requestedLightState}");
             try
