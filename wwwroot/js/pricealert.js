@@ -19,19 +19,24 @@ document.addEventListener('click', function (event) {
 
     console.log(event.target.dataset);
 
-    if (event.target.dataset.setLightState === "Turn Off") { // if the attribute exists...
+    if (event.target.dataset.setLightState === "Turn Off") {
         console.log("Turn Off");
         console.log(event.target.dataset);
         postLightStateToServer();
     }
 
+    if (event.target.dataset.setLightColor === "#E4E47A" || event.target.dataset.setLightColor === "#FF6363" || event.target.dataset.setLightColor === "#00FF21") {
+        console.log(event.target.dataset.setLightColor);
+        postLightStateToServer(event);
+    }
+
 });
 
-function postLightStateToServer() {
-
+function postLightStateToServer(event) {
+    
     axios.post('/PriceLightAlert/lightstate', {
-        firstName: 'Finn',
-        lastName: 'Williams'
+        AlertLihgtColor: event.target.dataset.setLightColor,
+        isPriceHight: true
     })
         .then((response) => {
             console.log(response);
