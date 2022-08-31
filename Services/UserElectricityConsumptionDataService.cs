@@ -51,12 +51,17 @@ namespace Tehotasapaino.Models
             using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream()))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-
+                string[] format = { "yyyy-MM-dd hh:mm", "dd/MM/yyyy hh.mm" };
                 csv.Read();
                 csv.ReadHeader();
                 while (csv.Read())
                 {
-                    DateTime dateFromFile = DateTime.Parse(csv.GetField<string>(0));
+                    DateTime dateFromFile;
+
+                    if (!DateTime.TryParseExact(csv.GetField<string>(0), format, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out dateFromFile))
+                    {
+                        throw new ArgumentException($"Check date format {csv.GetField<string>(0)}");
+                    }
                     DateData record = new DateData
                     {
                         WeekNum = GetWeek(dateFromFile),
