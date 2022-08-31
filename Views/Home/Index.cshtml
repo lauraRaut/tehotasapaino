@@ -55,7 +55,7 @@
         <li class="d-flex align-items-center my-2 ms-3">
             @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/kiinteahinta.svg"))
             <span class="ms-3 my-2">
-                Fixed price is <br /> <span id="averagePrice">  @Model.dayAHeadPriceData.averagePrice </span> c/kWh
+                Average price of the day is <br /> <span id="averagePrice">  @Model.dayAHeadPriceData.averagePrice </span> c/kWh
 
             </span>
         </li>
@@ -238,10 +238,12 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <partial name="_PartialFileUploadModal" />
-        <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+    </div>
+</div>
+<partial name="_PartialFileUploadModal" />
+<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+<div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
+
 
 <div class="bottom-info-box bg-dark fixed-bottom w-100">
     <div class="lineWrapper">
@@ -267,14 +269,14 @@
         <li class="d-flex align-items-center my-2 ms-3">
             @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
             <span class="ms-3 my-2">
-                Sähkönkulutus <br /> 1 000 kWh
+                Today's consumption <br /> @Model.userElectricityConsumptionData.TodayConsumptionFigure  kWh
             </span>
         </li>
         <li class="me-auto"></li>
         <li class="d-flex align-items-center ms-3 my-2">
             @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
             <span class="mx-3 my-2">
-                Sähkönhinta: <br /> 1 000 €
+                Today's electricity bill: <br /> @Model.userElectricityConsumptionData.TodayConsumptionPrice €
             </span>
         </li>
         <li class="me-auto"></li>

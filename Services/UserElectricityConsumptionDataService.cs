@@ -83,7 +83,7 @@ namespace Tehotasapaino.Models
             return dataPoints;
         }
 
-        private static int GetWeek(DateTime date)
+        public static int GetWeek(DateTime date)
         {
             Calendar cal = new CultureInfo("fi-FI").Calendar;
             DayOfWeek firstDay = DayOfWeek.Monday;
@@ -92,12 +92,12 @@ namespace Tehotasapaino.Models
             return cal.GetWeekOfYear(date, rule, firstDay);
         }
 
-        private static int GetDayOfWeek(DateTime date)
+        public static int GetDayOfWeek(DateTime date)
         {
             return (int)date.DayOfWeek;
         }
 
-        private static int GetHour(DateTime date)
+        public static int GetHour(DateTime date)
         {
             return (int)date.Hour;
         }
