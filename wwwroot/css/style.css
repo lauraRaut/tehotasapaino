@@ -296,13 +296,7 @@ input[type=number] {
 /* } */
 @media only screen and (min-width: 1200px) {
 
-<<<<<<< HEAD
-=======
 
-
-
-@media only screen and (min-width: 768px) {
->>>>>>> 45191640dfcc6c953fd07c17ad8e078d94a79c5a
 
 
     .lineSvg {
@@ -317,11 +311,8 @@ input[type=number] {
         margin-left: 20%;
     }
 }
-<<<<<<< HEAD
-=======
+
 
 }
 
 
-
->>>>>>> 45191640dfcc6c953fd07c17ad8e078d94a79c5a
