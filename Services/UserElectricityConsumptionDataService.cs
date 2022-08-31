@@ -113,23 +113,23 @@ namespace Tehotasapaino.Models
 
         public override bool Equals(object compared)
         {
-            // if the variables are located in the same position, they are equal
+            
             if (this == compared)
             {
                 return true;
             }
 
-            // if the compared object is null or not of type Book, the objects are not equal
+            
             if ((compared == null) || !this.GetType().Equals(compared.GetType()))
             {
                 return false;
             }
             else
             {
-                // convert the object to a Book object
+                
                 DateData comparedRecord = (DateData)compared;
 
-                // if the values of the object variables are equal, the objects are, too
+                
                 return this.WeekNum == comparedRecord.WeekNum && this.DayOfWeek == comparedRecord.DayOfWeek && this.Hour == comparedRecord.Hour;
             }
         }

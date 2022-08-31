@@ -36,10 +36,19 @@ namespace Tehotasapaino.Models
         }
         private async Task<HuePutResponse> TurnLightToDesiredState(UserLightAlertClient AuthenticatedHueApiClient, LightStateFromTestPage requestedLightState)
         {
+            UpdateLight newLightStateReq = new UpdateLight();
 
-            UpdateLight newLightStateReq = new UpdateLight()
+            if (requestedLightState.isPriceHight == "true")
+            {
+                newLightStateReq = new UpdateLight()
                                         .TurnOn()
                                         .SetColor(new HueApi.ColorConverters.RGBColor(requestedLightState.AlertLightHexColor));
+            }
+            else
+            {
+                newLightStateReq = new UpdateLight().TurnOff();
+            }
+
             Guid userLightId = AuthenticatedHueApiClient.UserAlertLight;
 
             HuePutResponse result = await AuthenticatedHueApiClient.UserHueClient.UpdateLightAsync(userLightId, newLightStateReq);

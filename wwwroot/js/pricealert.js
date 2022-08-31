@@ -15,24 +15,25 @@
 //axios.
 
 
-document.addEventListener('click', function (event) {
+var isPriceHigh = false;
 
+document.addEventListener('click', function (event) {
+    
     console.log(event.target.dataset);
 
-    if (event.target.dataset.setLightState === "Turn Off") {
-        console.log("Turn Off");
-        console.log(event.target.dataset);
-        postLightStateToServer();
-    }
+    if (isPriceHigh === true) {
 
     if (event.target.dataset.setLightColor === "E4E47A" || event.target.dataset.setLightColor === "FF6363" || event.target.dataset.setLightColor === "00FF21") {
-        console.log(event.target.dataset.setLightColor);
-        postLightStateToServer(event);
+        console.log(event.target.dataset);
+        document.getElementById('userSelectedColor').id = "";
+        event.target.id = "userSelectedColor";
+        postLightStateToServer(event.target.dataset,isPriceHigh);
+        }
     }
 
 });
 
-function postLightStateToServer(event) {
+function postLightStateToServer(dataset,isPriceHigh) {
 
     axios.interceptors.request.use(request => {
         console.log('Starting Request', JSON.stringify(request, null, 2))
@@ -44,8 +45,8 @@ function postLightStateToServer(event) {
         url: "/PriceLightAlert/lightstate",
         headers: { 'Content-Type': 'application/json'},
         data: {
-            AlertLightHexColor: event.target.dataset.setLightColor,
-            isPriceHight: 'true'
+            AlertLightHexColor: dataset.setLightColor,
+            isPriceHight: String(isPriceHigh)
         }
     })
         .then((data) => console.log(data))
@@ -60,7 +61,6 @@ function postLightStateToServer(event) {
 
 window.onload = function () {
     const priceData = JSON.parse(document.getElementById('appdata').dataset.obj);
-    console.log(priceData);
 
     const priceList = priceData.map(sortPricesFromData);
 
@@ -78,27 +78,39 @@ window.onload = function () {
 }
 
 
-    function showChart(priceList, hourPositionList) {
 
-        const ctx = document.getElementById("priceConsumptionGraph");
-        // Mychartista voi tehdä funktion, joka ottaa sisään x ja y koordinaatit sisään
+
+    function showChart(priceList, hourPositionList) {
+        const ctx = document.getElementById('priceConsumptionGraph');
         const myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: hourPositionList,
                 datasets: [{
-                    label: 'Sähkönhinta',
+                    label: 'Electricity price',
                     data: priceList,
                     stepped: true,
                     borderColor: "rgba(255,99,132,1)",
                     borderWidth: 2,
                     hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                    hoverBorderColor: "rgba(255,99,132,1)"
+                    hoverBorderColor: "rgba(255,99,132,1)",
+                    yAxisID: 'y',
+                    pointRadius: 3,
+                    pointStyle: 'rectRounded',
+                    pointBorderWidth: 10,
+                    hitRadius: 10
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
+                onClick: (evt, el, chart) => {
+
+                    if (el.length > 0) {
+                        tooltipData = chart.data.datasets[el[0].datasetIndex].data[el[0].index]
+                        priceAlertHander(tooltipData)
+                    }
+                },
                 scales: {
                     y: {
                         ticks: {
@@ -120,8 +132,31 @@ window.onload = function () {
             }
 
         });
-
 }
+
+
+function priceAlertHander(selectedDayAheadPrice) {
+    console.log(selectedDayAheadPrice)
+    const priceLevelCtn = document.getElementById('selectedPrice').innerText
+
+    if (priceLevelCtn <= selectedDayAheadPrice) {
+        isPriceHigh = true
+        const selectedColor = document.getElementById('userSelectedColor');
+        console.log(selectedColor.dataset);
+        postLightStateToServer(selectedColor.dataset,isPriceHigh)
+        document.getElementById('alertIndicator').innerText = "Alert active!"
+        
+    }
+
+    else {
+        isPriceHigh = false
+        document.getElementById('alertIndicator').innerText = "Alert not active!"
+        const dummydata = {dataset:""}
+        postLightStateToServer(dummydata, isPriceHigh)
+    }
+}
+
+
 
 document.addEventListener('click', function (event) {
     const id = event.target.dataset.id;

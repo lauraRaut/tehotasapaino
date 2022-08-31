@@ -64,6 +64,10 @@ function showChart(priceList, hourPositionList, usageData) {
                 hoverBackgroundColor: "rgba(255,99,132,0.4)",
                 hoverBorderColor: "rgba(255,99,132,1)",
                 yAxisID: 'y',
+                pointRadius: 0,
+                pointStyle: 'rectRounded',
+                pointBorderWidth: 0,
+                hitRadius: 10
             },
             {
                 label: 'Your consumption',
@@ -74,6 +78,7 @@ function showChart(priceList, hourPositionList, usageData) {
                 hoverBackgroundColor: "rgba(99, 255, 222,0.4)",
                 hoverBorderColor: "rgba(99, 255, 222,1)",
                 yAxisID: 'y1',
+                pointRadius: 0
             }
 
 
@@ -82,6 +87,14 @@ function showChart(priceList, hourPositionList, usageData) {
         options: {
             responsive: true,
             maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white"
+                    }
+                }
+            
+            },
             scales: {
                 y: {
                     type: 'linear',
