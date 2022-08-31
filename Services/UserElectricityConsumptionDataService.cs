@@ -43,20 +43,23 @@ namespace Tehotasapaino.Models
 
         private Dictionary<DateData, List<decimal>> BuildDataAnalysisModelFromCSV(IFormFile fileFromUser)
         {
-            //string filepath = @"C:\Users\Sampsa\source\repos\LinqTestailua\LinqTestailua\files\electricity.csv";
-
             _logger.LogInformation($"Started parsing CSV stream");
             Dictionary<DateData, List<decimal>> dataPoints = new Dictionary<DateData, List<decimal>>();
 
-            using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream()))
+            using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream(),System.Text.Encoding.UTF8))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-
+                string[] format = { "yyyy-MM-dd HH:mm", "dd/MM/yyyy HH.mm" };
                 csv.Read();
                 csv.ReadHeader();
                 while (csv.Read())
                 {
-                    DateTime dateFromFile = DateTime.Parse(csv.GetField<string>(0));
+                    DateTime dateFromFile;
+
+                    if (!DateTime.TryParseExact(csv.GetField<string>(0), format, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out dateFromFile))
+                    {
+                        throw new ArgumentException($"Check date format {csv.GetField<string>(0)}");
+                    }
                     DateData record = new DateData
                     {
                         WeekNum = GetWeek(dateFromFile),
@@ -80,7 +83,7 @@ namespace Tehotasapaino.Models
             return dataPoints;
         }
 
-        private static int GetWeek(DateTime date)
+        public static int GetWeek(DateTime date)
         {
             Calendar cal = new CultureInfo("fi-FI").Calendar;
             DayOfWeek firstDay = DayOfWeek.Monday;
@@ -89,12 +92,12 @@ namespace Tehotasapaino.Models
             return cal.GetWeekOfYear(date, rule, firstDay);
         }
 
-        private static int GetDayOfWeek(DateTime date)
+        public static int GetDayOfWeek(DateTime date)
         {
             return (int)date.DayOfWeek;
         }
 
-        private static int GetHour(DateTime date)
+        public static int GetHour(DateTime date)
         {
             return (int)date.Hour;
         }

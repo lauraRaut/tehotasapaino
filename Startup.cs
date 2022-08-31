@@ -26,8 +26,11 @@ namespace Tehotasapaino
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           // services.AddDbContext<TehotasapainoContext>(options =>
+           //          options.UseSqlServer(Configuration.GetValue<string>("Tehotasapaino:ConnectionString")));
+
             services.AddDbContext<TehotasapainoContext>(options =>
-                     options.UseSqlServer(Configuration.GetValue<string>("Tehotasapaino:ConnectionString")));
+            options.UseSqlServer(Configuration.GetValue<string>("AZURE_SQL_CONNECTIONSTRING")));
 
             services.AddScoped<UserService>();
             services.AddScoped<UserElectricityConsumptionDataService>();
@@ -75,8 +78,6 @@ namespace Tehotasapaino
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-
 
             app.UseEndpoints(endpoints =>
             {
