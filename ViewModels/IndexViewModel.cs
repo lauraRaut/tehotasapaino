@@ -113,14 +113,20 @@ namespace Tehotasapaino.Models
             public UserElectricityUsageData(List<UserElectricityConsumptionData> consumptionList)
             {
                 this.DayConsumptionList = consumptionList;
-                
             }
            
           public List<decimal> DayConsumptionListForGraph
             {
                 get
                 {
-                    return DayConsumptionList.Where(x => x.WeekNum ==35 && x.WeekDay == 2).Select(x => x.AverageConsumptionkWh).ToList();
+                    DateTime today = DateTime.Now;
+                    int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                    int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                    int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+
+                            
+                     return DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour-1).OrderBy(x => x.Hour)
+                            .Select(x => x.AverageConsumptionkWh).ToList();
                 }
 
                 set { }
