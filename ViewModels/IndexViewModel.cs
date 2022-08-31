@@ -118,12 +118,12 @@ namespace Tehotasapaino.Models
           public List<decimal> DayConsumptionListForGraph
             {
                 get
-                {
+                { //Use two-day range of days instead of DateTime Now 
+                  //use Take 24 , MAYBE  
                     DateTime today = DateTime.Now;
                     int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
                     int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
                     int currentHour = UserElectricityConsumptionDataService.GetHour(today);
-
                             
                      return DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour-1).OrderBy(x => x.Hour)
                             .Select(x => x.AverageConsumptionkWh).ToList();
@@ -133,11 +133,60 @@ namespace Tehotasapaino.Models
             }
 
 
+            public string TodayConsumptionFigure
+            {
+                get {
+
+                    DateTime today = DateTime.Now;
+                    int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                    int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                    int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+                    decimal sum = 0;
+
+                    var consumptionFigures = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                            .Select(x => x.AverageConsumptionkWh).ToList();
+
+                    foreach (var figure in consumptionFigures)
+                    {
+                        sum += figure;
+                    }
+
+                    return sum.ToString();
+                }
+
+                set { }
+            }
 
 
+        public string TodayConsumptionPrice
+        {
+            get
+            {
+                DateTime today = DateTime.Now;
+                int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
+                int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
+                int currentHour = UserElectricityConsumptionDataService.GetHour(today);
+                var todayConsumptionPrice = 0;
+
+                List<decimal> consumptionFigures = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                        .Select(x => x.AverageConsumptionkWh).ToList();
+
+                List<int> hours = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
+                        .Select(x => x.Hour).ToList();
+
+                    for (int i = 0; i < consumptionFigures.Count; i++)
+                    {
+                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 10;
+
+                    }
+                    return todayConsumptionPrice.ToString();
+               }
+
+            set { }
         }
 
-
-
     }
+
+
+}
 }
