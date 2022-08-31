@@ -43,15 +43,13 @@ namespace Tehotasapaino.Models
 
         private Dictionary<DateData, List<decimal>> BuildDataAnalysisModelFromCSV(IFormFile fileFromUser)
         {
-            //string filepath = @"C:\Users\Sampsa\source\repos\LinqTestailua\LinqTestailua\files\electricity.csv";
-
             _logger.LogInformation($"Started parsing CSV stream");
             Dictionary<DateData, List<decimal>> dataPoints = new Dictionary<DateData, List<decimal>>();
 
-            using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream()))
+            using (StreamReader reader = new StreamReader(fileFromUser.OpenReadStream(),System.Text.Encoding.UTF8))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                string[] format = { "yyyy-MM-dd hh:mm", "dd/MM/yyyy hh.mm" };
+                string[] format = { "yyyy-MM-dd HH:mm", "dd/MM/yyyy HH.mm" };
                 csv.Read();
                 csv.ReadHeader();
                 while (csv.Read())
