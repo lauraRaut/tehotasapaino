@@ -70,22 +70,49 @@
                         Sauna
                     </button>
                 </h2>
+
+
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <div class="container mt-4">
+                        
                             <div class="d-inline-flex p-1 justify-content-center ">
 
-                                        <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
-                                        <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
-                                        <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
-                                        <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
-                                        <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
-                                
-                                </div>
-                                </div>
-                            </div>
+
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    @*<li class="justify-content-center"></li>*@
+                                    <li class=" justify-content-center">
+                                        <span class="justify-content-center">
+                                            <h3 style="white-space: nowrap">Using the sauna for 1.5 hours</h3>  <br /> 
+                                            <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
+                                            <input id=sauna type=number step="1" min=0 max=100>
+                                            <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+
+                                            <span class="justify-content-center">
+                                                <br />   Price in your electricity bill: <br /> <span id="saunaCost"> </span> €
+
+                                            </span>
+
+                                    </li>
+                                </ul>
+                            
+                        </div>
+                        </div>
                     </div>
-                </div>
+
+                        @*<div class="container mt-4">
+                            <div class="d-inline-flex p-1 justify-content-center ">
+
+                                <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
+                                <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
+                                <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
+                                <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
+                                <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>*@
 
                 <div class="accordion accordion-flush" id="accordionFlushExample2">
                     <div class="accordion-item">
@@ -243,7 +270,7 @@
         <partial name="_PartialFileUploadModal" />
         <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
 
-<div class="bottom-info-box bg-dark fixed-bottom w-100">
+<div class="bottom-info-box fixed-bottom w-100" style="background-color: rgb(34, 33, 33)">
     <div class="lineWrapper">
 
         <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -300,11 +327,3 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
-
-        <!--Alla olevat koskee Lauran tekemiä muutoksia accordionin aukeavan sisällön järjestykseen, en tiedä toimivatko-->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js">
-        </script>
