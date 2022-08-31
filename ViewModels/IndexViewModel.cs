@@ -141,7 +141,16 @@ namespace Tehotasapaino.Models
 
             public UserElectricityUsageData(List<UserElectricityConsumptionData> consumptionList)
             {
+
+                if (consumptionList.Any())
+                {
                 this.DayConsumptionList = consumptionList;
+                }
+
+                else
+                {
+                    this.DayConsumptionList = new List<UserElectricityConsumptionData>();
+                }
             }
            
           public List<decimal> DayConsumptionListForGraph

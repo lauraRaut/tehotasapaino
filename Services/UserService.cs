@@ -59,9 +59,8 @@ namespace Tehotasapaino.Models
         public async Task<List<UserElectricityConsumptionData>> GetUserElectricityConsumptionData(User userFromAzure)
         {
 
-            var dbConsumption = await _DbContext.UserConsumptionData.ToListAsync();
-          
-          //  throw new Exception("not implemented");
+            var dbConsumption = await _DbContext.UserConsumptionData.Include(u => u.UserInformation)
+                                                          .Where(x => x.UserInformation.Email == userFromAzure.Mail).ToListAsync();
             return dbConsumption;
 
         }
