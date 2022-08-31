@@ -36,7 +36,7 @@ namespace Tehotasapaino
             services.AddScoped<UserElectricityConsumptionDataService>();
             services.AddScoped<HueLightService>();
             services.AddScoped<PriceProcessorService>();
-            
+           
             services.AddMvc().AddRazorRuntimeCompilation();
 
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');

@@ -109,6 +109,10 @@ input[type="file"] {
     border-top:none;
 }
 
+/*.accordion-button collapsed {
+    color: rgb(228, 228, 122);
+}*/
+
 .accordion-button:active {
     background-color: rgb(34, 33, 33);
     color: rgb(228, 228, 122);
@@ -119,13 +123,11 @@ input[type="file"] {
     box-shadow:none;
     border-color:rgba(0,0,0, .125);
 }
-=======
-    box-shadow: none;
-    border-color: rgba(0,0,0, .125);
-}
+
 
 .accordion-button:after {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e4e47a'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+    color: rgb(228, 228, 122);
 }
 
 
@@ -251,6 +253,20 @@ button.accordion-button.collapsed::after {
     background-color: rgb(34, 33, 33) !important;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none; /* <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/*testi*/
+
+
 /* .consumption {
     color:rgb(245, 245, 81);
     font-size: 20px;
@@ -278,19 +294,25 @@ button.accordion-button.collapsed::after {
 
 
 /* } */
+@media only screen and (min-width: 1200px) {
 
 
 
 
-@media only screen and (min-width: 768px) {
+    .lineSvg {
+        width: 100em;
+        height: 1.5em;
+    }
 
-.lineSvg {
 
-    width:100em;
-    height:1.5em;
+
+    .calc-wrapper {
+        width: 60% !important;
+        margin-left: 20%;
+    }
 }
 
-}
 
+}
 
 
