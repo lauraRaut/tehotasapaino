@@ -9,9 +9,16 @@
 
 <div class="text-center py-2">
     <h1 class="display-4">Hi @(Model.loggedInPerson.FirstName)!</h1>
-    @if (!Model.loggedInPerson.isInPriceAlertBetaProgram)
-    {
-        <h2>This service is in development!<br /> Please come back when it is public</h2>
+    @{
+        if (!Model.loggedInPerson.isInPriceAlertBetaProgram)
+        {
+            <h2>This service is in development!<br /> Please come back when it is public</h2>
+        }
+
+        else
+        {
+            <h4 class="py-2">Please select higer/lower price than your alert level<br /> from graph to test alert functionality</h4>
+        }
     }
 </div>
 
@@ -27,36 +34,37 @@
 
 
 
-    @if (Model.loggedInPerson.isInPriceAlertBetaProgram)
-    {
-        <h4>Test colors different colors by clicking on box</h4>
-    <div class="gy-3">
-        <div class="d-flex justify-content-center">
-            <div class="p-4 mx-3 rounded" style="background-color: #E4E47A" data-set-light-color="#E4E47A"></div>
-            <div class="p-4 mx-3 rounded"  style="background-color: #FF6363" data-set-light-color="#FF6363"></div>
-            <div class="p-4 mx-3 rounded"  style="background-color: #00FF21"  data-set-light-color="#00FF21"></div>
-        </div>
-    </div>
-        <ul class="d-flex list-unstyled mt-auto" data-lightOn>
-            <li class="me-auto"></li>
-            <li class="d-flex align-items-center my-2 ms-3 " data-lightOn>
-                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/maxprice.svg"))
-                <input type="button" class="mx-3 my-2" value="Turn on" data-set-light-state="Turn On">
-            </li>
-            <li class="me-auto"></li>
-            <li class="d-flex align-items-center ms-3 my-2">
-                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/minprice.svg"))
-                <input type="button" class="mx-3 my-2" value="Turn off" data-set-light-state="Turn Off">
 
-            </li>
-            <li class="me-auto"></li>
-        </ul>
+    @{
+        if (Model.loggedInPerson.hasAddedLight)
+        {
+
+
+            <h4>Select price level which will trigger the alert</h4>
+            <div class="gy-3">
+                <div class="d-flex justify-content-center">
+                    <div class="p-4 mx-3 rounded" style="background-color: #E4E47A" data-set-action="dec">-</div>
+                    <div id="selectedPrice" class="p-4 mx-3 rounded" style="background-color: #FF6363" data-set-price="">20</div>
+                    <div class="p-4 mx-3 rounded" style="background-color: #00FF21" data-set-action="inc">+</div>
+                </div>
+                <div class="d-flex justify-content-center">
+                   <h4> <div class="gy-2 my-2" id="alertIndicator">Alert deactive</div></h4>
+                </div>
+            </div>
+
+            <h4>Test and select different alert colors by clicking on box</h4>
+            <div class="gy-3">
+                <div class="d-flex justify-content-center">
+                    <div class="p-4 mx-3 rounded" id="userSelectedColor" style="background-color: #E4E47A" data-set-light-color="E4E47A"></div>
+                    <div class="p-4 mx-3 rounded" style="background-color: #FF6363" data-set-light-color="FF6363"></div>
+                    <div class="p-4 mx-3 rounded" style="background-color: #00FF21" data-set-light-color="00FF21"></div>
+                </div>
+            </div>
+        }
     }
 
 
 </div>
-
-
 
 <script src="~/js/pricealert.js" asp-append-version="true"></script>
 <script src="~/lib/axios/axios.min.js"></script>

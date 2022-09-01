@@ -11,6 +11,7 @@ namespace Tehotasapaino.Models
         public DbSet<UserInformation> UserData { get; set; }
         public DbSet<UserElectricityConsumptionData> UserConsumptionData { get; set; }
         public DbSet<UserExternalAPIToken> UserExternalAPITokens { get; set; }
+        public DbSet<UserAlertLightInformation> UserAlertLightInformation { get; set; }
 
 
         public TehotasapainoContext(DbContextOptions<TehotasapainoContext> options) : base(options) { }

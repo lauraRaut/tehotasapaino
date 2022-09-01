@@ -4,7 +4,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 using static Tehotasapaino.Models.DayAHeadPriceAPIClient;
-using static Tehotasapaino.Models.IndexViewModel;
+using Azure.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Tehotasapaino
 {

@@ -161,7 +161,7 @@ button.accordion-button.collapsed::after{
     padding: 6px 16px;
     font-size: 24px;
     font:bold;
-    margin-right: 4px;
+   /* margin-right: 4px;*/
 
     cursor: pointer;
     text-align: center;
@@ -183,7 +183,7 @@ button.accordion-button.collapsed::after{
     padding: 6px 16px;
     font-size: 24px;
     font:bold;
-    margin-left:4px;
+   /* margin-left:4px;*/
     cursor: pointer;
     text-align: center;
     text-decoration: none;

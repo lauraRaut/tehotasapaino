@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using HueApi.Models;
 using System;
 using Tehotasapaino.Models;
 
@@ -35,7 +36,7 @@ namespace Tehotasapaino.Controllers
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         public async Task<IActionResult> UserPriceAlertConfigurator()
         {
-            var user = await _graphServiceClient.Me.Request().GetAsync();
+            User user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
 
             UserPriceAlertConfiguratorViewModel priceAlertViewModel = await _userService.CreatePriceAlertViewModel(user);
@@ -46,29 +47,27 @@ namespace Tehotasapaino.Controllers
         [HttpPost, ActionName("lightstate")]
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetLightState(LightState requestedLightState)
+        public async Task<IActionResult> SetLightState([FromBody] LightStateFromTestPage requestedLightState)
         {
             _logger.LogInformation($"POST lightstate received {requestedLightState}");
             try
             {
-                var user = await _graphServiceClient.Me.Request().GetAsync();
-                UserExternalAPIToken userHueAPIToken = await _userService.GetUserExternalAPITokenDataAsync(user, "Hue");
-                
-                try
+                User user = await _graphServiceClient.Me.Request().GetAsync();
+                HuePutResponse response = await _hueLightService.SetAlertLightToDesiredState(user,requestedLightState);
+
+                if (response.HasErrors)
                 {
-                    await _hueLightService.ControlLightState(requestedLightState, userHueAPIToken);
-                    return Ok();
+                    _logger.LogInformation($"Problems {response.Errors}");
+                    return StatusCode(418, $"{response.Data} and {response.Errors}");
                 }
-                catch (Exception e)
-                {
-                    _logger.LogInformation($"Error controlling the lights {e}");
-                    return StatusCode(418);
-                }
+
+                return Ok();
+
             }
             catch (Exception e)
             {
-                _logger.LogInformation($"User not authorized {e}");
-                return StatusCode(401);
+                _logger.LogInformation($"Problems {e}");
+                return StatusCode(500, e.StackTrace);
             }
         }
     }

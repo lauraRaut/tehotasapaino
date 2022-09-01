@@ -126,7 +126,6 @@ namespace Tehotasapaino.Models
                     this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();
                 }
                 else
-
                 {
                 this.DayAheadPrices = new List<Point>();
                 }
@@ -142,7 +141,16 @@ namespace Tehotasapaino.Models
 
             public UserElectricityUsageData(List<UserElectricityConsumptionData> consumptionList)
             {
+
+                if (consumptionList.Any())
+                {
                 this.DayConsumptionList = consumptionList;
+                }
+
+                else
+                {
+                    this.DayConsumptionList = new List<UserElectricityConsumptionData>();
+                }
             }
            
           public List<decimal> DayConsumptionListForGraph

@@ -4,53 +4,84 @@ using System.Linq;
 using System.Threading.Tasks;
 using HueApi;
 using HueApi.BridgeLocator;
-using HueApi.ColorConverters;
+using HueApi.ColorConverters.Original.Extensions;
 using HueApi.Extensions;
 using HueApi.Models.Requests;
+using HueApi.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Graph;
 
 namespace Tehotasapaino.Models
 {
     public class HueLightService
     {
-
-        public HueLightService()
+        private readonly IConfiguration _config;
+        private readonly UserService _userService;
+        public HueLightService(IConfiguration config, UserService userService)
         {
+            _config = config;
+            _userService = userService;
         }
 
-        public async Task ControlLightState(LightState userRequestedState, UserExternalAPIToken userAPIToken) 
+        public async Task<HuePutResponse> SetAlertLightToDesiredState(User userFromAzureAD, LightStateFromTestPage requestedLightState)
         {
-            string userHueUsername = "RI1GXSUWxBokc0oSjqq9Yvofqf5mVf97GJrk80Zk";
-            string userBearerToken = "vTxHDvCNrl1z9ULnOnaErh1ZXg3E";
-            //Guid lampID = "aeccabe4-5acc-484e-9177-30ed40e2fe04";
-            RemoteHueApi HueClient = new RemoteHueApi(userHueUsername, userBearerToken);
+            UserLightAlertClient userLightClient = await InitializeAlertLightClientForSingleUserAsync(userFromAzureAD);
+            return await TurnLightToDesiredState(userLightClient, requestedLightState);
+        }
 
-            var bridges = await HueClient.GetBridgesAsync();
+        private async Task SetAlertLightToDesiredState(UserInformation userFromDb)
+        {
+            //TODO
+            return;
+        }
+        private async Task<HuePutResponse> TurnLightToDesiredState(UserLightAlertClient AuthenticatedHueApiClient, LightStateFromTestPage requestedLightState)
+        {
+            UpdateLight newLightStateReq = new UpdateLight();
 
-
-            if (bridges == null)
+            if (requestedLightState.isPriceHight == "true")
             {
-                throw new ArgumentException("No Hue bridge found!");
+                newLightStateReq = new UpdateLight()
+                                        .TurnOn()
+                                        .SetColor(new HueApi.ColorConverters.RGBColor(requestedLightState.AlertLightHexColor));
+            }
+            else
+            {
+                newLightStateReq = new UpdateLight().TurnOff();
             }
 
+            Guid userLightId = AuthenticatedHueApiClient.UserAlertLight;
 
-            
-               await TurnLightToDesiredState(HueClient);
-            
+            HuePutResponse result = await AuthenticatedHueApiClient.UserHueClient.UpdateLightAsync(userLightId, newLightStateReq);
+            return result;
         }
 
-        private static async Task TurnLightToDesiredState(RemoteHueApi AuthenticatedHueApiClient) 
+        private async Task<UserLightAlertClient> InitializeAlertLightClientForSingleUserAsync(User userFromAzureAD) 
         {
-
-            var lights = await AuthenticatedHueApiClient.GetLightsAsync();
-
-            Console.WriteLine(lights);
-
-            var id = lights.Data.SingleOrDefault(x => x.Metadata.Name.Contains("Alertlamppu")).Id;
-        
-            var req = new UpdateLight().TurnOff();
-            var result = await AuthenticatedHueApiClient.UpdateLightAsync(id, req);
-            Console.WriteLine(result);
+            UserInformation dbUser = await _userService.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
+            return new UserLightAlertClient(dbUser);
         }
 
+        private void LightRequestBuilder(string HEXColorCode) 
+        {
+            UpdateLight req = new UpdateLight().TurnOn().SetColor(new HueApi.ColorConverters.RGBColor(HEXColorCode));
+        }
+    }
+
+    
+    
+    public class UserLightAlertClient
+    {
+        public RemoteHueApi UserHueClient { get; set; }
+        public Guid UserAlertLight { get; set; }
+
+        public UserLightAlertClient(UserInformation dbUser) 
+        {
+            string userHueUsername = dbUser.UserExternalAPITokens.SingleOrDefault(x => x.ProviderName == "Hue").UserNameProvider;
+            string userBearerToken = dbUser.UserExternalAPITokens.SingleOrDefault(x => x.ProviderName == "Hue").Access_token;
+            string alertLightId = dbUser.UserAlertLightInformation.LightGUID;
+
+            this.UserHueClient = new RemoteHueApi(userHueUsername, userBearerToken);
+            this.UserAlertLight = Guid.Parse(alertLightId);
+        }
     }
 }
