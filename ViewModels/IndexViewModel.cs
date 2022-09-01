@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Microsoft.Graph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Graph;
 using static Tehotasapaino.Models.DayAheadPrice;
 
 namespace Tehotasapaino.Models
@@ -21,14 +20,14 @@ namespace Tehotasapaino.Models
             userElectricityConsumptionData = new UserElectricityUsageData(consumptionList);
         }
 
-        
-       
+
+
         public class LoggedInPerson
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Email { get; set; }
-            public bool isRegisteredToService {get;set;}
+            public bool isRegisteredToService { get; set; }
 
             public LoggedInPerson(User userFromAzureAD, bool isRegistered)
             {
@@ -41,25 +40,35 @@ namespace Tehotasapaino.Models
 
         }
 
-        public class DayAHeadPriceData 
+        public class DayAHeadPriceData
         {
 
             public List<Point> DayAheadPrices { get; set; } = new List<Point>();
-            public string maxPrice {
+            public string maxPrice
+            {
                 get
                 {
-                    return this.DayAheadPrices.Max(x => x.Priceamount).ToString();
+                    if (this.DayAheadPrices.Any())
+                    {
+                        return this.DayAheadPrices.Max(x => x.Priceamount).ToString();
+
+                    }
+                    return "0";
                 }
-                set { } 
+                set { }
             }
             public string maxPriceTimeStamp
             {
                 get
                 {
-                    DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.maxPrice))
+                    if (this.DayAheadPrices.Any())
+                    {
+                        DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.maxPrice))
                                        .Select(y => y.PricePosTimeStamp).FirstOrDefault();
 
-                    return $"{startPos:HH} - {startPos.AddHours(1):HH}.00";
+                        return $"{startPos:HH} - {startPos.AddHours(1):HH}.00";
+                    }
+                    return "";
                 }
                 set { }
             }
@@ -70,7 +79,11 @@ namespace Tehotasapaino.Models
             {
                 get
                 {
-                    return this.DayAheadPrices.Min(x => x.Priceamount).ToString();
+                    if (this.DayAheadPrices.Any())
+                    {
+                        return this.DayAheadPrices.Min(x => x.Priceamount).ToString();
+                    }
+                    return "";
                 }
                 set { }
             }
@@ -79,9 +92,13 @@ namespace Tehotasapaino.Models
             {
                 get
                 {
-                    DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.minPrice))
+                    if (this.DayAheadPrices.Any())
+                    {
+                        DateTime startPos = this.DayAheadPrices.Where(x => x.Priceamount == decimal.Parse(this.minPrice))
                         .Select(y => y.PricePosTimeStamp).FirstOrDefault();
-                    return $"{startPos:HH} - {startPos.AddHours(1):HH}.00";
+                        return $"{startPos:HH} - {startPos.AddHours(1):HH}.00";
+                    }
+                    return "";
                 }
                 set { }
             }
@@ -90,17 +107,30 @@ namespace Tehotasapaino.Models
             {
                 get
                 {
-                   int averagePrice = (Convert.ToInt32(minPrice) + Convert.ToInt32(maxPrice)) / 2;
-                    return averagePrice;
+                    if (this.DayAheadPrices.Any())
+                    {
+                        int averagePrice = (Convert.ToInt32(minPrice) + Convert.ToInt32(maxPrice)) / 2;
+                        return averagePrice;
+                    }
+                    return 0;
                 }
 
                 set { }
-                
+
             }
 
-            public DayAHeadPriceData(List<Point> dayAheadPrice) 
+            public DayAHeadPriceData(List<Point> dayAheadPrice)
             {
-                this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();
+                if (dayAheadPrice.Any())
+                {
+                    this.DayAheadPrices = dayAheadPrice.Where(x => x.PricePosTimeStamp >= DateTime.Now.AddHours(-1)).Take(24).ToList();
+                }
+                else
+
+                {
+                this.DayAheadPrices = new List<Point>();
+                }
+
             }
 
         }
