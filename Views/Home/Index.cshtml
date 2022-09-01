@@ -60,6 +60,8 @@
         </li>
         <li class="me-auto"></li>
     </ul>
+</div>
+
 
     <div class="calc-wrapper">
         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -74,45 +76,45 @@
 
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        
-                            <div class="d-inline-flex p-1 justify-content-center ">
 
-                                <ul class="d-flex list-unstyled mt-auto">
-                                    @*<li class="justify-content-center"></li>*@
-                                    <li class=" justify-content-center">
+                        <div class="d-inline-flex p-1 justify-content-center ">
+
+                            <ul class="d-flex list-unstyled mt-auto">
+                                @*<li class="justify-content-center"></li>*@
+                                <li class=" justify-content-center">
+                                    <span class="justify-content-center">
+                                        <h3 style="white-space: nowrap">Using the sauna for 1.5 hours</h3>  <br />
+                                        <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
+                                        <input id=sauna type=number step="1" min=0 max=100>
+                                        <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+
                                         <span class="justify-content-center">
-                                            <h3 style="white-space: nowrap">Using the sauna for 1.5 hours</h3>  <br /> 
-                                            <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
-                                            <input id=sauna type=number step="1" min=0 max=100>
-                                            <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+                                            <br />   Price in your electricity bill: <br /> <span id="saunaCost"> </span> €
 
-                                            <span class="justify-content-center">
-                                                <br />   Price in your electricity bill: <br /> <span id="saunaCost"> </span> €
+                                        </span>
+                                    </span>
 
-                                            </span>
-                                            </span>
+                                </li>
+                            </ul>
 
-                                    </li>
-                                </ul>
-                            
-                        </div>
                         </div>
                     </div>
+                </div>
 
-                        @*<div class="container mt-4">
-                            <div class="d-inline-flex p-1 justify-content-center ">
+                @*<div class="container mt-4">
+                                <div class="d-inline-flex p-1 justify-content-center ">
 
-                                <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
-                                <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
-                                <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
-                                <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
-                                <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
+                                    <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
+                                    <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
+                                    <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
+                                    <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
+                                    <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
 
                 <div class="accordion accordion-flush" id="accordionFlushExample2">
                     <div class="accordion-item">
@@ -267,69 +269,69 @@
                     </div>
                 </div>
 
-    </div>
-</div>
+            </div>
         </div>
     </div>
-<partial name="_PartialFileUploadModal" />
-<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
-<div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
+
+    <partial name="_PartialFileUploadModal" />
+    <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+    <div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
 
 
-<div class="bottom-info-box fixed-bottom w-100" style="background-color: rgb(34, 33, 33)">
-    <div class="lineWrapper">
+    <div class="bottom-info-box fixed-bottom w-100" style="background-color: rgb(34, 33, 33)">
+        <div class="lineWrapper">
 
-        <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#D3D3D3" d="M0 0h334v11H0z" />
-            <g clip-path="url(#a)">
-                <path fill="#232323" d="M-27-879h390v991H-27z" />
-                <path fill="#232323" d="M-27 1h390v111H-27z" />
-                <path d="m1 10 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9m0 0 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9" stroke="#fff" />
-            </g>
-            <defs>
-                <clipPath id="a">
-                    <path fill="#fff" transform="translate(-27 -879)" d="M0 0h390v991H0z" />
-                </clipPath>
-            </defs>
-        </svg>
-
-    </div>
-
-    <ul class="d-flex list-unstyled mt-auto w-100">
-        <li class="me-auto"></li>
-        <li class="d-flex align-items-center my-2 ms-3">
-            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
-            <span class="ms-3 my-2">
-                Today's consumption <br /> @Model.userElectricityConsumptionData.TodayConsumptionFigure  kWh
-            </span>
-        </li>
-        <li class="me-auto"></li>
-        <li class="d-flex align-items-center ms-3 my-2">
-            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
-            <span class="mx-3 my-2">
-                Today's electricity bill: <br /> @Model.userElectricityConsumptionData.TodayConsumptionPrice €
-            </span>
-        </li>
-        <li class="me-auto"></li>
-    </ul>
+            <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#D3D3D3" d="M0 0h334v11H0z" />
+                <g clip-path="url(#b)">
+                    <path fill="#232323" d="M-27-879h390v991H-27z" />
+                    <path fill="#232323" d="M-27 1h390v111H-27z" />
+                    <path d="m1 10 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9m0 0 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9" stroke="#fff" />
+                </g>
+                <defs>
+                    <clipPath id="b">
+                        <path fill="#fff" transform="translate(-27 -879)" d="M0 0h390v991H0z" />
+                    </clipPath>
+                </defs>
+            </svg>
 
         </div>
-        <script>
+
+        <ul class="d-flex list-unstyled mt-auto w-100">
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center my-2 ms-3">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
+                <span class="ms-3 my-2">
+                    Today's consumption <br /> @Model.userElectricityConsumptionData.TodayConsumptionFigure  kWh
+                </span>
+            </li>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center ms-3 my-2">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
+                <span class="mx-3 my-2">
+                    Today's electricity bill: <br /> @Model.userElectricityConsumptionData.TodayConsumptionPrice €
+                </span>
+            </li>
+            <li class="me-auto"></li>
+        </ul>
+
+    </div>
+    <script>
 
 
 
-            function increment(id, priceid, kwh) {
-                document.getElementById(id).stepUp();
-                CalculateMachine(id, priceid, kwh);
+        function increment(id, priceid, kwh) {
+            document.getElementById(id).stepUp();
+            CalculateMachine(id, priceid, kwh);
 
-            }
-            function decrement(id, priceid, kwh) {
-                document.getElementById(id).stepDown();
-                CalculateMachine(id, priceid, kwh);
-            }
-        </script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
+        }
+        function decrement(id, priceid, kwh) {
+            document.getElementById(id).stepDown();
+            CalculateMachine(id, priceid, kwh);
+        }
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
