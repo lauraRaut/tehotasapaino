@@ -289,14 +289,30 @@ input[type=number] {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
     /* color:yellow; */
     /* } */
+
+    @media only screen and (min-width: 1200px) {
+
+        .lineSvg {
+            width: 90em;
+            height: 1.2em;
+        }
+
+
+
+        .calc-wrapper {
+            width: 60% !important;
+            margin-left: 20%;
+        }
+    }
     @media only screen and (min-width: 1200px) {
 
 
 
 
     .lineSvg {
-        width: 100em;
+        width:100%;
         height: 1.5em;
+      
     }
 
 
@@ -307,5 +323,21 @@ input[type=number] {
     }
 }
 
+/*    @media only screen and (min-width: 1600px) {
+        .lineSvg {
+            width: 100em;
+            height: 1.5em;
+            margin-left:1%;
+        }
+
+
+
+        .calc-wrapper {
+            width: 60% !important;
+            margin-left: 20%;
+        }
+
+    }
+*/
 
 
