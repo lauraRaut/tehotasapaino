@@ -36,6 +36,8 @@ namespace Tehotasapaino.Controllers
         {
             var user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
+            ViewData["HomeStyle"] = "border-bottom: 5px solid rgb(228, 228, 122); border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; color:rgb(255, 255, 255)";
+            ViewData["PriceAlertStyle"] = "color:rgb(228, 228, 122)";
 
             IndexViewModel indexViewModel = await _userService.CreateIndexViewModel(user);
             

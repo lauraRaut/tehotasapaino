@@ -171,7 +171,30 @@ function showChart(priceList, hourPositionList, usageData) {
 
         document.getElementById(priceid).innerHTML = calc.toFixed(2);
 
-    }
+}
+
+
+function changeButtonToSpinner(buttonElem, spinnerBtnId) {
+    event.target
+    buttonElem.replaceWith(SpinnerButtonHTML(spinnerBtnId));
+}
+
+function SpinnerButtonHTML(uniqueID) {
+    const btn_elem = document.createElement("button");
+    btn_elem.disabled = true;
+    btn_elem.id = uniqueID;
+    btn_elem.className = "btn btn-outline-dark btn-sm text-dark";
+    btn_elem.type = "button";
+    btn_elem.textContent = "Saving...";
+
+    const span_elem = document.createElement("span");
+    span_elem.className = "spinner-grow spinner-grow-sm text-dark";
+    span_elem.role = "status";
+
+    btn_elem.appendChild(span_elem);
+
+    return btn_elem;
+}
 
 
 

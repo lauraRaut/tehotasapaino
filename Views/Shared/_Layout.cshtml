@@ -26,10 +26,10 @@
         <nav class="navbar navbar-expand navbar-light justify-content-center p-0">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link h3 @(ViewData["HomeSelectedClass"])" href="@Url.Action("Index", "Home")">Home <span class="sr-only"></span></a>
+                    <a class="nav-link h3" style="@(ViewData["HomeStyle"])" href="@Url.Action("Index", "Home")">Home <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h3 @(ViewData["PriceAlertSelectedClass"])" style="color:rgb(228, 228, 122);" href="@Url.Action("UserPriceAlertConfigurator", "PriceLightAlert")">Price alerts</a>
+                    <a class="nav-link h3" style="@(ViewData["PriceAlertStyle"])" href="@Url.Action("UserPriceAlertConfigurator", "PriceLightAlert")">Price alerts</a>
                 </li>
 
             </ul>

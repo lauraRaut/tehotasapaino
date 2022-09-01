@@ -39,6 +39,8 @@ namespace Tehotasapaino.Controllers
         {
             User user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
+            ViewData["PriceAlertStyle"] = "border-bottom: 5px solid rgb(228, 228, 122); border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; color:rgb(255, 255, 255)";
+            ViewData["HomeStyle"] = "color:rgb(228, 228, 122)";
 
             try
             {
