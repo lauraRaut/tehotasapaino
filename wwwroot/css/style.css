@@ -89,7 +89,7 @@ input[type="file"] {
 
 
 
-#laundryMachine, #shower, #dishWasher, #sauna, #gamingConsole, #coffeeMachine, #saunaCost {
+#laundryMachine, #shower, #dishWasher, #sauna, #gamingConsole, #coffeeMachine, #saunaCost, #laundryCost, #showerCost, #dishWasherCost, #gamingConsoleCost, #coffeeMachineCost {
     border-radius:0px;
     outline: none;
     border: none;
