@@ -60,6 +60,8 @@
         </li>
         <li class="me-auto"></li>
     </ul>
+</div>
+
 
     <div class="calc-wrapper">
         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -74,45 +76,45 @@
 
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        
-                            <div class="d-inline-flex p-1 justify-content-center ">
 
-                                <ul class="d-flex list-unstyled mt-auto">
-                                    @*<li class="justify-content-center"></li>*@
-                                    <li class=" justify-content-center">
+                        <div class="d-inline-flex p-1 justify-content-center ">
+
+                            <ul class="d-flex list-unstyled mt-auto">
+                                @*<li class="justify-content-center"></li>*@
+                                <li class=" justify-content-center">
+                                    <span class="justify-content-center">
+                                        <h3 style="white-space: nowrap">Using the sauna for 1.5 hours</h3>  <br />
+                                        <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
+                                        <input id=sauna type=number step="1" min=0 max=100>
+                                        <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+
                                         <span class="justify-content-center">
-                                            <h3 style="white-space: nowrap">Using the sauna for 1.5 hours</h3>  <br /> 
-                                            <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button>
-                                            <input id=sauna type=number step="1" min=0 max=100>
-                                            <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button>
+                                            <br />   Price in your electricity bill: <br /> <span id="saunaCost"> </span> €
 
-                                            <span class="justify-content-center">
-                                                <br />   Price in your electricity bill: <br /> <span id="saunaCost"> </span> €
+                                        </span>
+                                    </span>
 
-                                            </span>
-                                            </span>
+                                </li>
+                            </ul>
 
-                                    </li>
-                                </ul>
-                            
-                        </div>
                         </div>
                     </div>
+                </div>
 
-                        @*<div class="container mt-4">
-                            <div class="d-inline-flex p-1 justify-content-center ">
+                @*<div class="container mt-4">
+                                <div class="d-inline-flex p-1 justify-content-center ">
 
-                                <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
-                                <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
-                                <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
-                                <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
-                                <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
+                                    <div class="p-0"><p>Using the sauna for 1.5 hours.</p><br /> </div>
+                                    <div class="p-1"> <button onclick="increment('sauna', 'saunaCost', 8)" id="plus">+</button> </div>
+                                    <div class="p-1"> <button onclick="decrement('sauna', 'saunaCost', 8)" id="minus">-</button> </div>
+                                    <div class="p-1"> <input id=sauna type=number min=0 max=100> </div>
+                                    <div class="p-0"> <p>Price in your electricity bill: </p> <p id="saunaCost"> </p> € </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
 
                 <div class="accordion accordion-flush" id="accordionFlushExample2">
                     <div class="accordion-item">
@@ -133,15 +135,29 @@
                         </h2>
                         <div id="flush-collapseOne2" class="accordion-collapse collapse" aria-labelledby="flush-headingOne2" data-bs-parent="#accordionFlushExample2">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-left mt-1 mb-1">
 
-                                    <p>Mixed laundry programme in 40 c degrees.</p><br />
-                                    <button onclick="increment('laundryMachine', 'laundryCost', 0.6)" id="plus">+</button>
-                                    <button onclick="decrement('laundryMachine', 'laundryCost', 0.6)" id="minus">-</button>
-                                    <input id=laundryMachine type=number min=0 max=100><br />
-                                    <p>Price in your electricity bill: </p> <p id="laundryCost"> </p> €
+                                <div class="d-inline-flex p-1 justify-content-center ">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                        <li class=" justify-content-center">
+                                            <span class="justify-content-center">
 
-                                </div>
+                                                <h3 style="white-space: nowrap">
+                                                    Laundry programme in 40 c degrees </h3>
+                                                    <br />
+                                                    <button onclick="increment('laundryMachine', 'laundryCost', 0.6)" id="plus">+</button>
+                                                    <input id=laundryMachine type=number min=0 max=100>
+                                                    <button onclick="decrement('laundryMachine', 'laundryCost', 0.6)" id="minus">-</button>
+                                                    <br />
+                                                    <span class="justify-content-center">
+                                                        <br /> Price in your electricity bill: <br />
+                                                        <span id="laundryCost"> </span> €
+                                                    </span>
+                                                </span>
+                                                </li>
+                                        </ul>
+
+
+</div>
                             </div>
                         </div>
                     </div>
@@ -163,15 +179,26 @@
                         </h2>
                         <div id="flush-collapseOne3" class="accordion-collapse collapse" aria-labelledby="flush-headingOne3" data-bs-parent="#accordionFlushExample3">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-left mt-1 mb-1">
-                                    <p>
-                                        37 c shower for 5 minutes, 12 litres of water.
-                                    </p> <br />
-                                    <button onclick="increment('shower', 'showerCost', 2.1 )" id="plus">+</button>
-                                    <button onclick="decrement('shower', 'showerCost', 2.1 )" id="minus">-</button>
-                                    <input id=shower type=number min=0 max=100>
-                                    <p>Price in your electricity bill: </p> <p id="showerCost"> </p> €
-                                </div>
+
+                                <div class="d-inline-flex p-1 justify-content-center ">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                        <li class=" justify-content-center">
+                                            <span class="justify-content-center">
+
+
+                                                <h3 style="white-space: nowrap">
+                                                    37 c shower for 5 minutes, 12 litres of water.
+                                                    </h3> <br />
+                                                    <button onclick="increment('shower', 'showerCost', 2.1 )" id="plus">+</button>
+                                                    <input id=shower type=number min=0 max=100>
+                                                    <button onclick="decrement('shower', 'showerCost', 2.1 )" id="minus">-</button>
+                                                    <span class="justify-content-center"><br /> Price in your electricity bill: <br/>  <span id="showerCost"> </span> €
+                                                </span>
+                                                </span>
+                                            </li>
+                                        </ul>
+
+</div>
                             </div>
                         </div>
                     </div>
@@ -194,14 +221,23 @@
                         </h2>
                         <div id="flush-collapseOne4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne4" data-bs-parent="#accordionFlushExample4">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-left mt-1 mb-1">
-                                    <p>
-                                        Basic washing programme with warm mater.
-                                    </p> <br />
-                                    <button onclick="increment('dishWasher', 'dishWasherCost', 1.2)" id="plus">+</button>
-                                    <button onclick="decrement('dishWasher', 'dishWasherCost', 1.2)" id="minus">-</button>
-                                    <input id=dishWasher type=number min=0 max=100>
-                                    <p>Price in your electricity bill: </p> <p id="dishWasherCost"> </p> €
+
+                                <div class="d-inline-flex p-1 justify-content-center ">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                        <li class=" justify-content-center">
+                                            <span class="justify-content-center">
+
+                                                <h3 style="white-space: nowrap">
+                                                    Basic washing programme with warm mater.
+                                                </h3> <br />
+                                                <button onclick="increment('dishWasher', 'dishWasherCost', 1.2)" id="plus">+</button>
+                                                <input id=dishWasher type=number min=0 max=100>
+                                                <button onclick="decrement('dishWasher', 'dishWasherCost', 1.2)" id="minus">-</button>
+                                                <span class="justify-content-center"> <br />Price in your electricity bill: <br />  <span id="dishWasherCost"> </span> €
+                                                </span>
+                                                </span>
+                                            </li>
+                                        </ul>
                                 </div>
                             </div>
                         </div>
@@ -225,12 +261,20 @@
                         </h2>
                         <div id="flush-collapseOne5" class="accordion-collapse collapse" aria-labelledby="flush-headingOne5" data-bs-parent="#accordionFlushExample5">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-left mt-1 mb-1">
-                                    <p>Using gaming console and a television for one hour. </p> <br />
-                                    <button onclick="increment('gamingConsole', 'gamingConsoleCost', 0.31)" id="plus">+</button>
-                                    <button onclick="decrement('gamingConsole', 'gamingConsoleCost', 0.31)" id="minus">-</button>
-                                    <input id=gamingConsole type=number min=0 max=100>
-                                    <p>Price in your electricity bill: </p> <p id="gamingConsoleCost"> </p> €
+                                <div class="d-inline-flex p-1 justify-content-center ">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                        <li class=" justify-content-center">
+                                            <span class="justify-content-center">
+
+                                                <h3 style="white-space:nowrap"> Using gaming console and a television for one hour. </h3> <br />
+                                                <button onclick="increment('gamingConsole', 'gamingConsoleCost', 0.31)" id="plus">+</button>
+                                                <input id=gamingConsole type=number min=0 max=100>
+                                                <button onclick="decrement('gamingConsole', 'gamingConsoleCost', 0.31)" id="minus">-</button>
+                                                <span class = "justify-content-center"> <br/> Price in your electricity bill: <br />  <span id="gamingConsoleCost"> </span> €
+                                                </span>
+                                                </span>
+                                            </li>
+                                        </ul>
                                 </div>
                             </div>
                         </div>
@@ -253,83 +297,92 @@
                         </h2>
                         <div id="flush-collapseOne6" class="accordion-collapse collapse" aria-labelledby="flush-headingOne6" data-bs-parent="#accordionFlushExample6">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-left mt-1 mb-1">
-                                    <p>
-                                        Basic washing programme with warm mater.
-                                    </p> <br />
-                                    <button onclick="increment('coffeeMachine', 'coffeeMachineCost', 0.01)" id="plus">+</button>
-                                    <button onclick="decrement('coffeeMachine', 'coffeeMachineCost', 0.01)" id="minus">-</button>
-                                    <input id=coffeeMachine type=number min=0 max=100>
-                                    <p>Price in your electricity bill: </p> <p id="coffeeMachineCost"> </p> €
+                                <div class="d-inline-flex p-1 justify-content-center ">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                        <li class=" justify-content-center">
+                                            <span class="justify-content-center">
+
+
+                                                <h3 style="white-space:nowrap"> 
+                                                    Basic washing programme with warm mater.
+                                                </h3> <br />
+                                                <button onclick="increment('coffeeMachine', 'coffeeMachineCost', 0.01)" id="plus">+</button>
+                                                <input id=coffeeMachine type=number min=0 max=100>
+                                                <button onclick="decrement('coffeeMachine', 'coffeeMachineCost', 0.01)" id="minus">-</button>
+                                                <span class="justify-content-center"> <br/> Price in your electricity bill: <br/> <span id="coffeeMachineCost"> </span> €
+                                                </span>
+                                                </span>
+                                            </li>
+                                        </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-    </div>
-</div>
+            </div>
         </div>
     </div>
-<partial name="_PartialFileUploadModal" />
-<div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
-<div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
+
+    <partial name="_PartialFileUploadModal" />
+    <div id="appdata" data-obj="@JsonConvert.SerializeObject(Model.dayAHeadPriceData.DayAheadPrices)"></div>
+    <div id="consumptiondata" data-obj="@JsonConvert.SerializeObject(Model.userElectricityConsumptionData.DayConsumptionListForGraph)"></div>
 
 
-<div class="bottom-info-box fixed-bottom w-100" style="background-color: rgb(34, 33, 33)">
-    <div class="lineWrapper">
+    <div class="bottom-info-box fixed-bottom w-100" style="background-color: rgb(34, 33, 33)">
+        <div class="lineWrapper d-flex alig-items-center ">
 
-        <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#D3D3D3" d="M0 0h334v11H0z" />
-            <g clip-path="url(#a)">
-                <path fill="#232323" d="M-27-879h390v991H-27z" />
-                <path fill="#232323" d="M-27 1h390v111H-27z" />
-                <path d="m1 10 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9m0 0 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9" stroke="#fff" />
-            </g>
-            <defs>
-                <clipPath id="a">
-                    <path fill="#fff" transform="translate(-27 -879)" d="M0 0h390v991H0z" />
-                </clipPath>
-            </defs>
-        </svg>
-
-    </div>
-
-    <ul class="d-flex list-unstyled mt-auto w-100">
-        <li class="me-auto"></li>
-        <li class="d-flex align-items-center my-2 ms-3">
-            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
-            <span class="ms-3 my-2">
-                Today's consumption <br /> @Model.userElectricityConsumptionData.TodayConsumptionFigure  kWh
-            </span>
-        </li>
-        <li class="me-auto"></li>
-        <li class="d-flex align-items-center ms-3 my-2">
-            @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
-            <span class="mx-3 my-2">
-                Today's electricity bill: <br /> @Model.userElectricityConsumptionData.TodayConsumptionPrice €
-            </span>
-        </li>
-        <li class="me-auto"></li>
-    </ul>
+            <svg class="lineSvg" viewBox="0 0 334 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#D3D3D3" d="M0 0h334v11H0z" />
+                <g clip-path="url(#b)">
+                    <path fill="#232323" d="M-27-879h390v991H-27z" />
+                    <path fill="#232323" d="M-27 1h390v111H-27z" />
+                    <path d="m1 10 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9m0 0 16-9 18 9 19-9 17 9 16-9 16 9 17-9 19 9 14-9 14 9" stroke="#fff" />
+                </g>
+                <defs>
+                    <clipPath id="b">
+                        <path fill="#fff" transform="translate(-27 -879)" d="M0 0h390v991H0z" />
+                    </clipPath>
+                </defs>
+            </svg>
 
         </div>
-        <script>
+
+        <ul class="d-flex list-unstyled mt-auto w-100">
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center my-2 ms-3">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/salama.svg"))
+                <span class="ms-3 my-2">
+                    Today's consumption <br /> @Model.userElectricityConsumptionData.TodayConsumptionFigure  kWh
+                </span>
+            </li>
+            <li class="me-auto"></li>
+            <li class="d-flex align-items-center ms-3 my-2">
+                @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/euromerkki.svg"))
+                <span class="mx-3 my-2">
+                    Today's electricity bill: <br /> @Model.userElectricityConsumptionData.TodayConsumptionPrice €
+                </span>
+            </li>
+            <li class="me-auto"></li>
+        </ul>
+
+    </div>
+    <script>
 
 
 
-            function increment(id, priceid, kwh) {
-                document.getElementById(id).stepUp();
-                CalculateMachine(id, priceid, kwh);
+        function increment(id, priceid, kwh) {
+            document.getElementById(id).stepUp();
+            CalculateMachine(id, priceid, kwh);
 
-            }
-            function decrement(id, priceid, kwh) {
-                document.getElementById(id).stepDown();
-                CalculateMachine(id, priceid, kwh);
-            }
-        </script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
+        }
+        function decrement(id, priceid, kwh) {
+            document.getElementById(id).stepDown();
+            CalculateMachine(id, priceid, kwh);
+        }
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
