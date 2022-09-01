@@ -264,10 +264,9 @@ input[type=number] {
     -moz-appearance: textfield; /* Firefox */
 }
 
-/*testi*/
 
-
-/* .consumption {
+    /*testi*/
+    /* .consumption {
     color:rgb(245, 245, 81);
     font-size: 20px;
     width: 100%;
@@ -279,7 +278,7 @@ input[type=number] {
 
 .consumption:after {
   content: '\02795'; /* Unicode character for "plus" sign (+) */
-/* color: rgb(255, 255, 30);
+    /* color: rgb(255, 255, 30);
     font-size: 20px;
     font: bold;
     float: right;
@@ -288,13 +287,9 @@ input[type=number] {
   
   .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
-/* color:yellow; */
-
-
-
-
-/* } */
-@media only screen and (min-width: 1200px) {
+    /* color:yellow; */
+    /* } */
+    @media only screen and (min-width: 1200px) {
 
 
 
@@ -312,7 +307,5 @@ input[type=number] {
     }
 }
 
-
-}
 
 
