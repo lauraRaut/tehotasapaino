@@ -57,8 +57,16 @@ namespace Tehotasapaino.Models
 
         private async Task<UserLightAlertClient> InitializeAlertLightClientForSingleUserAsync(User userFromAzureAD) 
         {
+            
             UserInformation dbUser = await _userService.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
+
+            if (dbUser == null)
+            {
+                throw new ArgumentException($"No user found with email {userFromAzureAD.Mail}");
+            }
+            
             return new UserLightAlertClient(dbUser);
+
         }
 
         private void LightRequestBuilder(string HEXColorCode) 
