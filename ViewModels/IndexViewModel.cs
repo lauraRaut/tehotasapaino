@@ -166,7 +166,7 @@ namespace Tehotasapaino.Models
 
                         var DayConsumptionListForGraph = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay || x.WeekDay == currentDay + 1  && x.Hour >= currentHour - 1)
                                                  .OrderBy(x => x.Hour)
-                                                 .Select(x => x.AverageConsumptionkWh)
+                                                 .Select(x => x.AverageConsumptionkWh / 100)
                                                   .Take(24).ToList();
 
                     return DayConsumptionListForGraph;
@@ -185,6 +185,7 @@ namespace Tehotasapaino.Models
                     int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
                     int currentHour = UserElectricityConsumptionDataService.GetHour(today);
                     decimal sum = 0;
+                    decimal sumDivided = 0;
 
                     var consumptionFigures = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour - 1).OrderBy(x => x.Hour)
                             .Select(x => x.AverageConsumptionkWh).ToList();
@@ -192,9 +193,11 @@ namespace Tehotasapaino.Models
                     foreach (var figure in consumptionFigures)
                     {
                         sum += figure;
+                        sumDivided = sum / 100;
+                        
                     }
 
-                    return sum.ToString();
+                    return sumDivided.ToString();
                 }
 
                 set { }
