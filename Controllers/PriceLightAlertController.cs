@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using HueApi.Models;
 using System;
 using Tehotasapaino.Models;
+using TempDataExtensions;
 
 namespace Tehotasapaino.Controllers
 {
@@ -39,9 +40,20 @@ namespace Tehotasapaino.Controllers
             User user = await _graphServiceClient.Me.Request().GetAsync();
             ViewData["ApiResult"] = user.DisplayName;
 
-            UserPriceAlertConfiguratorViewModel priceAlertViewModel = await _userService.CreatePriceAlertViewModel(user);
+            try
+            {
 
+            UserPriceAlertConfiguratorViewModel priceAlertViewModel = await _userService.CreatePriceAlertViewModel(user);
             return View(priceAlertViewModel);
+
+            }
+            catch (Exception)
+            {
+
+                TempData.Put("UserMessage", new SuccessMessage()
+                { CssClassName = "alert-danger", Title = "Error!", DisplayMessage = $"You have no access to service" });
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost, ActionName("lightstate")]
