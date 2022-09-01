@@ -32,7 +32,7 @@ namespace Tehotasapaino.Controllers
             _graphServiceClient = graphServiceClient;
             _userService = userService;
             _hueLightService = hueLightService;
-       }
+        }
 
         [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
         public async Task<IActionResult> UserPriceAlertConfigurator()
@@ -43,8 +43,8 @@ namespace Tehotasapaino.Controllers
             try
             {
 
-            UserPriceAlertConfiguratorViewModel priceAlertViewModel = await _userService.CreatePriceAlertViewModel(user);
-            return View(priceAlertViewModel);
+                UserPriceAlertConfiguratorViewModel priceAlertViewModel = await _userService.CreatePriceAlertViewModel(user);
+                return View(priceAlertViewModel);
 
             }
             catch (Exception)
@@ -65,7 +65,7 @@ namespace Tehotasapaino.Controllers
             try
             {
                 User user = await _graphServiceClient.Me.Request().GetAsync();
-                HuePutResponse response = await _hueLightService.SetAlertLightToDesiredState(user,requestedLightState);
+                HuePutResponse response = await _hueLightService.SetAlertLightToDesiredState(user, requestedLightState);
 
                 if (response.HasErrors)
                 {
@@ -81,6 +81,19 @@ namespace Tehotasapaino.Controllers
                 _logger.LogInformation($"Problems {e}");
                 return StatusCode(500, e.StackTrace);
             }
+        }
+
+        [HttpPost, ActionName("savealertprice")]
+        [AuthorizeForScopes(ScopeKeySection = "DownstreamApi:Scopes")]
+        public async Task<IActionResult> SaveAlertPrice()
+        {
+            _logger.LogInformation($"POST save price received");
+
+            User user = await _graphServiceClient.Me.Request().GetAsync();
+
+            TempData.Put("UserMessage", new SuccessMessage()
+            { CssClassName = "alert-success", Title = "Success!", DisplayMessage = $"{user.DisplayName} your new alert price have been set!" });
+            return RedirectToAction("Index", "Home");
         }
     }
 }

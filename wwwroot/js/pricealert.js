@@ -31,6 +31,28 @@ document.addEventListener('click', function (event) {
         }
     }
 
+    if (event.target.dataset.setAction === "inc") {
+        counterElem = document.getElementById('selectedPrice');
+        const val = parseInt(document.getElementById('selectedPrice').innerText);
+        const newVal = val + 10;
+        counterElem.innerText = newVal.toString();
+
+        
+    }
+
+    if (event.target.dataset.setAction === "dec") {
+        counterElem = document.getElementById('selectedPrice');
+        const val = parseInt(document.getElementById('selectedPrice').innerText);
+        const newVal = val - 10;
+        if (newVal < 0) {
+        counterElem.innerText = 0;
+        }
+        else {
+            counterElem.innerText = newVal;
+        }
+
+    }
+
 });
 
 function postLightStateToServer(dataset,isPriceHigh) {
@@ -145,13 +167,15 @@ function priceAlertHander(selectedDayAheadPrice) {
         console.log(selectedColor.dataset);
         postLightStateToServer(selectedColor.dataset,isPriceHigh)
         document.getElementById('alertIndicator').innerText = "Alert active!"
+        document.getElementById('selectedPrice').style.backgroundColor = "rgb(255, 99, 99)"
         
     }
 
     else {
         isPriceHigh = false
         document.getElementById('alertIndicator').innerText = "Alert not active!"
-        const dummydata = {dataset:""}
+        document.getElementById('selectedPrice').style.backgroundColor = "rgb(0, 0, 0)"
+        const dummydata = { dataset: "" }
         postLightStateToServer(dummydata, isPriceHigh)
     }
 }

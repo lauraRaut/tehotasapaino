@@ -23,7 +23,7 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class="card bg-transparent border border-0">
+    <div class="card bg-transparent border border-0 w-75">
         <div class="card-body">
             <canvas id="priceConsumptionGraph" class=""></canvas>
         </div>
@@ -43,15 +43,15 @@
             <h4>Select price level which will trigger the alert</h4>
             <div class="gy-3">
                 <div class="d-flex justify-content-center">
-                    <div class="p-4 mx-3 rounded" style="background-color: #E4E47A" data-set-action="dec">-</div>
-                    <div id="selectedPrice" class="p-4 mx-3 rounded" style="background-color: #FF6363" data-set-price="">20</div>
-                    <div class="p-4 mx-3 rounded" style="background-color: #00FF21" data-set-action="inc">+</div>
+                    <button data-set-action="dec" id="minus">-</button>
+                    <div type="text" id="selectedPrice" class="p-4 mx-3 rounded" style="background-color: rgb(0, 0, 0)" data-set-price="" value="20">20</div>
+                    <button data-set-action="inc" id="plus">+</button>
                 </div>
                 <div class="d-flex justify-content-center">
-                   <h4> <div class="gy-2 my-2" id="alertIndicator">Alert deactive</div></h4>
+                    <div class="gy-2 my-2" id="alertIndicator">Alert deactive</div>
                 </div>
             </div>
-
+            <div class="gy-3"></div>
             <h4>Test and select different alert colors by clicking on box</h4>
             <div class="gy-3">
                 <div class="d-flex justify-content-center">
@@ -60,6 +60,13 @@
                     <div class="p-4 mx-3 rounded" style="background-color: #00FF21" data-set-light-color="00FF21"></div>
                 </div>
             </div>
+            <div class="gy-5"></div>
+            <form id="saveValue" method="post" action="/PriceLightAlert/savealertprice" enctype="">
+                <input id="submitbtn2" name="laheta" form="saveValue" class="uploadDataBtn py-2" type="submit" value="Set Alert price!" />
+            </form>
+
+            <div class="gy-5"></div>
+            <div class="gy-5"></div>
         }
     }
 
