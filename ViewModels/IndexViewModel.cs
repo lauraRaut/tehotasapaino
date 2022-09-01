@@ -156,15 +156,20 @@ namespace Tehotasapaino.Models
           public List<decimal> DayConsumptionListForGraph
             {
                 get
-                { //Use two-day range of days instead of DateTime Now 
-                  //use Take 24 , MAYBE  
+                {  
                     DateTime today = DateTime.Now;
+                  //  DateTime tomorrow = today.AddDays(1);
+                  //TimeSpan twoDays = tomorrow - today;
                     int currentWeek = UserElectricityConsumptionDataService.GetWeek(today);
                     int currentDay = UserElectricityConsumptionDataService.GetDayOfWeek(today);
                     int currentHour = UserElectricityConsumptionDataService.GetHour(today);
-                            
-                     return DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay && x.Hour >= currentHour-1).OrderBy(x => x.Hour)
-                            .Select(x => x.AverageConsumptionkWh).ToList();
+
+                        var DayConsumptionListForGraph = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay || x.WeekDay == currentDay + 1  && x.Hour >= currentHour - 1)
+                                                 .OrderBy(x => x.Hour)
+                                                 .Select(x => x.AverageConsumptionkWh)
+                                                  .Take(24).ToList();
+
+                    return DayConsumptionListForGraph;
                 }
 
                 set { }
@@ -214,7 +219,7 @@ namespace Tehotasapaino.Models
 
                     for (int i = 0; i < consumptionFigures.Count; i++)
                     {
-                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 10;
+                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 100;
 
                     }
                     return todayConsumptionPrice.ToString();
