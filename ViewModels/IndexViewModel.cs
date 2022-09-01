@@ -153,7 +153,7 @@ namespace Tehotasapaino.Models
                 }
             }
            
-          public List<UserElectricityConsumptionData> DayConsumptionListForGraph
+          public List<decimal> DayConsumptionListForGraph
             {
                 get
                 {  
@@ -166,6 +166,7 @@ namespace Tehotasapaino.Models
 
                         var DayConsumptionListForGraph = DayConsumptionList.Where(x => x.WeekNum == currentWeek && x.WeekDay == currentDay || x.WeekDay == currentDay + 1  && x.Hour >= currentHour - 1)
                                                  .OrderBy(x => x.Hour)
+                                                 .Select(x => x.AverageConsumptionkWh)
                                                   .Take(24).ToList();
 
                     return DayConsumptionListForGraph;
@@ -218,7 +219,7 @@ namespace Tehotasapaino.Models
 
                     for (int i = 0; i < consumptionFigures.Count; i++)
                     {
-                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 10;
+                        todayConsumptionPrice = (Convert.ToInt32(consumptionFigures[i]) * hours[i]) / 100;
 
                     }
                     return todayConsumptionPrice.ToString();
