@@ -58,7 +58,7 @@ namespace Tehotasapaino.Controllers
                 if (response.HasErrors)
                 {
                     _logger.LogInformation($"Problems {response.Errors}");
-                    return StatusCode(500, $"{response.Data} and {response.Errors}");
+                    return StatusCode(418, $"{response.Data} and {response.Errors}");
                 }
 
                 return Ok();
@@ -67,7 +67,7 @@ namespace Tehotasapaino.Controllers
             catch (Exception e)
             {
                 _logger.LogInformation($"Problems {e}");
-                return StatusCode(401, e.StackTrace);
+                return StatusCode(500, e.StackTrace);
             }
         }
     }
