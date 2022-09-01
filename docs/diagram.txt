@@ -29,7 +29,7 @@ teho -> user: return view with prices
 
 user -> teho: Get price alert page
 user -> teho: Control light
-teho -> hueApi: Send light command
+teho -> hueApi: Send light command \n User Bearer Token
 
 hueApi -> huelight: Send new light state
 huelight -> user: Light Alert!

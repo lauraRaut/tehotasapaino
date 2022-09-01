@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using static Tehotasapaino.Models.DayAheadPrice;
 
 namespace Tehotasapaino.Models
@@ -14,14 +16,16 @@ namespace Tehotasapaino.Models
         private readonly TehotasapainoContext _DbContext;
         private readonly UserElectricityConsumptionDataService _ConsumptionData;
         private readonly PriceProcessorService _dayAheadPrice;
+        private readonly ILogger<UserService> _logger;
 
 
         public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService,
-                            PriceProcessorService dayAheadPriceService)
+                            PriceProcessorService dayAheadPriceService, ILogger<UserService> logger)
         {
             _DbContext = context;
             _ConsumptionData = dataService;
             _dayAheadPrice = dayAheadPriceService;
+            _logger = logger;
         }
 
         public async Task<bool> CheckUserExistDbAsync(string email)
@@ -46,14 +50,20 @@ namespace Tehotasapaino.Models
                     HasUploadedData = true,
                     UserElectricityConsumptionDatas = _ConsumptionData.GetUserElectricityWeekDayHourAverages(fileFromUser)
                 };
+                Stopwatch sw = Stopwatch.StartNew();
+                _logger.LogInformation("Stopwatch started for prices insert to DB");
 
                 _DbContext.UserData.Add(newUser);
                 await _DbContext.SaveChangesAsync();
+
+                sw.Stop();
+                _logger.LogInformation($"Consumption data write to DB took {sw.ElapsedMilliseconds} ms");
             }
             else
             {
                 throw new ArgumentException($"User found with email {email}");
             }
+
         }
 
         public async Task<List<UserElectricityConsumptionData>> GetUserElectricityConsumptionData(User userFromAzure)

@@ -3,8 +3,10 @@
 @model IndexViewModel
 @{
     ViewData["Title"] = "Home Page";
-    ViewData["HomeSelectedClass"] = "text-white";
-    ViewData["PriceAlertSelectedClass"] = "";
+    ViewData["HomeStyle"] = "border-bottom: 5px solid rgb(228, 228, 122); border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; color:rgb(255, 255, 255)";
+    ViewData["PriceAlertStyle"] = "color:rgb(228, 228, 122)";
+
+
 }
 <div class="text-center py-2">
     <h1 class="display-4">Welcome @(Model.loggedInPerson.FirstName)</h1>
@@ -68,9 +70,15 @@
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
-                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/kahvi_010922.svg"))
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Sauna
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="d-flex align-items-center me-3">
+                                    @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/sauna_010922new.svg"))
+                                <span class="m-3">
+                                    Sauna
+                                </span>
+                            </li>
+                        </ul>
                     </button>
                 </h2>
 
@@ -108,7 +116,6 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne2">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2" aria-expanded="false" aria-controls="flush-collapseOne2">
-
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="d-flex align-items-center me-3">
                                         @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/pesu_010922.svg"))
@@ -273,7 +280,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne6" aria-expanded="false" aria-controls="flush-collapseOne6">
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="d-flex align-items-center me-3">
-                                        @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/kahvi_010922.svg"))
+                                        @Html.Raw(await File.ReadAllTextAsync("wwwroot/svgassets/kahvi_010922new.svg"))
                                         <span class="m-3">
                                             Coffee machine
                                         </span>

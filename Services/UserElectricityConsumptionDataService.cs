@@ -26,6 +26,9 @@ namespace Tehotasapaino.Models
 
         public List<UserElectricityConsumptionData> GetUserElectricityWeekDayHourAverages(IFormFile fileFromUser)
         {
+            Stopwatch sw = Stopwatch.StartNew();
+            _logger.LogInformation("Stopwatch started for price analyse");
+
             List<UserElectricityConsumptionData> averagedUserConsumption = new List<UserElectricityConsumptionData>();
 
             _logger.LogInformation($"Creating consumption list");
@@ -38,7 +41,10 @@ namespace Tehotasapaino.Models
                                                                                                         AverageConsumptionkWh = record.Value.Average()
                                                                                                      }).ToList();
 
+            sw.Stop();
+            _logger.LogInformation($"Consumption data analyse took {sw.ElapsedMilliseconds} ms");
             return averagedUserConsumption;
+
         }
 
         private Dictionary<DateData, List<decimal>> BuildDataAnalysisModelFromCSV(IFormFile fileFromUser)
