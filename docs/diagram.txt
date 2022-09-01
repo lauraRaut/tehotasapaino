@@ -1,0 +1,37 @@
+@startuml
+title Tehotasapaino
+actor User as user
+database Tehotasapaino as teho
+database AzureAD as azad
+database EntsoE_prices as transit
+database PhillipsHUE as hueApi
+actor HueLight as huelight
+
+
+
+user -> teho: Open site
+note right:https://teamtehotasapaino.azurewebsites.net
+
+teho --> azad:Authenticate User
+azad --> user: Challange
+user -> azad: Prove identity
+
+azad --> user: Authenticated
+
+user -> teho: Token to prove identity
+
+teho -> teho: Authorize user access
+
+teho -> transit: GET Electricity spot prices
+transit --> teho: Spot prices
+
+teho -> user: return view with prices
+
+user -> teho: Get price alert page
+user -> teho: Control light
+teho -> hueApi: Send light command
+
+hueApi -> huelight: Send new light state
+huelight -> user: Light Alert!
+
+@enduml
