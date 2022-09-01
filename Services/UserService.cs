@@ -14,7 +14,7 @@ namespace Tehotasapaino.Models
         private readonly TehotasapainoContext _DbContext;
         private readonly UserElectricityConsumptionDataService _ConsumptionData;
         private readonly PriceProcessorService _dayAheadPrice;
-        
+
 
         public UserService(TehotasapainoContext context, UserElectricityConsumptionDataService dataService,
                             PriceProcessorService dayAheadPriceService)
@@ -126,7 +126,6 @@ namespace Tehotasapaino.Models
         public async Task<UserPriceAlertConfiguratorViewModel> CreatePriceAlertViewModel(User userFromAzureAD)
         {
 
-
             try
             {
                 bool isUserInPriceAlertProgram = false;
@@ -134,17 +133,22 @@ namespace Tehotasapaino.Models
 
                 UserInformation dbUser = await this.GetDbUserWithTokenAndAlertLightDataAsync(userFromAzureAD);
 
-                UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName == "Hue");
-                if (userToken != null)
+                if (dbUser != null)
                 {
-                    isUserInPriceAlertProgram = true;
+
+                    UserExternalAPIToken userToken = dbUser.UserExternalAPITokens.FirstOrDefault(x => x.ProviderName != null && x.ProviderName == "Hue");
+                    if (userToken != null)
+                    {
+                        isUserInPriceAlertProgram = true;
+                    }
+
+                    UserAlertLightInformation userAlertLight = dbUser.UserAlertLightInformation;
+                    if (userAlertLight != null)
+                    {
+                        hasUserAddedAlertLight = true;
+                    }
                 }
 
-                UserAlertLightInformation userAlertLight = dbUser.UserAlertLightInformation;
-                if (userAlertLight != null)
-                {
-                    hasUserAddedAlertLight = true;
-                }
 
                 List<Point> nextDayPrices = _dayAheadPrice.GetPricesPerSearch();
                 UserPriceAlertConfiguratorViewModel UserPriceAlertViewModel = new UserPriceAlertConfiguratorViewModel(userFromAzureAD, isUserInPriceAlertProgram,
@@ -156,7 +160,7 @@ namespace Tehotasapaino.Models
             {
                 throw new ArgumentException($"Failed to fetch any data {args.Message}");
             }
-            
+
 
         }
     }
